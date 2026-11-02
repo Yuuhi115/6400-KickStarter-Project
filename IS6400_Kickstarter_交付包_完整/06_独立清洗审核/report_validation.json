@@ -1,0 +1,14 @@
+{
+  "report_placeholders": 0,
+  "profile_columns": 68,
+  "history_snippet_test": "passed",
+  "prior_launch_tie_test": "passed",
+  "text_missing_snippet_test": "passed",
+  "input_hash_recheck": "passed",
+  "percentages": {
+    "removed_pct": 2.9137166420290983,
+    "missing_any_pct": 93.45882325006419,
+    "missing_original43_pct": 86.38903358220584,
+    "country_mismatch_pct": 4.582993860551259
+  }
+}

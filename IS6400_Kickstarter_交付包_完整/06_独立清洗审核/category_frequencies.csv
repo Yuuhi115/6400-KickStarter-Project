@@ -1,0 +1,701 @@
+﻿field,value,n,pct
+state,failed,307091,45.5733491234553
+state,successful,297538,44.15565142415325
+state,canceled,69210,10.270999452391447
+currency,USD,460596,68.35401334740197
+currency,GBP,70062,10.397439150895096
+currency,EUR,60112,8.9208253009992
+currency,CAD,31207,4.631224966201125
+currency,AUD,16197,2.4036899021873177
+currency,MXN,8726,1.2949680858483998
+currency,HKD,7651,1.1354344286988436
+currency,SEK,3799,0.5637845241964327
+currency,JPY,3311,0.49136366402063403
+currency,SGD,3191,0.4735552557806835
+currency,NZD,2846,0.4223560820908258
+currency,DKK,2185,0.3242614333690985
+currency,CHF,2117,0.3141700020331266
+currency,NOK,1202,0.17838088920350412
+currency,PLN,637,0.09453296707373719
+country,US,460586,68.35252931338198
+country,GB,70062,10.397439150895096
+country,CA,31215,4.632412193417122
+country,AU,16197,2.4036899021873177
+country,DE,13264,1.9684227241225278
+country,IT,10681,1.5850967367575937
+country,FR,10282,1.5258837793597582
+country,ES,9888,1.4674128389719205
+country,MX,8726,1.2949680858483998
+country,HK,7651,1.1354344286988436
+country,NL,5731,0.8504998968596356
+country,SE,4396,0.6523813551901864
+country,JP,3311,0.49136366402063403
+country,SG,3191,0.4735552557806835
+country,NZ,2846,0.4223560820908258
+country,DK,2541,0.3770930444809517
+country,CH,2342,0.3475607674830338
+country,PL,2302,0.34162463140305027
+country,BE,1991,0.29547117338117856
+country,IE,1970,0.2923547019391873
+country,AT,1694,0.25139536298730114
+country,NO,1392,0.20657753558342573
+country,GR,1154,0.17125752590752388
+country,SI,226,0.03353916885190676
+country,LU,200,0.02968068039991749
+country_final,US,460586,68.35252931338198
+country_final,GB,70062,10.397439150895096
+country_final,CA,31215,4.632412193417122
+country_final,AU,16197,2.4036899021873177
+country_final,DE,13264,1.9684227241225278
+country_final,IT,10681,1.5850967367575937
+country_final,FR,10282,1.5258837793597582
+country_final,ES,9888,1.4674128389719205
+country_final,MX,8726,1.2949680858483998
+country_final,HK,7651,1.1354344286988436
+country_final,NL,5731,0.8504998968596356
+country_final,SE,4396,0.6523813551901864
+country_final,JP,3311,0.49136366402063403
+country_final,SG,3191,0.4735552557806835
+country_final,NZ,2846,0.4223560820908258
+country_final,DK,2541,0.3770930444809517
+country_final,CH,2342,0.3475607674830338
+country_final,PL,2302,0.34162463140305027
+country_final,BE,1991,0.29547117338117856
+country_final,IE,1970,0.2923547019391873
+country_final,AT,1694,0.25139536298730114
+country_final,NO,1392,0.20657753558342573
+country_final,GR,1154,0.17125752590752388
+country_final,SI,226,0.03353916885190676
+country_final,LU,200,0.02968068039991749
+location_country,US,446071,66.19845393335797
+location_country,GB,67945,10.08326914886197
+location_country,CA,30540,4.5322398970674005
+location_country,AU,15663,2.324442485519538
+location_country,DE,13052,1.9369612028986152
+location_country,IT,10928,1.6217523770514917
+location_country,FR,10311,1.530187478017746
+location_country,ES,9999,1.4838856165938747
+location_country,MX,8696,1.2905159837884124
+location_country,HK,7048,1.0459471772930922
+location_country,NL,5471,0.8119150123397428
+location_country,SE,4356,0.6464452191102029
+location_country,JP,4186,0.6212166407702729
+location_country,SG,3094,0.4591601257867235
+location_country,NZ,2838,0.42116885487482913
+location_country,DK,2538,0.3766478342749529
+location_country,PL,2505,0.3717505220089666
+location_country,CH,2283,0.3388049667650581
+location_country,IE,2028,0.3009620992551633
+location_country,BE,1830,0.27157822565924505
+location_country,<MISSING>,1770,0.2626740215392698
+location_country,AT,1661,0.24649805072131473
+location_country,NO,1362,0.20212543352343806
+location_country,GR,1248,0.18520744569548514
+location_country,CN,1186,0.1760064347715107
+location_country,UA,871,0.12925936314164066
+location_country,TW,611,0.09067447862174793
+location_country,KR,610,0.09052607521974834
+location_country,IN,585,0.08681599016975865
+location_country,TH,564,0.08369951872776732
+location_country,PR,458,0.06796875811581105
+location_country,SI,448,0.06648472409581517
+location_country,IL,403,0.05980657100583374
+location_country,ZA,359,0.053276821317851886
+location_country,BR,351,0.05208959410185519
+location_country,CO,351,0.05208959410185519
+location_country,CZ,334,0.049566736267862205
+location_country,RU,333,0.04941833286586262
+location_country,ID,326,0.048379509051865506
+location_country,TR,319,0.04734068523786839
+location_country,HU,307,0.04555984441387334
+location_country,PE,253,0.03754606070589562
+location_country,PT,252,0.037397657303896034
+location_country,AR,249,0.03695244709789727
+location_country,PH,239,0.0354684130779014
+location_country,RO,233,0.034577992665903876
+location_country,KE,213,0.031609924625912125
+location_country,VN,213,0.031609924625912125
+location_country,FI,201,0.029829083801917077
+location_country,BG,201,0.029829083801917077
+location_country,IS,184,0.027306225967924085
+location_country,LU,174,0.025822191947928216
+location_country,MY,169,0.02508017493793028
+location_country,NP,167,0.024783368133931102
+location_country,LT,164,0.02433815792793234
+location_country,CL,162,0.024041351123933165
+location_country,CR,157,0.023299334113935227
+location_country,GH,152,0.02255731710393729
+location_country,HR,150,0.022260510299938113
+location_country,RS,149,0.02211210689793853
+location_country,EC,148,0.02196370349593894
+location_country,AE,137,0.02033126607394348
+location_country,EE,137,0.02033126607394348
+location_country,GT,124,0.01840202184794884
+location_country,UG,118,0.01751160143595132
+location_country,NG,114,0.01691798782795297
+location_country,EG,109,0.01617597081795503
+location_country,HT,107,0.015879164013955855
+location_country,KH,96,0.014246726591960395
+location_country,KZ,93,0.013801516385961632
+location_country,CU,92,0.013653112983962042
+location_country,LV,87,0.012911095973964108
+location_country,TZ,83,0.012317482365965757
+location_country,PK,81,0.012020675561966582
+location_country,MN,78,0.011575465355967821
+location_country,MA,78,0.011575465355967821
+location_country,DO,76,0.011278658551968645
+location_country,GE,74,0.01098185174796947
+location_country,JM,70,0.01038823813997112
+location_country,BO,69,0.010239834737971533
+location_country,LB,66,0.009794624531972771
+location_country,NI,66,0.009794624531972771
+location_country,AF,64,0.009497817727973597
+location_country,BA,61,0.009052607521974834
+location_country,MT,60,0.008904204119975246
+location_country,SK,58,0.008607397315976071
+location_country,ET,57,0.008458993913976484
+location_country,HN,56,0.008310590511976896
+location_country,VE,55,0.00816218710997731
+location_country,MK,54,0.008013783707977722
+location_country,CY,53,0.007865380305978135
+location_country,PA,52,0.007716976903978547
+location_country,BY,51,0.00756857350197896
+location_country,SJ,49,0.007271766697979785
+location_country,RW,48,0.0071233632959801976
+location_country,LK,48,0.0071233632959801976
+location_country,JO,46,0.006826556491981021
+location_country,IQ,45,0.006678153089981434
+location_country,SN,43,0.006381346285982259
+location_country,BZ,42,0.006232942883982672
+location_country,AQ,42,0.006232942883982672
+location_country,AM,41,0.006084539481983085
+location_country,PS,37,0.005490925873984735
+location_country,VI,36,0.005342522471985148
+location_country,CD,35,0.00519411906998556
+location_country,UY,33,0.004897312265986386
+location_country,MM,32,0.004748908863986798
+location_country,SV,31,0.00460050546198721
+location_country,GU,31,0.00460050546198721
+location_country,ZW,30,0.004452102059987623
+location_country,BD,28,0.004155295255988448
+location_country,CM,28,0.004155295255988448
+location_country,BS,27,0.004006891853988861
+location_country,MW,27,0.004006891853988861
+location_country,TN,26,0.0038584884519892735
+location_country,LR,25,0.003710085049989686
+location_country,ZM,25,0.003710085049989686
+location_country,IR,24,0.0035616816479900988
+location_country,SL,24,0.0035616816479900988
+location_country,MG,22,0.0032648748439909232
+location_country,MZ,20,0.002968068039991749
+location_country,ML,20,0.002968068039991749
+location_country,BT,20,0.002968068039991749
+location_country,TT,18,0.002671261235992574
+location_country,MD,18,0.002671261235992574
+location_country,GL,17,0.0025228578339929865
+location_country,SA,17,0.0025228578339929865
+location_country,KG,14,0.002077647627994224
+location_country,GP,14,0.002077647627994224
+location_country,PG,13,0.0019292442259946367
+location_country,CI,13,0.0019292442259946367
+location_country,FJ,13,0.0019292442259946367
+location_country,PY,12,0.0017808408239950494
+location_country,RE,12,0.0017808408239950494
+location_country,BB,11,0.0016324374219954616
+location_country,KW,11,0.0016324374219954616
+location_country,UZ,11,0.0016324374219954616
+location_country,AZ,11,0.0016324374219954616
+location_country,SD,10,0.0014840340199958745
+location_country,SY,10,0.0014840340199958745
+location_country,KP,10,0.0014840340199958745
+location_country,BF,10,0.0014840340199958745
+location_country,MU,10,0.0014840340199958745
+location_country,XK,10,0.0014840340199958745
+location_country,MC,10,0.0014840340199958745
+location_country,GM,10,0.0014840340199958745
+location_country,BW,10,0.0014840340199958745
+location_country,QA,9,0.001335630617996287
+location_country,GI,9,0.001335630617996287
+location_country,AL,9,0.001335630617996287
+location_country,BJ,9,0.001335630617996287
+location_country,LA,8,0.0011872272159966996
+location_country,SZ,8,0.0011872272159966996
+location_country,SS,8,0.0011872272159966996
+location_country,YE,8,0.0011872272159966996
+location_country,DM,8,0.0011872272159966996
+location_country,GN,8,0.0011872272159966996
+location_country,TO,8,0.0011872272159966996
+location_country,DZ,8,0.0011872272159966996
+location_country,PF,8,0.0011872272159966996
+location_country,VU,7,0.001038823813997112
+location_country,CV,7,0.001038823813997112
+location_country,MQ,7,0.001038823813997112
+location_country,CW,7,0.001038823813997112
+location_country,ME,7,0.001038823813997112
+location_country,GY,6,0.0008904204119975247
+location_country,LY,6,0.0008904204119975247
+location_country,SR,6,0.0008904204119975247
+location_country,SO,6,0.0008904204119975247
+location_country,MO,6,0.0008904204119975247
+location_country,NE,6,0.0008904204119975247
+location_country,GF,6,0.0008904204119975247
+location_country,LC,5,0.0007420170099979372
+location_country,FM,5,0.0007420170099979372
+location_country,CG,5,0.0007420170099979372
+location_country,FO,5,0.0007420170099979372
+location_country,OM,5,0.0007420170099979372
+location_country,LI,5,0.0007420170099979372
+location_country,BM,4,0.0005936136079983498
+location_country,LS,4,0.0005936136079983498
+location_country,MV,4,0.0005936136079983498
+location_country,VC,4,0.0005936136079983498
+location_country,VA,3,0.00044521020599876235
+location_country,TD,3,0.00044521020599876235
+location_country,AG,3,0.00044521020599876235
+location_country,TC,3,0.00044521020599876235
+location_country,BH,3,0.00044521020599876235
+location_country,GA,3,0.00044521020599876235
+location_country,MR,3,0.00044521020599876235
+location_country,KI,3,0.00044521020599876235
+location_country,SX,3,0.00044521020599876235
+location_country,WS,3,0.00044521020599876235
+location_country,KY,3,0.00044521020599876235
+location_country,AO,3,0.00044521020599876235
+location_country,CF,2,0.0002968068039991749
+location_country,TJ,2,0.0002968068039991749
+location_country,FK,2,0.0002968068039991749
+location_country,GQ,2,0.0002968068039991749
+location_country,TL,2,0.0002968068039991749
+location_country,AS,2,0.0002968068039991749
+location_country,AX,2,0.0002968068039991749
+location_country,TG,2,0.0002968068039991749
+location_country,ST,2,0.0002968068039991749
+location_country,NC,2,0.0002968068039991749
+location_country,BQ,2,0.0002968068039991749
+location_country,CK,2,0.0002968068039991749
+location_country,AW,2,0.0002968068039991749
+location_country,BN,2,0.0002968068039991749
+location_country,NU,2,0.0002968068039991749
+location_country,MH,1,0.00014840340199958745
+location_country,ER,1,0.00014840340199958745
+location_country,GD,1,0.00014840340199958745
+location_country,KN,1,0.00014840340199958745
+location_country,AI,1,0.00014840340199958745
+location_country,PN,1,0.00014840340199958745
+location_country,DJ,1,0.00014840340199958745
+location_country,SB,1,0.00014840340199958745
+location_country,AD,1,0.00014840340199958745
+location_country,SC,1,0.00014840340199958745
+location_country,CC,1,0.00014840340199958745
+location_country,BI,1,0.00014840340199958745
+location_country,TV,1,0.00014840340199958745
+location_country,GW,1,0.00014840340199958745
+location_country,MP,1,0.00014840340199958745
+location_country,SM,1,0.00014840340199958745
+location_country,TM,1,0.00014840340199958745
+location_type,Town,628223,93.23043041438682
+location_type,County,20476,3.0387080593435525
+location_type,Suburb,16207,2.405173936207314
+location_type,LocalAdmin,4964,0.7366744875259521
+location_type,<MISSING>,1815,0.2693521746292512
+location_type,Zip,1235,0.18327820146949048
+location_type,Island,827,0.12272961345365882
+location_type,Country,42,0.006232942883982672
+location_type,Miscellaneous,39,0.005787732677983911
+location_type,Estate,11,0.0016324374219954616
+usd_type,domestic,367384,54.52103544021644
+usd_type,international,293023,43.485610064125105
+usd_type,<MISSING>,13432,1.9933544956584583
+profile_state,inactive,558463,82.87780909089561
+profile_state,active,106053,15.738625992262248
+profile_state,<MISSING>,9323,1.3835649168421538
+category_parent_name,Games,102650,15.233609215257651
+category_parent_name,Film & Video,90515,13.432733931992658
+category_parent_name,Publishing,72771,10.799463966911977
+category_parent_name,Music,70859,10.515716662288767
+category_parent_name,Design,59073,8.766634166321628
+category_parent_name,Technology,57021,8.462110385418475
+category_parent_name,Art,55985,8.308364460946903
+category_parent_name,Fashion,41504,6.159334796590877
+category_parent_name,Food,35680,5.295033383345279
+category_parent_name,Comics,33699,5.001046243984097
+category_parent_name,Crafts,14544,2.1583790786819996
+category_parent_name,Photography,14491,2.1505136983760216
+category_parent_name,Theater,13604,2.0188798808023876
+category_parent_name,Journalism,6564,0.974119930725292
+category_parent_name,Dance,4651,0.6902242227000812
+category_parent_name,comics,228,0.03383597565590594
+category_name,<MISSING>,129242,19.179952481230682
+category_name,Tabletop Games,57144,8.480364003864423
+category_name,Product Design,45690,6.78055143736115
+category_name,Video Games,22090,3.2782311501708863
+category_name,Documentary,19941,2.959312239273773
+category_name,Fiction,18325,2.71949234164244
+category_name,Shorts,16223,2.407548390639307
+category_name,Comic Books,16174,2.4002766239413273
+category_name,Children's Books,13745,2.0398047604843295
+category_name,Apparel,13503,2.003891137200429
+category_name,Nonfiction,12622,1.8731477400387928
+category_name,Apps,12531,1.85964303045683
+category_name,Illustration,12511,1.8566749624168384
+category_name,Accessories,10504,1.5588293346036664
+category_name,Playing Cards,10427,1.5474022726496983
+category_name,Rock,8317,1.2342710944305688
+category_name,Web,7664,1.1373636729248382
+category_name,Graphic Novels,7459,1.1069409755149227
+category_name,Gadgets,7456,1.106495765308924
+category_name,Indie Rock,6962,1.0331844847211278
+category_name,Webseries,6800,1.0091431335971945
+category_name,Hardware,6593,0.97842362938328
+category_name,Country & Folk,6560,0.9735263171172936
+category_name,Narrative Film,6290,0.933457398577405
+category_name,Software,5138,0.7624966794738803
+category_name,Hip-Hop,5040,0.7479531460779206
+category_name,Restaurants,5031,0.7466175154599244
+category_name,Animation,4969,0.73741650453595
+category_name,Art Books,4889,0.725544232375983
+category_name,Painting,4831,0.7169368350600069
+category_name,Pop,4729,0.701799688056049
+category_name,Drinks,4710,0.6989800234180568
+category_name,Comedy,4707,0.6985348132120581
+category_name,Drama,4704,0.6980896030060593
+category_name,Mixed Media,4572,0.6785003539421137
+category_name,Digital Art,4284,0.6357601741662326
+category_name,Mobile Games,4272,0.6339793333422375
+category_name,Public Art,3748,0.5562159506944537
+category_name,Photobooks,3596,0.5336586335905164
+category_name,Classical Music,3479,0.5162954355565648
+category_name,Small Batch,3271,0.48542752794065047
+category_name,Horror,3156,0.4683611367106979
+category_name,Electronic Music,3111,0.4616829836207165
+category_name,Anthologies,3009,0.4465458366167586
+category_name,Graphic Design,2986,0.4431325583707681
+category_name,World Music,2943,0.43675121208478584
+category_name,Food Trucks,2849,0.42280129229682456
+category_name,Sculpture,2810,0.4170135596188407
+category_name,Jewelry,2759,0.40944498611686175
+category_name,Performance Art,2681,0.39786952076089394
+category_name,Jazz,2509,0.3723441356169649
+category_name,Wearables,2391,0.35483253418101357
+category_name,Poetry,2285,0.3391017735690573
+category_name,Plays,2238,0.3321268136750767
+category_name,DIY,2151,0.3192157177011126
+category_name,Footwear,2002,0.29710361080317405
+category_name,Young Adult,1939,0.2877541964772001
+category_name,Live Games,1902,0.2822632706032153
+category_name,Farms,1876,0.27840478215122605
+category_name,Woodworking,1868,0.2772175549352293
+category_name,DIY Electronics,1848,0.2742494868952376
+category_name,Webcomics,1847,0.27410108349323803
+category_name,Radio & Podcasts,1838,0.27276545287524173
+category_name,Faith,1807,0.26816494741325453
+category_name,Toys,1783,0.26460326576526444
+category_name,Academic,1734,0.2573314990672846
+category_name,Television,1695,0.2515437663893007
+category_name,Ready-to-wear,1677,0.24887250515330814
+category_name,Periodicals,1637,0.24293636907332467
+category_name,People,1576,0.23388376155134982
+category_name,Experimental,1573,0.23343855134535102
+category_name,3D Printing,1567,0.23254813093335353
+category_name,Thrillers,1552,0.2303220799033597
+category_name,Spaces,1538,0.22824443227536548
+category_name,Conceptual Art,1519,0.22542476763737332
+category_name,Performances,1517,0.22512796083337416
+category_name,Science Fiction,1484,0.22023064856738778
+category_name,Musical,1477,0.21919182475339063
+category_name,Action,1413,0.20969400702541705
+category_name,Sound,1389,0.20613232537742698
+category_name,Festivals,1351,0.20049299610144264
+category_name,Vegan,1342,0.19915736548344634
+category_name,Metal,1244,0.18461383208748677
+category_name,Print,1241,0.18416862188148803
+category_name,Fine Art,1223,0.18149736064549543
+category_name,Events,1203,0.17852929260550368
+category_name,Music Videos,1163,0.1725931565255202
+category_name,Architecture,1153,0.17110912250552432
+category_name,Zines,1088,0.16146290137555114
+category_name,Gaming Hardware,1085,0.16101769116955236
+category_name,Robots,1058,0.1570107993155635
+category_name,Cookbooks,1024,0.15196508364757755
+category_name,Places,977,0.14499012375359693
+category_name,Candles,975,0.14469331694959775
+category_name,Puzzles,969,0.14380289653760023
+category_name,Camera Equipment,892,0.132375834583632
+category_name,Installations,856,0.12703331211164684
+category_name,Childrenswear,845,0.1254008746896514
+category_name,Calendars,835,0.1239168406696555
+category_name,R&B,828,0.12287801685565838
+category_name,Nature,806,0.11961314201166748
+category_name,Textiles,794,0.11783230118767242
+category_name,Fantasy,783,0.11619986376567697
+category_name,Stationery,744,0.11041213108769306
+category_name,Audio,703,0.10432759160570998
+category_name,Interactive Design,690,0.10239834737971534
+category_name,Ceramics,671,0.09957868274172317
+category_name,Farmer's Markets,635,0.09423616026973802
+category_name,Video,606,0.08993246161174999
+category_name,Family,592,0.08785481398375576
+category_name,Literary Journals,585,0.08681599016975865
+category_name,Immersive,581,0.08622237656176031
+category_name,Punk,552,0.08191867790377226
+category_name,Movie Theaters,535,0.07939582006977929
+category_name,Flight,535,0.07939582006977929
+category_name,Printing,534,0.0792474166677797
+category_name,Space Exploration,499,0.07405329759779412
+category_name,Fabrication Tools,485,0.07197564996979991
+category_name,documentary,482,0.07153043976380115
+category_name,Couture,467,0.06930438873380733
+category_name,Kids,464,0.06885917852780857
+category_name,Blues,454,0.0673751445078127
+category_name,Makerspaces,433,0.06425867306582136
+category_name,Romance,431,0.0639618662618222
+category_name,shorts,429,0.06366505945782301
+category_name,Civic Design,427,0.06336825265382384
+category_name,Literary Spaces,422,0.0626262356438259
+category_name,Community Gardens,420,0.06232942883982672
+category_name,Video Art,383,0.05683850296584198
+category_name,Social Practice,374,0.0555028723478457
+category_name,Animals,373,0.055354468945846114
+category_name,Knitting,365,0.054167241729849415
+category_name,Crochet,346,0.051347577091857256
+category_name,Pet Fashion,305,0.04526303760987417
+category_name,Translations,296,0.04392740699187788
+category_name,Pottery,293,0.04348219678587912
+category_name,Latin,291,0.04318538998187994
+category_name,Glass,256,0.03799127091189439
+category_name,Photo,255,0.037842867509894795
+category_name,Embroidery,241,0.035765219881900574
+category_name,Bacon,229,0.03398437905790552
+category_name,Workshops,219,0.032500345037909655
+category_name,product design,216,0.032055134831910886
+category_name,Typography,206,0.03057110081191501
+category_name,Letterpress,167,0.024783368133931102
+category_name,Weaving,167,0.024783368133931102
+category_name,video games,136,0.020182862671943892
+category_name,Quilts,131,0.019440845661945955
+category_name,fiction,113,0.01676958442595338
+category_name,tabletop games,106,0.01573076061195627
+category_name,nonfiction,104,0.015433953807957094
+category_name,Residencies,102,0.01513714700395792
+category_name,rock,80,0.011872272159966996
+category_name,webseries,77,0.011427061953968231
+category_name,Chiptune,65,0.009646221129973183
+category_name,indie rock,43,0.006381346285982259
+category_name,narrative film,39,0.005787732677983911
+category_name,Taxidermy,15,0.0022260510299938114
+category_name,animation,5,0.0007420170099979372
+category_name,hip-hop,3,0.00044521020599876235
+category_name,apparel,3,0.00044521020599876235
+category_name,software,2,0.0002968068039991749
+category_name,world music,2,0.0002968068039991749
+category_name,mixed media,2,0.0002968068039991749
+category_name,public art,2,0.0002968068039991749
+category_name,painting,2,0.0002968068039991749
+category_name,woodworking,2,0.0002968068039991749
+category_name,web,2,0.0002968068039991749
+category_name,drinks,2,0.0002968068039991749
+category_name,digital art,1,0.00014840340199958745
+category_name,country & folk,1,0.00014840340199958745
+category_name,poetry,1,0.00014840340199958745
+category_name,animals,1,0.00014840340199958745
+category_name,illustration,1,0.00014840340199958745
+category_name,gadgets,1,0.00014840340199958745
+category_name,pop,1,0.00014840340199958745
+category_name,performance art,1,0.00014840340199958745
+category_name,footwear,1,0.00014840340199958745
+category_name,couture,1,0.00014840340199958745
+category_name,fabrication tools,1,0.00014840340199958745
+category_name,restaurants,1,0.00014840340199958745
+category_name,graphic design,1,0.00014840340199958745
+category_name,mobile games,1,0.00014840340199958745
+category_name,performances,1,0.00014840340199958745
+category_name,bacon,1,0.00014840340199958745
+category_name,cookbooks,1,0.00014840340199958745
+category_name,science fiction,1,0.00014840340199958745
+category_name,webcomics,1,0.00014840340199958745
+category_name,electronic music,1,0.00014840340199958745
+category_name,playing cards,1,0.00014840340199958745
+category_name,television,1,0.00014840340199958745
+category_name,horror,1,0.00014840340199958745
+category_name,makerspaces,1,0.00014840340199958745
+category_name,nature,1,0.00014840340199958745
+category_name,family,1,0.00014840340199958745
+category_name,sculpture,1,0.00014840340199958745
+category_name,ready-to-wear,1,0.00014840340199958745
+category_name,apps,1,0.00014840340199958745
+category_key,games,102650,15.233609215257651
+category_key,film & video,90515,13.432733931992658
+category_key,publishing,72771,10.799463966911977
+category_key,music,70859,10.515716662288767
+category_key,design,59073,8.766634166321628
+category_key,technology,57021,8.462110385418475
+category_key,art,55985,8.308364460946903
+category_key,fashion,41504,6.159334796590877
+category_key,food,35680,5.295033383345279
+category_key,comics,33927,5.034882219640003
+category_key,crafts,14544,2.1583790786819996
+category_key,photography,14491,2.1505136983760216
+category_key,theater,13604,2.0188798808023876
+category_key,journalism,6564,0.974119930725292
+category_key,dance,4651,0.6902242227000812
+subcategory_key,unknown,129242,19.179952481230682
+subcategory_key,tabletop games,57250,8.49609476447638
+subcategory_key,product design,45906,6.8126065721930615
+subcategory_key,video games,22226,3.2984140128428305
+subcategory_key,documentary,20423,3.0308426790375744
+subcategory_key,fiction,18438,2.736261926068393
+subcategory_key,shorts,16652,2.47121345009713
+subcategory_key,comic books,16174,2.4002766239413273
+subcategory_key,children's books,13745,2.0398047604843295
+subcategory_key,apparel,13506,2.004336347406428
+subcategory_key,nonfiction,12726,1.8885816938467497
+subcategory_key,apps,12532,1.8597914338588297
+subcategory_key,illustration,12512,1.8568233658188378
+subcategory_key,accessories,10504,1.5588293346036664
+subcategory_key,playing cards,10428,1.5475506760516977
+subcategory_key,rock,8397,1.2461433665905357
+subcategory_key,web,7666,1.1376604797288372
+subcategory_key,graphic novels,7459,1.1069409755149227
+subcategory_key,gadgets,7457,1.1066441687109236
+subcategory_key,indie rock,7005,1.0395658310071099
+subcategory_key,webseries,6877,1.0205701955511628
+subcategory_key,hardware,6593,0.97842362938328
+subcategory_key,country & folk,6561,0.9736747205192933
+subcategory_key,narrative film,6329,0.9392451312553889
+subcategory_key,software,5140,0.7627934862778794
+subcategory_key,hip-hop,5043,0.7483983562839194
+subcategory_key,restaurants,5032,0.746765918861924
+subcategory_key,animation,4974,0.7381585215459479
+subcategory_key,art books,4889,0.725544232375983
+subcategory_key,painting,4833,0.7172336418640061
+subcategory_key,pop,4730,0.7019480914580486
+subcategory_key,drinks,4712,0.699276830222056
+subcategory_key,comedy,4707,0.6985348132120581
+subcategory_key,drama,4704,0.6980896030060593
+subcategory_key,mixed media,4574,0.678797160746113
+subcategory_key,digital art,4285,0.6359085775682322
+subcategory_key,mobile games,4273,0.6341277367442371
+subcategory_key,public art,3750,0.556512757498453
+subcategory_key,photobooks,3596,0.5336586335905164
+subcategory_key,classical music,3479,0.5162954355565648
+subcategory_key,small batch,3271,0.48542752794065047
+subcategory_key,horror,3157,0.4685095401126976
+subcategory_key,electronic music,3112,0.4618313870227161
+subcategory_key,anthologies,3009,0.4465458366167586
+subcategory_key,graphic design,2987,0.44328096177276766
+subcategory_key,world music,2945,0.43704801888878503
+subcategory_key,food trucks,2849,0.42280129229682456
+subcategory_key,sculpture,2811,0.41716196302084024
+subcategory_key,jewelry,2759,0.40944498611686175
+subcategory_key,performance art,2682,0.3980179241628935
+subcategory_key,jazz,2509,0.3723441356169649
+subcategory_key,wearables,2391,0.35483253418101357
+subcategory_key,poetry,2286,0.33925017697105686
+subcategory_key,plays,2238,0.3321268136750767
+subcategory_key,diy,2151,0.3192157177011126
+subcategory_key,footwear,2003,0.29725201420517366
+subcategory_key,young adult,1939,0.2877541964772001
+subcategory_key,live games,1902,0.2822632706032153
+subcategory_key,farms,1876,0.27840478215122605
+subcategory_key,woodworking,1870,0.2775143617392285
+subcategory_key,webcomics,1848,0.2742494868952376
+subcategory_key,diy electronics,1848,0.2742494868952376
+subcategory_key,radio & podcasts,1838,0.27276545287524173
+subcategory_key,faith,1807,0.26816494741325453
+subcategory_key,toys,1783,0.26460326576526444
+subcategory_key,academic,1734,0.2573314990672846
+subcategory_key,television,1696,0.2516921697913003
+subcategory_key,ready-to-wear,1678,0.24902090855530773
+subcategory_key,periodicals,1637,0.24293636907332467
+subcategory_key,people,1576,0.23388376155134982
+subcategory_key,experimental,1573,0.23343855134535102
+subcategory_key,3d printing,1567,0.23254813093335353
+subcategory_key,thrillers,1552,0.2303220799033597
+subcategory_key,spaces,1538,0.22824443227536548
+subcategory_key,conceptual art,1519,0.22542476763737332
+subcategory_key,performances,1518,0.2252763642353737
+subcategory_key,science fiction,1485,0.22037905196938737
+subcategory_key,musical,1477,0.21919182475339063
+subcategory_key,action,1413,0.20969400702541705
+subcategory_key,sound,1389,0.20613232537742698
+subcategory_key,festivals,1351,0.20049299610144264
+subcategory_key,vegan,1342,0.19915736548344634
+subcategory_key,metal,1244,0.18461383208748677
+subcategory_key,print,1241,0.18416862188148803
+subcategory_key,fine art,1223,0.18149736064549543
+subcategory_key,events,1203,0.17852929260550368
+subcategory_key,music videos,1163,0.1725931565255202
+subcategory_key,architecture,1153,0.17110912250552432
+subcategory_key,zines,1088,0.16146290137555114
+subcategory_key,gaming hardware,1085,0.16101769116955236
+subcategory_key,robots,1058,0.1570107993155635
+subcategory_key,cookbooks,1025,0.15211348704957714
+subcategory_key,places,977,0.14499012375359693
+subcategory_key,candles,975,0.14469331694959775
+subcategory_key,puzzles,969,0.14380289653760023
+subcategory_key,camera equipment,892,0.132375834583632
+subcategory_key,installations,856,0.12703331211164684
+subcategory_key,childrenswear,845,0.1254008746896514
+subcategory_key,calendars,835,0.1239168406696555
+subcategory_key,r&b,828,0.12287801685565838
+subcategory_key,nature,807,0.11976154541366707
+subcategory_key,textiles,794,0.11783230118767242
+subcategory_key,fantasy,783,0.11619986376567697
+subcategory_key,stationery,744,0.11041213108769306
+subcategory_key,audio,703,0.10432759160570998
+subcategory_key,interactive design,690,0.10239834737971534
+subcategory_key,ceramics,671,0.09957868274172317
+subcategory_key,farmer's markets,635,0.09423616026973802
+subcategory_key,video,606,0.08993246161174999
+subcategory_key,family,593,0.08800321738575535
+subcategory_key,literary journals,585,0.08681599016975865
+subcategory_key,immersive,581,0.08622237656176031
+subcategory_key,punk,552,0.08191867790377226
+subcategory_key,movie theaters,535,0.07939582006977929
+subcategory_key,flight,535,0.07939582006977929
+subcategory_key,printing,534,0.0792474166677797
+subcategory_key,space exploration,499,0.07405329759779412
+subcategory_key,fabrication tools,486,0.0721240533717995
+subcategory_key,couture,468,0.06945279213580692
+subcategory_key,kids,464,0.06885917852780857
+subcategory_key,blues,454,0.0673751445078127
+subcategory_key,makerspaces,434,0.06440707646782094
+subcategory_key,romance,431,0.0639618662618222
+subcategory_key,civic design,427,0.06336825265382384
+subcategory_key,literary spaces,422,0.0626262356438259
+subcategory_key,community gardens,420,0.06232942883982672
+subcategory_key,video art,383,0.05683850296584198
+subcategory_key,animals,374,0.0555028723478457
+subcategory_key,social practice,374,0.0555028723478457
+subcategory_key,knitting,365,0.054167241729849415
+subcategory_key,crochet,346,0.051347577091857256
+subcategory_key,pet fashion,305,0.04526303760987417
+subcategory_key,translations,296,0.04392740699187788
+subcategory_key,pottery,293,0.04348219678587912
+subcategory_key,latin,291,0.04318538998187994
+subcategory_key,glass,256,0.03799127091189439
+subcategory_key,photo,255,0.037842867509894795
+subcategory_key,embroidery,241,0.035765219881900574
+subcategory_key,bacon,230,0.03413278245990511
+subcategory_key,workshops,219,0.032500345037909655
+subcategory_key,typography,206,0.03057110081191501
+subcategory_key,letterpress,167,0.024783368133931102
+subcategory_key,weaving,167,0.024783368133931102
+subcategory_key,quilts,131,0.019440845661945955
+subcategory_key,residencies,102,0.01513714700395792
+subcategory_key,chiptune,65,0.009646221129973183
+subcategory_key,taxidermy,15,0.0022260510299938114
+spotlight,False,367189,54.492096776826514
+spotlight,True,297327,44.12433830633133
+spotlight,<MISSING>,9323,1.3835649168421538
+staff_pick,False,591143,87.72763226824212
+staff_pick,True,72221,10.717842095812205
+staff_pick,<MISSING>,10475,1.5545256359456785
+is_terminal_pair,True,604629,89.72900054760855
+is_terminal_pair,False,69210,10.270999452391447
+is_relaunch,False,672992,99.87430231850635
+is_relaunch,True,847,0.12569768149365057
+country_mismatch,False,642957,95.41700613944874
+country_mismatch,True,30882,4.582993860551259
+goal_under_1,False,673835,99.999406386392
+goal_under_1,True,4,0.0005936136079983498

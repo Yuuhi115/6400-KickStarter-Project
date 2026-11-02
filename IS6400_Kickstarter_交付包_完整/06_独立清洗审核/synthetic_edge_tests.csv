@@ -1,0 +1,6 @@
+﻿case,kept,reason
+12h valid campaign,False,R4
+24h valid campaign,True,kept
+missing_goal_12h,False,R4
+infinite_goal_12h,False,R4
+missing_goal_24h,True,kept

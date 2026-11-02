@@ -1,0 +1,27 @@
+# ---- 大文件 / 二进制：不入库（用原始来源或 _archive 取）----
+*.csv
+*.csv.gz
+*.zip
+*.pptx
+*.pptx.tmp
+*.parquet
+*.tmp
+
+# 例外：审核留痕的小型证据表（合计约 370 KB）需要入库
+!IS6400_Kickstarter_交付包_完整/06_独立清洗审核/*.csv
+
+# 图表：交付包的 11 张 PNG（约 1 MB）入库；其它一律忽略
+*.png
+!IS6400_Kickstarter_交付包_完整/04_图表/*.png
+
+# ---- 归档区：2.09 GB 的旧版本与中间产物，不入库 ----
+_archive_20261101/
+
+# ---- Python ----
+__pycache__/
+*.pyc
+
+# ---- Office / 系统锁文件 ----
+~$*
+Thumbs.db
+desktop.ini
