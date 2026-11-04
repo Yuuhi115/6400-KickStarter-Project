@@ -1,0 +1,29 @@
+{
+  "rows_validated": 673839,
+  "checks": {
+    "independent_history_rows": 3779,
+    "independent_history": "passed",
+    "existing_data_hashes_unchanged": "passed"
+  },
+  "rate_repairs": {
+    "fx_rate": {
+      "zero_before": 533,
+      "USD_zero_fixed": 406,
+      "non_USD_zero_remaining": 127
+    },
+    "usd_exchange_rate": {
+      "zero_before": 533,
+      "USD_zero_fixed": 406,
+      "non_USD_zero_remaining": 127
+    },
+    "static_usd_rate": {
+      "zero_before": 0,
+      "USD_zero_fixed": 0,
+      "non_USD_zero_remaining": 0
+    }
+  },
+  "changed_history_rate_n": 2709,
+  "relaunch_changed_n": 415,
+  "total_projects_changed_n": 179533,
+  "limitation": "Original CSV absent; helper validation uses retained sample, not end-to-end raw reproduction."
+}

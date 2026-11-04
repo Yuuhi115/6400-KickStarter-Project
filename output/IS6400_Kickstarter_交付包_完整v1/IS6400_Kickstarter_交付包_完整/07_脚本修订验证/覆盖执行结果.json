@@ -1,0 +1,39 @@
+{
+  "status": "overwritten",
+  "dataset": "F:\\xwechat_files\\wxid_at2mhgrmfa0q32_4253\\msg\\file\\2026-10\\IS6400_Kickstarter_交付包_完整\\01_清洗数据\\ks_clean.csv",
+  "backup": "F:\\xwechat_files\\wxid_at2mhgrmfa0q32_4253\\msg\\file\\2026-10\\IS6400_Kickstarter_交付包_完整\\07_脚本修订验证\\覆盖前备份\\ks_clean_before_revision_20261003_111622_UTC.csv",
+  "shape_before": [
+    673839,
+    68
+  ],
+  "shape_after": [
+    673839,
+    81
+  ],
+  "rows_added_or_removed": 0,
+  "rate_repairs": {
+    "fx_rate": {
+      "USD_zero_fixed": 406,
+      "non_USD_zero_retained": 127
+    },
+    "usd_exchange_rate": {
+      "USD_zero_fixed": 406,
+      "non_USD_zero_retained": 127
+    },
+    "static_usd_rate": {
+      "USD_zero_fixed": 0,
+      "non_USD_zero_retained": 0
+    }
+  },
+  "changed_rows_by_field": {
+    "creator_prev_success_rate": 2709,
+    "creator_n_projects": 179533,
+    "is_relaunch": 415,
+    "goal_capped": 541
+  },
+  "sha256_before": "78f2c2f52224826c1d55accae59ed3b4e62fb9d006566087fccc087e5c9a2653",
+  "sha256_after": "aaf7a89e08e91cdefb4b7b56a079e74f358ae3c0b0548471ced8565396b70b3f",
+  "history_scope": "retained_clean_sample; removed campaigns absent from source",
+  "unrelated_original_columns_equal": true,
+  "staged_csv_roundtrip_validated": true
+}

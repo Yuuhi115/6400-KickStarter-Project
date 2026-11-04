@@ -1,0 +1,4 @@
+Model,Validation_Optimal_F1_Threshold,Validation_Positive_Rate_At_Threshold
+Logistic Regression,0.30999999999999994,0.7636837532580365
+Random Forest,0.38999999999999996,0.7408774978279756
+Gradient Boosting,0.42499999999999993,0.7049304952215465
