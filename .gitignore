@@ -33,3 +33,6 @@ desktop.ini
 # 但这两个太大，不入库（41 MB 样本 = 原始数据 10% 抽样，可复现；1.1 MB 预测可由脚本重生成）
 IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_study_results/kickstarter_pilot_10pct.csv
 IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_study_results/test_predictions_best_model.csv
+
+# 临时 clone 目录（禁止作为嵌入仓库入库）
+_repo_check/
