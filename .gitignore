@@ -41,3 +41,6 @@ _repo_check/
 *.joblib
 # 11_结果与报告 里的小结果表需要入库
 !IS6400_Kickstarter_交付包_完整/11_结果与报告/*.csv
+
+# git bundle（离线传输用，不入库）
+*.bundle
