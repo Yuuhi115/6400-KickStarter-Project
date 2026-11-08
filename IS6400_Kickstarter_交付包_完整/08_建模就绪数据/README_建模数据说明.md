@@ -9,7 +9,9 @@
 | 文件 | 规模 | sha256 |
 | --- | --- | --- |
 | `ks_model_ready_v1.parquet` | **673,839 行 × 92 列**，231,240,096 B（zstd 压缩） | `71dea1f8bf94fbd4…` |
+| `ks_model_ready_usdonly.parquet` | **460,596 行 × 92 列**（仅 USD 计价项目，附录稳健性用），143,756,030 B | 见 `build_report_usdonly.json` |
 | `build_report.json` | 构建统计（行数、各新列缺失、金额分布） | — |
+| `build_report_usdonly.json` | USD-only 版的构建与校验统计（含六档表） | — |
 
 CSV 版可按需生成（约 730 MB），默认只给 parquet（保留可空类型，避免 CSV 的布尔/时间退化）。
 
@@ -100,8 +102,29 @@ y = train["succ"].astype(float)
 ```powershell
 cd "E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整\09_分析脚本"
 python _build_model_ready.py     # 约 3–5 分钟，重新生成 parquet 与 build_report.json
+python build_usd_only.py         # 约 1 分钟，生成 USD-only 附录文件
 ```
+
+## 八·五、USD-only 附录文件（`ks_model_ready_usdonly.parquet`）
+
+用途：**只作稳健性检验**（写进报告附录），证明"汇率换算没有改变结论"，不作为主分析口径。
+
+| 项 | 值 |
+| --- | --- |
+| 行/列 | **460,596 × 92**（仅 `m_currency_usd = True`，含 canceled 等不可建模行，保持与主文件同构） |
+| 可建模 | **415,619**（train 361,184 / test 54,435） |
+| 成功率 | 48.75% |
+| `m_goal_usd` | 与 `goal` **完全相等**（USD→USD），无缺失 |
+| 校验 | 非 USD 行 = **0**；`abs(m_goal_usd − goal).max() < 1e-9` |
+| 体积 | 143,756,030 B |
+
+**六档达标率（USD-only，可建模）**：≤1k 65.66%｜1–5k 53.66%｜5–10k 46.76%｜10–20k 41.61%｜20–50k 31.40%｜>50k 15.72%
+
+与全量换算口径（68.17 / 54.16 / 46.33 / 40.64 / 30.41 / 14.84）对比：**最大差 2.9pp（最低档）**，结论一致。
+
+⚠️ 使用限制：USD-only 只剩 **3 个国家**（US 415,609 / CA 8 / PL 2），且 games −2.83pp、technology −1.22pp、design −0.94pp 被系统性低估 → **不可用它替代主分析**，也不要在它上面做跨国比较。
 
 ## 九、版本记录
 
 - **v1（2026-11-02）**：首次生成。92 列 = 81 原始/派生 + 11 个 `m_*`；`m_goal_usd` 覆盖 672,352/673,839 行（99.78%），其中 7,836 行为 USD 精确填充。
+- **v1 + USD-only 附录（2026-11-02）**：新增 `ks_model_ready_usdonly.parquet`（460,596 × 92，可建模 415,619），用于附录稳健性检验；生成脚本 `09_分析脚本/build_usd_only.py`。
