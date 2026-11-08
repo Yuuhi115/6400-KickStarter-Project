@@ -1,0 +1,63 @@
+{
+  "features": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon",
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "numeric": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon"
+  ],
+  "categorical": [
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "threshold": 0.38999999999999996,
+  "test_metrics": {
+    "Accuracy": 0.7969722003802168,
+    "Precision": 0.7866049254966887,
+    "Recall": 0.9397348332663721,
+    "F1": 0.8563784095869771,
+    "ROC_AUC": 0.8823107870212121,
+    "PR_AUC": 0.9294575064834102,
+    "Brier_Score": 0.13156647288295645,
+    "Threshold": 0.38999999999999996,
+    "n": 100469,
+    "base_rate": 0.6441190815077288
+  },
+  "top_decile": {
+    "top_n": 10047,
+    "overall": 0.6441190815077288,
+    "top_rate": 0.9924355529013635,
+    "lift": 1.5407640937733271
+  }
+}

@@ -36,3 +36,8 @@ IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_
 
 # 临时 clone 目录（禁止作为嵌入仓库入库）
 _repo_check/
+
+# 训练出的模型二进制（几十 MB，不入库）
+*.joblib
+# 11_结果与报告 里的小结果表需要入库
+!IS6400_Kickstarter_交付包_完整/11_结果与报告/*.csv
