@@ -1,0 +1,4 @@
+Model,Brier_Score
+Logistic Regression,0.16124126183391377
+Random Forest,0.16288143927308507
+Gradient Boosting,0.14525433663067

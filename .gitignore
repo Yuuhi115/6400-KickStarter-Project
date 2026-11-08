@@ -26,5 +26,10 @@ __pycache__/
 Thumbs.db
 desktop.ini
 
-# 组员 pilot 的小型结果表需要入库
-!IS6400_Kickstarter_交付包_完整/10_组员pilot研究/*.csv
+# ---- 组员 pilot 研究：文本、小表与 9 张评估图入库 ----
+!IS6400_Kickstarter_交付包_完整/10_组员pilot研究/model_metrics.csv
+!IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_study_results/*.csv
+!IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_study_results/plots/*.png
+# 但这两个太大，不入库（41 MB 样本 = 原始数据 10% 抽样，可复现；1.1 MB 预测可由脚本重生成）
+IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_study_results/kickstarter_pilot_10pct.csv
+IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_study_results/test_predictions_best_model.csv
