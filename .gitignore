@@ -25,3 +25,6 @@ __pycache__/
 ~$*
 Thumbs.db
 desktop.ini
+
+# 组员 pilot 的小型结果表需要入库
+!IS6400_Kickstarter_交付包_完整/10_组员pilot研究/*.csv
