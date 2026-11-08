@@ -186,6 +186,8 @@ def main():
     ap.add_argument("--split", choices=["pilot", "ours"], default="pilot")
     ap.add_argument("--no-prep-days", action="store_true")
     ap.add_argument("--rf-trees", type=int, default=250, help="0 = skip Random Forest (fast)")
+    ap.add_argument("--drop", default="",
+                    help="comma list of features to drop; 'creator' drops all creator_* features")
     ap.add_argument("--tag", default="")
     args = ap.parse_args()
 
@@ -193,6 +195,16 @@ def main():
     print(f"[{tag}] loading {args.data} ...", flush=True)
     df = build_frame(DATA[args.data], use_prep_days=not args.no_prep_days)
     numeric, categorical = df.attrs["numeric"], df.attrs["categorical"]
+    drops = set()
+    for tok in [t.strip() for t in args.drop.split(",") if t.strip()]:
+        if tok == "creator":
+            drops |= {c for c in numeric + categorical if c.startswith("creator")}
+        else:
+            drops.add(tok)
+    if drops:
+        numeric = [c for c in numeric if c not in drops]
+        categorical = [c for c in categorical if c not in drops]
+        print(f"[{tag}] dropped features: {sorted(drops)}", flush=True)
     train, val, test = make_splits(df, args.split)
     print(f"[{tag}] rows modelable={len(df):,} | train={len(train):,} val={len(val):,} test={len(test):,}",
           flush=True)
