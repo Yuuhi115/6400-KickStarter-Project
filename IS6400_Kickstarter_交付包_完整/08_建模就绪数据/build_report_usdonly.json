@@ -1,0 +1,40 @@
+{
+  "rows": 460596,
+  "cols": 92,
+  "non_usd_rows": 0,
+  "modelable_rows": 415619,
+  "modelable_split": {
+    "train": 361184,
+    "test": 54435
+  },
+  "success_rate_modelable": 0.4875,
+  "goal_usd_equals_goal": true,
+  "goal_usd_na": 0,
+  "bytes": 143756030,
+  "goal_bands": {
+    "<=1k": {
+      "n": 79781,
+      "rate_pct": 65.66
+    },
+    "1-5k": {
+      "n": 142621,
+      "rate_pct": 53.66
+    },
+    "5-10k": {
+      "n": 75757,
+      "rate_pct": 46.76
+    },
+    "10-20k": {
+      "n": 49430,
+      "rate_pct": 41.61
+    },
+    "20-50k": {
+      "n": 44851,
+      "rate_pct": 31.4
+    },
+    ">50k": {
+      "n": 23179,
+      "rate_pct": 15.72
+    }
+  }
+}

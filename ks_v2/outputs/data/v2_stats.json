@@ -1,0 +1,14 @@
+{
+  "raw_rows": 673839,
+  "v2_rows": 408347,
+  "v2_rate": 0.495034860057745,
+  "train_rows": 353913,
+  "train_rate": 0.47235620053515975,
+  "test_rows": 54434,
+  "test_rate": 0.6424844766138811,
+  "dropped": {
+    "no_binary_outcome": 44977,
+    "non_usd_currency": 213243,
+    "usd_type_missing": 7272
+  }
+}

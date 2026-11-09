@@ -1,0 +1,98 @@
+{
+  "shape": [
+    673839,
+    68
+  ],
+  "python": "3.12.14",
+  "pandas": "3.0.1",
+  "numpy": "2.3.5",
+  "states": {
+    "failed": 307091,
+    "successful": 297538,
+    "canceled": 69210
+  },
+  "currency": {
+    "USD": 460596,
+    "GBP": 70062,
+    "EUR": 60112,
+    "CAD": 31207,
+    "AUD": 16197,
+    "MXN": 8726,
+    "HKD": 7651,
+    "SEK": 3799,
+    "JPY": 3311,
+    "SGD": 3191,
+    "NZD": 2846,
+    "DKK": 2185,
+    "CHF": 2117,
+    "NOK": 1202,
+    "PLN": 637
+  },
+  "dropped_shape": [
+    20223,
+    5
+  ],
+  "drop_reasons": {
+    "R1 未开始 / 未结束记录": 20215,
+    "R2 上线时间无效": 6,
+    "R5 募款额为负": 2
+  },
+  "dropped_states": {
+    "submitted": 9469,
+    "live": 7474,
+    "started": 1920,
+    "suspended": 1352,
+    "canceled": 6,
+    "failed": 2
+  },
+  "removed_id_unique": 20223,
+  "removed_kept_id_overlap": 0,
+  "missing_any_n": 629762,
+  "missing_any_original43_n": 582123,
+  "missing_blurb_n": 47,
+  "cap_999": 5000000.0,
+  "country_mismatch_n": 30882,
+  "time_range": {
+    "launch": [
+      "2009-04-21 19:02:48+00:00",
+      "2026-04-22 22:29:43+00:00"
+    ],
+    "deadline": [
+      "2009-05-03 06:59:59+00:00",
+      "2026-06-21 22:29:43+00:00"
+    ],
+    "created": [
+      "2009-04-21 17:00:19+00:00",
+      "2026-04-22 21:08:55+00:00"
+    ],
+    "state_changed": [
+      "2009-04-29 02:57:50+00:00",
+      "2026-04-24 12:59:50+00:00"
+    ]
+  },
+  "category_mappings": [
+    {
+      "id_field": "category_parent_id",
+      "multi_label_ids": 0
+    },
+    {
+      "id_field": "category_id",
+      "multi_label_ids": 0
+    }
+  ],
+  "duration_fraction_summary": {
+    "count": 673839.0,
+    "mean": 0.2039056204449431,
+    "std": 0.3365637273406155,
+    "min": 0.0,
+    "25%": 0.0,
+    "50%": 0.0,
+    "75%": 0.3131192129629632,
+    "max": 0.9999884259259275
+  },
+  "hashes": {
+    "01_清洗数据\\ks_clean.csv": "78f2c2f52224826c1d55accae59ed3b4e62fb9d006566087fccc087e5c9a2653",
+    "01_清洗数据\\dropped_rows.csv.gz": "c0a17ef50d5d0de4ec120ed2db2134a924ed36abd5bd14cd10d5bc919cb1399b",
+    "02_清洗规则与理由\\清洗脚本.py": "b95553f8c8bbe01af57e82471e786e3dafe3ab205d32e7af80d8de83e41fc273"
+  }
+}

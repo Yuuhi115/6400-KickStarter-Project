@@ -1,0 +1,813 @@
+[17:06:32] stage data: reading raw csv ...
+[17:06:41] raw rows=673,839 cols=32
+[17:06:41] v2 rows=408,347  success rate=0.4950
+[17:06:41] train(<= 2022) n=353,913 rate=0.4724
+[17:06:41] test(>= 2023)  n=54,434 rate=0.6425
+[17:06:47] stage data: reading raw csv ...
+[17:06:56] raw rows=673,839 cols=32
+[17:06:56] v2 rows=408,347  success rate=0.4950
+[17:06:57] train(<= 2022) n=353,913 rate=0.4724
+[17:06:57] test(>= 2023)  n=54,434 rate=0.6425
+[17:07:10] wrote E:\个人\港城\courses\IS6400\group project\KS project\ks_v2\outputs\data\ks_v2_usd.csv.gz  (51.2 MB)
+[17:07:18] dropped 265,492 rows -> E:\个人\港城\courses\IS6400\group project\KS project\ks_v2\outputs\data\dropped_rows_currency.csv.gz
+[17:07:18] reason
+no_binary_outcome     44977
+non_usd_currency     213243
+usd_type_missing       7272
+[17:07:43] eda: v2=408,347 train=353,913 test=54,434
+[17:07:43]                                     0
+v2_rows                 408347.000000
+v2_rate                      0.495035
+train_rows              353913.000000
+train_rate                   0.472356
+test_rows                54434.000000
+test_rate                    0.642484
+majority_baseline_test       0.642484
+train_median_goal         5000.000000
+test_median_goal          4000.000000
+train_median_duration       30.000000
+test_median_duration        30.000000
+[17:07:43] 
+   goal_bin  n_success  median_usd_pledged  mean_usd_pledged
+0      <=1k      39943            1016.000      2.679306e+03
+1      1-5k      63896            3877.500      7.599007e+03
+2     5-10k      29929           10165.000      2.439532e+04
+3    10-20k      17980           19702.775      4.432787e+04
+4    20-50k      12259           42669.330      1.141026e+05
+5   50-100k       2430          107608.500      2.797957e+05
+6  100-500k        685          295132.050      6.566449e+05
+7     >500k         51         1578950.110      3.680567e+06
+[17:07:44] stage eda done
+[17:08:44] text: fitting TF-IDF on training window ...
+[17:09:02] text: train matrix (353913, 15000) nnz=3,808,654
+[17:09:02] text: year 2009 skipped (history=0 < 20,000)
+[17:09:02] text: year 2010 skipped (history=1,162 < 20,000)
+[17:09:02] text: year 2011 skipped (history=10,545 < 20,000)
+[17:09:02] text: year 2012 n=36,151 history=33,828 auc_in_sample_na
+[17:09:03] text: year 2013 n=35,144 history=69,979 auc_in_sample_na
+[17:09:03] text: year 2014 n=44,107 history=105,123 auc_in_sample_na
+[17:09:04] text: year 2015 n=46,516 history=149,230 auc_in_sample_na
+[17:09:05] text: year 2016 n=33,203 history=195,746 auc_in_sample_na
+[17:09:06] text: year 2017 n=29,064 history=228,949 auc_in_sample_na
+[17:09:08] text: year 2018 n=23,021 history=258,013 auc_in_sample_na
+[17:09:10] text: year 2019 n=21,205 history=281,034 auc_in_sample_na
+[17:09:11] text: year 2020 n=18,133 history=302,239 auc_in_sample_na
+[17:09:13] text: year 2021 n=17,179 history=320,372 auc_in_sample_na
+[17:09:16] text: year 2022 n=16,362 history=337,551 auc_in_sample_na
+[17:09:16] text: fitting final classifier on all train rows for the test window
+[17:09:19] text: text-only out-of-time AUC on test = 0.7302
+[17:09:23] text: wrote scores for 374,519 rows
+[17:09:30] models: n=408,347 text_scored=374,519
+[17:09:30] fold val=2017: train=228,949 val=29,064
+[17:10:15]   B0_majority    auc=0.5000 brier=0.2456
+[17:10:15]   B1_goal_only   auc=0.6077 brier=0.2362
+[17:10:15]   B2_cell_rate   auc=0.6672 brier=0.2253
+[17:10:15]   LR             auc=0.7933 brier=0.1823
+[17:10:15]   TREE           auc=0.7281 brier=0.2006
+[17:10:15]   RF             auc=0.8008 brier=0.1797
+[17:10:15]   HGB            auc=0.8208 brier=0.1704
+[17:10:15]   HGB_text       auc=0.8453 brier=0.1587
+[17:10:15]   BLEND          auc=0.8393 brier=0.1617
+[17:10:15] fold val=2018: train=258,013 val=23,021
+[17:11:06]   B0_majority    auc=0.5000 brier=0.2557
+[17:11:06]   B1_goal_only   auc=0.6217 brier=0.2419
+[17:11:06]   B2_cell_rate   auc=0.6858 brier=0.2287
+[17:11:06]   LR             auc=0.8021 brier=0.1832
+[17:11:06]   TREE           auc=0.7494 brier=0.2001
+[17:11:06]   RF             auc=0.8098 brier=0.1805
+[17:11:06]   HGB            auc=0.8230 brier=0.1725
+[17:11:06]   HGB_text       auc=0.8406 brier=0.1641
+[17:11:06]   BLEND          auc=0.8377 brier=0.1655
+[17:11:07] fold val=2019: train=281,034 val=21,205
+[17:12:02]   B0_majority    auc=0.5000 brier=0.2595
+[17:12:02]   B1_goal_only   auc=0.6319 brier=0.2422
+[17:12:02]   B2_cell_rate   auc=0.7108 brier=0.2240
+[17:12:03]   LR             auc=0.8149 brier=0.1780
+[17:12:03]   TREE           auc=0.7585 brier=0.1982
+[17:12:03]   RF             auc=0.8244 brier=0.1750
+[17:12:03]   HGB            auc=0.8372 brier=0.1663
+[17:12:03]   HGB_text       auc=0.8512 brier=0.1581
+[17:12:03]   BLEND          auc=0.8493 brier=0.1597
+[17:12:03] fold val=2020: train=302,239 val=18,133
+[17:13:05]   B0_majority    auc=0.5000 brier=0.2624
+[17:13:05]   B1_goal_only   auc=0.6672 brier=0.2358
+[17:13:05]   B2_cell_rate   auc=0.7228 brier=0.2208
+[17:13:05]   LR             auc=0.8267 brier=0.1723
+[17:13:05]   TREE           auc=0.7827 brier=0.1886
+[17:13:05]   RF             auc=0.8396 brier=0.1672
+[17:13:05]   HGB            auc=0.8477 brier=0.1600
+[17:13:05]   HGB_text       auc=0.8576 brier=0.1537
+[17:13:05]   BLEND          auc=0.8567 brier=0.1547
+[17:13:05] fold val=2021: train=320,372 val=17,179
+[17:14:08]   B0_majority    auc=0.5000 brier=0.2639
+[17:14:08]   B1_goal_only   auc=0.6842 brier=0.2372
+[17:14:08]   B2_cell_rate   auc=0.7382 brier=0.2165
+[17:14:08]   LR             auc=0.8313 brier=0.1693
+[17:14:08]   TREE           auc=0.7897 brier=0.1871
+[17:14:08]   RF             auc=0.8440 brier=0.1641
+[17:14:08]   HGB            auc=0.8557 brier=0.1541
+[17:14:08]   HGB_text       auc=0.8647 brier=0.1466
+[17:14:08]   BLEND          auc=0.8640 brier=0.1481
+[17:14:08] fold val=2022: train=337,551 val=16,362
+[17:15:13]   B0_majority    auc=0.5000 brier=0.2597
+[17:15:13]   B1_goal_only   auc=0.6873 brier=0.2307
+[17:15:13]   B2_cell_rate   auc=0.7497 brier=0.2074
+[17:15:13]   LR             auc=0.8476 brier=0.1575
+[17:15:13]   TREE           auc=0.8080 brier=0.1737
+[17:15:13]   RF             auc=0.8600 brier=0.1520
+[17:15:13]   HGB            auc=0.8691 brier=0.1441
+[17:15:13]   HGB_text       auc=0.8759 brier=0.1388
+[17:15:13]   BLEND          auc=0.8757 brier=0.1396
+[17:15:13] 
+rolling summary:
+       model  auc_mean   auc_sd  auc_min  auc_max  brier_mean
+    HGB_text  0.855894 0.013017 0.840641 0.875909    0.153344
+       BLEND  0.853773 0.014719 0.837660 0.875677    0.154887
+         HGB  0.842233 0.018903 0.820775 0.869106    0.161241
+          RF  0.829786 0.022293 0.800768 0.860047    0.169750
+          LR  0.819338 0.019948 0.793294 0.847592    0.173766
+        TREE  0.769387 0.029336 0.728117 0.807981    0.191397
+B2_cell_rate  0.712432 0.031384 0.667159 0.749730    0.220455
+B1_goal_only  0.650013 0.033982 0.607711 0.687287    0.237351
+ B0_majority  0.500000 0.000000 0.500000 0.500000    0.257796
+[17:16:23] selected model by rolling mean AUC: HGB_text
+[17:16:24] 
+test metrics:
+            model  calibrated      auc   pr_auc    brier  logloss      acc       f1
+      B0_majority       False 0.500000 0.642484 0.258642 0.710449 0.357516 0.000000
+     B1_goal_only       False 0.706773 0.799293 0.223417 0.637066 0.627182 0.667791
+     B2_cell_rate       False 0.759734 0.836265 0.199491 0.583144 0.688761 0.740607
+               LR       False 0.857087 0.914811 0.148467 0.450455 0.776004 0.819830
+             TREE       False 0.827654 0.889443 0.162196 0.481543 0.742514 0.795977
+               RF       False 0.870641 0.923978 0.142027 0.434264 0.790260 0.831257
+              HGB       False 0.879067 0.929073 0.134710 0.414108 0.803413 0.847209
+         HGB_text       False 0.884785 0.931828 0.130613 0.403589 0.809274 0.854789
+            BLEND       False 0.884701 0.931897 0.130874 0.404372 0.809751 0.853646
+HGB_text+isotonic        True 0.884666 0.929575 0.131907 0.407431 0.806408 0.856957
+[17:16:32] stage models done
+[17:16:37] === run_all stages=['eval', 'dual', 'ts', 'explain'] ===
+[17:16:37] --- stage eval start ---
+[17:16:41] evaluate: selected model = HGB_text, test n=54,434
+[17:16:42] 
+            model    brier      ece
+         HGB_text 0.130613 0.003160
+HGB_text+isotonic 0.131907 0.028353
+[17:16:42] 
+                          0
+train_rate         0.472356
+test_rate          0.642484
+logit_shift        0.696852
+brier_raw          0.130613
+brier_prior_shift  0.141770
+auc_raw            0.884785
+auc_prior_shift    0.884785
+[17:16:42] 
+ year       split     n      auc
+ 2017 rolling-OOF 29064 0.845302
+ 2018 rolling-OOF 23021 0.840641
+ 2019 rolling-OOF 21205 0.851214
+ 2020 rolling-OOF 18133 0.857644
+ 2021 rolling-OOF 17179 0.864655
+ 2022 rolling-OOF 16362 0.875909
+ 2023 out-of-time 16916 0.880883
+ 2024 out-of-time 16732 0.882985
+ 2025 out-of-time 16956 0.889657
+ 2026 out-of-time  3830 0.890123
+[17:16:42] 
+ decile    n  pred_mean  observed_rate  lift_vs_base  share_of_successes  precision_hits
+      1 5444   0.990001       0.994673      1.548167            0.154834            5415
+      2 5444   0.970625       0.971345      1.511857            0.151202            5288
+      3 5444   0.936019       0.935158      1.455534            0.145569            5091
+      4 5444   0.876184       0.871418      1.356325            0.135647            4744
+      5 5443   0.784195       0.788536      1.227323            0.122723            4292
+      6 5443   0.668940       0.668933      1.041165            0.104109            3641
+      7 5443   0.531480       0.518464      0.806967            0.080691            2822
+      8 5443   0.379286       0.385633      0.600221            0.060018            2099
+      9 5443   0.220359       0.221202      0.344291            0.034427            1204
+     10 5443   0.067281       0.069263      0.107805            0.010780             377
+[17:16:42] 
+    group_by        group     n     rate      auc
+category_key          art  3778 0.665961 0.822769
+category_key       comics  7639 0.850111 0.881811
+category_key       crafts   799 0.384230 0.825269
+category_key       design  4229 0.702057 0.871395
+category_key      fashion  2325 0.427957 0.860848
+category_key film & video  4826 0.445918 0.794511
+category_key         food  2141 0.305465 0.784662
+category_key        games 12195 0.741287 0.908995
+category_key        music  2899 0.621249 0.850074
+category_key  photography   485 0.626804 0.838016
+category_key   publishing  8698 0.647620 0.847729
+category_key   technology  3534 0.458404 0.933710
+category_key      theater   508 0.624016 0.779923
+    goal_bin         <=1k 14711 0.836857 0.858416
+    goal_bin         1-5k 18026 0.689393 0.845823
+    goal_bin        5-10k  9284 0.583046 0.857643
+    goal_bin       10-20k  5335 0.476851 0.863860
+    goal_bin       20-50k  5020 0.359562 0.882576
+    goal_bin      50-100k  1327 0.263753 0.910987
+    goal_bin     100-500k   595 0.200000 0.937999
+     dur_bin          1-7   898 0.828508 0.957164
+     dur_bin         8-14  3066 0.857143 0.915268
+     dur_bin        15-21  6756 0.851095 0.886358
+     dur_bin        22-30 27391 0.664890 0.859765
+     dur_bin        31-45  8407 0.619722 0.840384
+     dur_bin        46-60  7903 0.306339 0.846067
+    rank_bin          1st 28979 0.473515 0.815220
+    rank_bin          2nd  7060 0.680028 0.863144
+    rank_bin          3rd  3423 0.782647 0.856394
+    rank_bin          4th  2248 0.839413 0.851653
+    rank_bin          5th  1648 0.868932 0.853552
+    rank_bin        6-8th  3126 0.904671 0.867808
+    rank_bin         >8th  7950 0.958994 0.890736
+[17:18:32] 
+ model_a      model_b  delta_auc    ci_lo    ci_hi  significant
+HGB_text          HGB   0.005718 0.004631 0.006769         True
+HGB_text     HGB_text   0.000000 0.000000 0.000000        False
+HGB_text          HGB   0.005718 0.004787 0.006708         True
+HGB_text B2_cell_rate   0.125052 0.121138 0.128659         True
+HGB_text B1_goal_only   0.178013 0.173784 0.182581         True
+HGB_text           LR   0.027698 0.026090 0.029173         True
+HGB_text           RF   0.014144 0.012582 0.015653         True
+HGB_text  B0_majority   0.384785 0.382047 0.387373         True
+[17:18:57] 
+       scope     n  auc_structured  auc_plus_text  delta_auc     ci_lo    ci_hi
+         all 54434        0.879067       0.884785   0.005718  0.004808 0.006689
+         art  3778        0.814421       0.822769   0.008349  0.002797 0.013550
+      comics  7639        0.879765       0.881811   0.002046 -0.000442 0.004824
+      design  4229        0.864044       0.871395   0.007351  0.002931 0.011548
+film & video  4826        0.784716       0.794511   0.009795  0.003587 0.015331
+       games 12195        0.907398       0.908995   0.001597 -0.000085 0.003436
+  publishing  8698        0.839480       0.847729   0.008249  0.004921 0.011109
+  technology  3534        0.931212       0.933710   0.002498 -0.000179 0.004865
+[17:19:11] 
+   model      auc  auc_ci_lo  auc_ci_hi  test_n  test_rate
+HGB_text 0.884785   0.881932   0.887607   54434   0.642484
+[17:19:11] stage evaluate done
+[17:19:11] --- stage eval done in 154.4s ---
+[17:19:11] --- stage dual start ---
+[17:19:16] dual: train successes=167,173 test successes=34,973
+[17:19:44] 
+ quantile  pinball
+      0.1 0.105794
+      0.5 0.331849
+      0.9 0.186465
+[17:19:44] 
+ p10_p90_coverage  p50_below     n
+           0.7412   0.459068 34973
+[17:19:44] 
+goal_bin     n  p_success_mean  pred_median_median  observed_median  pred_p90_median
+    <=1k 12311        0.872144         1435.454784         1608.000     5.238455e+03
+    1-5k 12427        0.784749         5024.657696         5378.000     1.338315e+04
+   5-10k  5413        0.749723        12705.286599        13027.000     3.876769e+04
+  10-20k  2544        0.713701        21498.593428        20975.000     4.914275e+04
+  20-50k  1805        0.670812        47057.359716        50890.000     1.018837e+05
+ 50-100k   350        0.613795       117864.729088       117579.500     2.842264e+05
+100-500k   119        0.605411       352511.786595       377914.540     1.173447e+06
+   >500k     4        0.693289       523714.470624      1599237.755     2.347113e+06
+[17:19:45] dual: trade-off table and figure written
+[17:19:45] stage dual done
+[17:19:45] --- stage dual done in 33.3s ---
+[17:19:45] --- stage ts start ---
+[17:19:49] ts: monthly series 2009-05 .. 2026-04 (n=204)
+[17:19:49] ts: train months=164 test months=40
+[17:19:56] 
+           method  n      mae     rmse     mape  mae_vs_seasonal_naive
+      HW_additive 40 0.019295 0.034183 0.028427               0.825222
+HW_multiplicative 40 0.020191 0.033999 0.029812               0.863540
+   seasonal_naive 40 0.023382 0.042412 0.034437               1.000000
+       last_value 40 0.039534 0.055544 0.062087               1.690830
+[17:19:56] stage tseries done
+[17:19:56] --- stage ts done in 11.4s ---
+[17:19:56] --- stage explain start ---
+[17:20:01] scorecard: 204 cells with n_train>=300
+[17:20:01] category_key goal_bin dur4_bin  n_train  k_train  rate_train       lo       hi  n_test  k_test  rate_test  delta_test_minus_train
+        food  50-100k      46+      356      8.0    0.022472 0.011430 0.043710      61     3.0   0.049180                0.026708
+  technology 100-500k      46+      422     10.0    0.023697 0.012922 0.043065      43     4.0   0.093023                0.069327
+        food 100-500k    15-30      344      9.0    0.026163 0.013824 0.048967      12     1.0   0.083333                0.057171
+film & video 100-500k      46+      532     20.0    0.037594 0.024466 0.057352      47     1.0   0.021277               -0.016317
+  technology 100-500k    15-30      801     67.0    0.083645 0.066403 0.104863      54     6.0   0.111111                0.027466
+        food  50-100k    15-30      609     58.0    0.095238 0.074397 0.121154      45    11.0   0.244444                0.149206
+film & video 100-500k    15-30      776     76.0    0.097938 0.078964 0.120874      51    11.0   0.215686                0.117748
+  technology  50-100k      46+      610     61.0    0.100000 0.078639 0.126367     112     6.0   0.053571               -0.046429
+[17:20:10] === run_all stages=['explain'] ===
+[17:20:10] --- stage explain start ---
+[17:20:15] scorecard: 204 cells with n_train>=300
+[17:20:15] category_key goal_bin dur4_bin  n_train  k_train  rate_train       lo       hi  n_test  k_test  rate_test  delta_test_minus_train
+        food  50-100k      46+      356      8.0    0.022472 0.011430 0.043710      61     3.0   0.049180                0.026708
+  technology 100-500k      46+      422     10.0    0.023697 0.012922 0.043065      43     4.0   0.093023                0.069327
+        food 100-500k    15-30      344      9.0    0.026163 0.013824 0.048967      12     1.0   0.083333                0.057171
+film & video 100-500k      46+      532     20.0    0.037594 0.024466 0.057352      47     1.0   0.021277               -0.016317
+  technology 100-500k    15-30      801     67.0    0.083645 0.066403 0.104863      54     6.0   0.111111                0.027466
+        food  50-100k    15-30      609     58.0    0.095238 0.074397 0.121154      45    11.0   0.244444                0.149206
+film & video 100-500k    15-30      776     76.0    0.097938 0.078964 0.120874      51    11.0   0.215686                0.117748
+  technology  50-100k      46+      610     61.0    0.100000 0.078639 0.126367     112     6.0   0.053571               -0.046429
+[17:20:20] keyword panel: 450 rows, categories=15
+[17:20:22] odds ratios: design (353913, 35), fitting logit ...
+[17:20:26] odds ratios done; extreme terms:
+                     term      coef  odds_ratio     ci_lo     ci_hi       p_value
+                prev_miss -2.302131    0.100045  0.094279  0.106165  0.000000e+00
+           goal_bin_>500k -1.358861    0.256953  0.190046  0.347415  1.048299e-18
+        goal_bin_100-500k -0.922497    0.397525  0.357309  0.442268  1.856265e-64
+      category_key_crafts -0.844557    0.429748  0.405679  0.455244 2.113980e-181
+  category_key_journalism -0.708057    0.492601  0.455360  0.532887  9.507433e-70
+                 log_goal -0.683805    0.504693  0.486824  0.523218 1.506575e-302
+       category_key_music  0.505644    1.658053  1.606992  1.710737 2.683908e-220
+            rank_bin_>8th  0.551427    1.735728  1.579212  1.907755  2.740177e-30
+       category_key_dance  0.823139    2.277638  2.103663  2.466001  1.187710e-91
+     category_key_theater  1.022333    2.779671  2.629783  2.938102 3.975247e-286
+                    const  1.865984    6.462290  5.611612  7.441924 4.974142e-148
+creator_prev_success_rate  2.676272   14.530819 13.895480 15.195208  0.000000e+00
+[17:20:56] 
+                  feature  auc_drop_mean  auc_drop_sd
+creator_prev_success_rate       0.123016     0.001192
+                 log_goal       0.031537     0.000708
+          subcategory_key       0.031008     0.001878
+                 dur_days       0.013599     0.000604
+                     hour       0.012284     0.000395
+             creator_rank       0.007538     0.000748
+           location_state       0.007059     0.000497
+                 name_len       0.005572     0.000384
+                      dow       0.003422     0.000438
+       goal_vs_cat_median       0.002943     0.000184
+                blurb_len       0.002701     0.000245
+              blurb_words       0.002537     0.000570
+             category_key       0.002065     0.000327
+                      mon       0.000603     0.000093
+[17:21:09] === run_all stages=['explain'] ===
+[17:21:09] --- stage explain start ---
+[17:21:14] scorecard: 204 cells with n_train>=300
+[17:21:14] category_key goal_bin dur4_bin  n_train  k_train  rate_train       lo       hi  n_test  k_test  rate_test  delta_test_minus_train
+        food  50-100k      46+      356      8.0    0.022472 0.011430 0.043710      61     3.0   0.049180                0.026708
+  technology 100-500k      46+      422     10.0    0.023697 0.012922 0.043065      43     4.0   0.093023                0.069327
+        food 100-500k    15-30      344      9.0    0.026163 0.013824 0.048967      12     1.0   0.083333                0.057171
+film & video 100-500k      46+      532     20.0    0.037594 0.024466 0.057352      47     1.0   0.021277               -0.016317
+  technology 100-500k    15-30      801     67.0    0.083645 0.066403 0.104863      54     6.0   0.111111                0.027466
+        food  50-100k    15-30      609     58.0    0.095238 0.074397 0.121154      45    11.0   0.244444                0.149206
+film & video 100-500k    15-30      776     76.0    0.097938 0.078964 0.120874      51    11.0   0.215686                0.117748
+  technology  50-100k      46+      610     61.0    0.100000 0.078639 0.126367     112     6.0   0.053571               -0.046429
+[17:21:19] keyword panel: 450 rows, categories=15
+[17:21:21] odds ratios: design (353913, 35), fitting logit ...
+[17:21:25] odds ratios done; extreme terms:
+                     term      coef  odds_ratio     ci_lo     ci_hi       p_value
+                prev_miss -2.302131    0.100045  0.094279  0.106165  0.000000e+00
+           goal_bin_>500k -1.358861    0.256953  0.190046  0.347415  1.048299e-18
+        goal_bin_100-500k -0.922497    0.397525  0.357309  0.442268  1.856265e-64
+      category_key_crafts -0.844557    0.429748  0.405679  0.455244 2.113980e-181
+  category_key_journalism -0.708057    0.492601  0.455360  0.532887  9.507433e-70
+                 log_goal -0.683805    0.504693  0.486824  0.523218 1.506575e-302
+       category_key_music  0.505644    1.658053  1.606992  1.710737 2.683908e-220
+            rank_bin_>8th  0.551427    1.735728  1.579212  1.907755  2.740177e-30
+       category_key_dance  0.823139    2.277638  2.103663  2.466001  1.187710e-91
+     category_key_theater  1.022333    2.779671  2.629783  2.938102 3.975247e-286
+                    const  1.865984    6.462290  5.611612  7.441924 4.974142e-148
+creator_prev_success_rate  2.676272   14.530819 13.895480 15.195208  0.000000e+00
+[17:21:54] 
+                  feature  auc_drop_mean  auc_drop_sd
+creator_prev_success_rate       0.123016     0.001192
+                 log_goal       0.031537     0.000708
+          subcategory_key       0.031008     0.001878
+                 dur_days       0.013599     0.000604
+                     hour       0.012284     0.000395
+             creator_rank       0.007538     0.000748
+           location_state       0.007059     0.000497
+                 name_len       0.005572     0.000384
+                      dow       0.003422     0.000438
+       goal_vs_cat_median       0.002943     0.000184
+                blurb_len       0.002701     0.000245
+              blurb_words       0.002537     0.000570
+             category_key       0.002065     0.000327
+                      mon       0.000603     0.000093
+[17:22:04] === run_all stages=['explain'] ===
+[17:22:04] --- stage explain start ---
+[17:22:09] scorecard: 204 cells with n_train>=300
+[17:22:09] category_key goal_bin dur4_bin  n_train  k_train  rate_train       lo       hi  n_test  k_test  rate_test  delta_test_minus_train
+        food  50-100k      46+      356      8.0    0.022472 0.011430 0.043710      61     3.0   0.049180                0.026708
+  technology 100-500k      46+      422     10.0    0.023697 0.012922 0.043065      43     4.0   0.093023                0.069327
+        food 100-500k    15-30      344      9.0    0.026163 0.013824 0.048967      12     1.0   0.083333                0.057171
+film & video 100-500k      46+      532     20.0    0.037594 0.024466 0.057352      47     1.0   0.021277               -0.016317
+  technology 100-500k    15-30      801     67.0    0.083645 0.066403 0.104863      54     6.0   0.111111                0.027466
+        food  50-100k    15-30      609     58.0    0.095238 0.074397 0.121154      45    11.0   0.244444                0.149206
+film & video 100-500k    15-30      776     76.0    0.097938 0.078964 0.120874      51    11.0   0.215686                0.117748
+  technology  50-100k      46+      610     61.0    0.100000 0.078639 0.126367     112     6.0   0.053571               -0.046429
+[17:22:14] keyword panel: 450 rows, categories=15
+[17:22:15] odds ratios: design (353913, 35), fitting logit ...
+[17:22:19] odds ratios done; extreme terms:
+                     term      coef  odds_ratio     ci_lo     ci_hi       p_value
+                prev_miss -2.302131    0.100045  0.094279  0.106165  0.000000e+00
+           goal_bin_>500k -1.358861    0.256953  0.190046  0.347415  1.048299e-18
+        goal_bin_100-500k -0.922497    0.397525  0.357309  0.442268  1.856265e-64
+      category_key_crafts -0.844557    0.429748  0.405679  0.455244 2.113980e-181
+  category_key_journalism -0.708057    0.492601  0.455360  0.532887  9.507433e-70
+                 log_goal -0.683805    0.504693  0.486824  0.523218 1.506575e-302
+       category_key_music  0.505644    1.658053  1.606992  1.710737 2.683908e-220
+            rank_bin_>8th  0.551427    1.735728  1.579212  1.907755  2.740177e-30
+       category_key_dance  0.823139    2.277638  2.103663  2.466001  1.187710e-91
+     category_key_theater  1.022333    2.779671  2.629783  2.938102 3.975247e-286
+                    const  1.865984    6.462290  5.611612  7.441924 4.974142e-148
+creator_prev_success_rate  2.676272   14.530819 13.895480 15.195208  0.000000e+00
+[17:22:49] 
+                  feature  auc_drop_mean  auc_drop_sd
+creator_prev_success_rate       0.123016     0.001192
+                 log_goal       0.031537     0.000708
+          subcategory_key       0.031008     0.001878
+                 dur_days       0.013599     0.000604
+                     hour       0.012284     0.000395
+             creator_rank       0.007538     0.000748
+           location_state       0.007059     0.000497
+                 name_len       0.005572     0.000384
+                      dow       0.003422     0.000438
+       goal_vs_cat_median       0.002943     0.000184
+                blurb_len       0.002701     0.000245
+              blurb_words       0.002537     0.000570
+             category_key       0.002065     0.000327
+                      mon       0.000603     0.000093
+[17:22:50] card goal_too_high: id=1995875331 base=0.025 best=0.025 at goal x1.0 dur=42
+[17:22:50] card duration_too_long: id=937505946 base=0.082 best=0.082 at goal x1.0 dur=60
+[17:22:51] card weak_blurb: id=644954007 base=0.193 best=0.193 at goal x1.0 dur=60
+[17:22:51] stage explain done
+[17:22:51] --- stage explain done in 47.3s ---
+[17:22:51] === run_all finished ===
+[17:25:46] === run_all stages=['explain'] ===
+[17:25:46] --- stage explain start ---
+[17:25:50] scorecard: 204 cells with n_train>=300
+[17:25:50] category_key goal_bin dur4_bin  n_train  k_train  rate_train       lo       hi  n_test  k_test  rate_test  delta_test_minus_train
+        food  50-100k      46+      356      8.0    0.022472 0.011430 0.043710      61     3.0   0.049180                0.026708
+  technology 100-500k      46+      422     10.0    0.023697 0.012922 0.043065      43     4.0   0.093023                0.069327
+        food 100-500k    15-30      344      9.0    0.026163 0.013824 0.048967      12     1.0   0.083333                0.057171
+film & video 100-500k      46+      532     20.0    0.037594 0.024466 0.057352      47     1.0   0.021277               -0.016317
+  technology 100-500k    15-30      801     67.0    0.083645 0.066403 0.104863      54     6.0   0.111111                0.027466
+        food  50-100k    15-30      609     58.0    0.095238 0.074397 0.121154      45    11.0   0.244444                0.149206
+film & video 100-500k    15-30      776     76.0    0.097938 0.078964 0.120874      51    11.0   0.215686                0.117748
+  technology  50-100k      46+      610     61.0    0.100000 0.078639 0.126367     112     6.0   0.053571               -0.046429
+[17:25:56] keyword panel: 450 rows, categories=15
+[17:25:57] odds ratios: design (353913, 35), fitting logit ...
+[17:26:01] odds ratios done; extreme terms:
+                     term      coef  odds_ratio     ci_lo     ci_hi       p_value
+                prev_miss -2.302131    0.100045  0.094279  0.106165  0.000000e+00
+           goal_bin_>500k -1.358861    0.256953  0.190046  0.347415  1.048299e-18
+        goal_bin_100-500k -0.922497    0.397525  0.357309  0.442268  1.856265e-64
+      category_key_crafts -0.844557    0.429748  0.405679  0.455244 2.113980e-181
+  category_key_journalism -0.708057    0.492601  0.455360  0.532887  9.507433e-70
+                 log_goal -0.683805    0.504693  0.486824  0.523218 1.506575e-302
+       category_key_music  0.505644    1.658053  1.606992  1.710737 2.683908e-220
+            rank_bin_>8th  0.551427    1.735728  1.579212  1.907755  2.740177e-30
+       category_key_dance  0.823139    2.277638  2.103663  2.466001  1.187710e-91
+     category_key_theater  1.022333    2.779671  2.629783  2.938102 3.975247e-286
+                    const  1.865984    6.462290  5.611612  7.441924 4.974142e-148
+creator_prev_success_rate  2.676272   14.530819 13.895480 15.195208  0.000000e+00
+[17:26:30] 
+                  feature  auc_drop_mean  auc_drop_sd
+creator_prev_success_rate       0.123016     0.001192
+                 log_goal       0.031537     0.000708
+          subcategory_key       0.031008     0.001878
+                 dur_days       0.013599     0.000604
+                     hour       0.012284     0.000395
+             creator_rank       0.007538     0.000748
+           location_state       0.007059     0.000497
+                 name_len       0.005572     0.000384
+                      dow       0.003422     0.000438
+       goal_vs_cat_median       0.002943     0.000184
+                blurb_len       0.002701     0.000245
+              blurb_words       0.002537     0.000570
+             category_key       0.002065     0.000327
+                      mon       0.000603     0.000093
+[17:26:31] card goal_too_high: id=1995875331 base=0.025 best=0.073 at goal x0.5 dur=14
+[17:26:31] card duration_too_long: id=937505946 base=0.082 best=0.182 at goal x0.5 dur=30
+[17:26:32] card weak_blurb: id=644954007 base=0.193 best=0.540 at goal x0.5 dur=30
+[17:26:32] stage explain done
+[17:26:32] --- stage explain done in 46.3s ---
+[17:26:32] === run_all finished ===
+[17:26:40] === run_all stages=['data', 'eda', 'text', 'models', 'eval', 'dual', 'ts', 'explain'] ===
+[17:26:40] --- stage data start ---
+[17:26:40] stage data: reading raw csv ...
+[17:26:49] raw rows=673,839 cols=32
+[17:26:50] v2 rows=408,347  success rate=0.4950
+[17:26:50] train(<= 2022) n=353,913 rate=0.4724
+[17:26:50] test(>= 2023)  n=54,434 rate=0.6425
+[17:27:04] wrote E:\个人\港城\courses\IS6400\group project\KS project\ks_v2\outputs\data\ks_v2_usd.csv.gz  (51.2 MB)
+[17:27:12] dropped 265,492 rows -> E:\个人\港城\courses\IS6400\group project\KS project\ks_v2\outputs\data\dropped_rows_currency.csv.gz
+[17:27:12] reason
+no_binary_outcome     44977
+non_usd_currency     213243
+usd_type_missing       7272
+[17:27:13] --- stage data done in 32.8s ---
+[17:27:13] --- stage eda start ---
+[17:27:18] eda: v2=408,347 train=353,913 test=54,434
+[17:27:18]                                     0
+v2_rows                 408347.000000
+v2_rate                      0.495035
+train_rows              353913.000000
+train_rate                   0.472356
+test_rows                54434.000000
+test_rate                    0.642484
+majority_baseline_test       0.642484
+train_median_goal         5000.000000
+test_median_goal          4000.000000
+train_median_duration       30.000000
+test_median_duration        30.000000
+[17:27:18] 
+   goal_bin  n_success  median_usd_pledged  mean_usd_pledged
+0      <=1k      39943            1016.000      2.679306e+03
+1      1-5k      63896            3877.500      7.599007e+03
+2     5-10k      29929           10165.000      2.439532e+04
+3    10-20k      17980           19702.775      4.432787e+04
+4    20-50k      12259           42669.330      1.141026e+05
+5   50-100k       2430          107608.500      2.797957e+05
+6  100-500k        685          295132.050      6.566449e+05
+7     >500k         51         1578950.110      3.680567e+06
+[17:27:19] stage eda done
+[17:27:19] --- stage eda done in 6.6s ---
+[17:27:19] --- stage text start ---
+[17:27:24] text: fitting TF-IDF on training window ...
+[17:27:44] text: train matrix (353913, 15000) nnz=3,808,654
+[17:27:44] text: year 2009 skipped (history=0 < 20,000)
+[17:27:44] text: year 2010 skipped (history=1,162 < 20,000)
+[17:27:44] text: year 2011 skipped (history=10,545 < 20,000)
+[17:27:45] text: year 2012 n=36,151 history=33,828 auc_in_sample_na
+[17:27:45] text: year 2013 n=35,144 history=69,979 auc_in_sample_na
+[17:27:45] text: year 2014 n=44,107 history=105,123 auc_in_sample_na
+[17:27:46] text: year 2015 n=46,516 history=149,230 auc_in_sample_na
+[17:27:47] text: year 2016 n=33,203 history=195,746 auc_in_sample_na
+[17:27:49] text: year 2017 n=29,064 history=228,949 auc_in_sample_na
+[17:27:50] text: year 2018 n=23,021 history=258,013 auc_in_sample_na
+[17:27:52] text: year 2019 n=21,205 history=281,034 auc_in_sample_na
+[17:27:54] text: year 2020 n=18,133 history=302,239 auc_in_sample_na
+[17:27:56] text: year 2021 n=17,179 history=320,372 auc_in_sample_na
+[17:27:58] text: year 2022 n=16,362 history=337,551 auc_in_sample_na
+[17:27:58] text: fitting final classifier on all train rows for the test window
+[17:28:02] text: text-only out-of-time AUC on test = 0.7302
+[17:28:05] text: wrote scores for 374,519 rows
+[17:28:05] --- stage text done in 46.2s ---
+[17:28:05] --- stage models start ---
+[17:28:10] models: n=408,347 text_scored=374,519
+[17:28:10] fold val=2017: train=228,949 val=29,064
+[17:28:54]   B0_majority    auc=0.5000 brier=0.2456
+[17:28:54]   B1_goal_only   auc=0.6077 brier=0.2362
+[17:28:54]   B2_cell_rate   auc=0.6672 brier=0.2253
+[17:28:54]   LR             auc=0.7933 brier=0.1823
+[17:28:54]   TREE           auc=0.7281 brier=0.2006
+[17:28:54]   RF             auc=0.8008 brier=0.1797
+[17:28:54]   HGB            auc=0.8208 brier=0.1704
+[17:28:54]   HGB_text       auc=0.8453 brier=0.1587
+[17:28:54]   BLEND          auc=0.8393 brier=0.1617
+[17:28:54] fold val=2018: train=258,013 val=23,021
+[17:29:43]   B0_majority    auc=0.5000 brier=0.2557
+[17:29:43]   B1_goal_only   auc=0.6217 brier=0.2419
+[17:29:43]   B2_cell_rate   auc=0.6858 brier=0.2287
+[17:29:43]   LR             auc=0.8021 brier=0.1832
+[17:29:43]   TREE           auc=0.7494 brier=0.2001
+[17:29:43]   RF             auc=0.8098 brier=0.1805
+[17:29:43]   HGB            auc=0.8230 brier=0.1725
+[17:29:43]   HGB_text       auc=0.8406 brier=0.1641
+[17:29:44]   BLEND          auc=0.8377 brier=0.1655
+[17:29:44] fold val=2019: train=281,034 val=21,205
+[17:30:38]   B0_majority    auc=0.5000 brier=0.2595
+[17:30:38]   B1_goal_only   auc=0.6319 brier=0.2422
+[17:30:38]   B2_cell_rate   auc=0.7108 brier=0.2240
+[17:30:38]   LR             auc=0.8149 brier=0.1780
+[17:30:38]   TREE           auc=0.7585 brier=0.1982
+[17:30:38]   RF             auc=0.8244 brier=0.1750
+[17:30:38]   HGB            auc=0.8372 brier=0.1663
+[17:30:38]   HGB_text       auc=0.8512 brier=0.1581
+[17:30:38]   BLEND          auc=0.8493 brier=0.1597
+[17:30:39] fold val=2020: train=302,239 val=18,133
+[17:31:39]   B0_majority    auc=0.5000 brier=0.2624
+[17:31:39]   B1_goal_only   auc=0.6672 brier=0.2358
+[17:31:39]   B2_cell_rate   auc=0.7228 brier=0.2208
+[17:31:39]   LR             auc=0.8267 brier=0.1723
+[17:31:39]   TREE           auc=0.7827 brier=0.1886
+[17:31:39]   RF             auc=0.8396 brier=0.1672
+[17:31:39]   HGB            auc=0.8477 brier=0.1600
+[17:31:39]   HGB_text       auc=0.8576 brier=0.1537
+[17:31:39]   BLEND          auc=0.8567 brier=0.1547
+[17:31:40] fold val=2021: train=320,372 val=17,179
+[17:32:41]   B0_majority    auc=0.5000 brier=0.2639
+[17:32:41]   B1_goal_only   auc=0.6842 brier=0.2372
+[17:32:41]   B2_cell_rate   auc=0.7382 brier=0.2165
+[17:32:41]   LR             auc=0.8313 brier=0.1693
+[17:32:41]   TREE           auc=0.7897 brier=0.1871
+[17:32:41]   RF             auc=0.8440 brier=0.1641
+[17:32:41]   HGB            auc=0.8557 brier=0.1541
+[17:32:41]   HGB_text       auc=0.8647 brier=0.1466
+[17:32:41]   BLEND          auc=0.8640 brier=0.1481
+[17:32:41] fold val=2022: train=337,551 val=16,362
+[17:33:45]   B0_majority    auc=0.5000 brier=0.2597
+[17:33:45]   B1_goal_only   auc=0.6873 brier=0.2307
+[17:33:45]   B2_cell_rate   auc=0.7497 brier=0.2074
+[17:33:45]   LR             auc=0.8476 brier=0.1575
+[17:33:45]   TREE           auc=0.8080 brier=0.1737
+[17:33:45]   RF             auc=0.8600 brier=0.1520
+[17:33:45]   HGB            auc=0.8691 brier=0.1441
+[17:33:45]   HGB_text       auc=0.8759 brier=0.1388
+[17:33:45]   BLEND          auc=0.8757 brier=0.1396
+[17:33:45] 
+rolling summary:
+       model  auc_mean   auc_sd  auc_min  auc_max  brier_mean
+    HGB_text  0.855894 0.013017 0.840641 0.875909    0.153344
+       BLEND  0.853773 0.014719 0.837660 0.875677    0.154887
+         HGB  0.842233 0.018903 0.820775 0.869106    0.161241
+          RF  0.829786 0.022293 0.800768 0.860047    0.169750
+          LR  0.819338 0.019948 0.793294 0.847592    0.173766
+        TREE  0.769387 0.029336 0.728117 0.807981    0.191397
+B2_cell_rate  0.712432 0.031384 0.667159 0.749730    0.220455
+B1_goal_only  0.650013 0.033982 0.607711 0.687287    0.237351
+ B0_majority  0.500000 0.000000 0.500000 0.500000    0.257796
+[17:34:53] selected model by rolling mean AUC: HGB_text
+[17:34:53] 
+test metrics:
+            model  calibrated      auc   pr_auc    brier  logloss      acc       f1
+      B0_majority       False 0.500000 0.642484 0.258642 0.710449 0.357516 0.000000
+     B1_goal_only       False 0.706773 0.799293 0.223417 0.637066 0.627182 0.667791
+     B2_cell_rate       False 0.759734 0.836265 0.199491 0.583144 0.688761 0.740607
+               LR       False 0.857087 0.914811 0.148467 0.450455 0.776004 0.819830
+             TREE       False 0.827654 0.889443 0.162196 0.481543 0.742514 0.795977
+               RF       False 0.870641 0.923978 0.142027 0.434264 0.790260 0.831257
+              HGB       False 0.879067 0.929073 0.134710 0.414108 0.803413 0.847209
+         HGB_text       False 0.884785 0.931828 0.130613 0.403589 0.809274 0.854789
+            BLEND       False 0.884701 0.931897 0.130874 0.404372 0.809751 0.853646
+HGB_text+isotonic        True 0.884666 0.929575 0.131907 0.407431 0.806408 0.856957
+[17:35:02] stage models done
+[17:35:02] --- stage models done in 416.5s ---
+[17:35:02] --- stage eval start ---
+[17:35:07] evaluate: selected model = HGB_text, test n=54,434
+[17:35:07] 
+            model    brier      ece
+         HGB_text 0.130613 0.003160
+HGB_text+isotonic 0.131907 0.028353
+[17:35:07] 
+                          0
+train_rate         0.472356
+test_rate          0.642484
+logit_shift        0.696852
+brier_raw          0.130613
+brier_prior_shift  0.141770
+auc_raw            0.884785
+auc_prior_shift    0.884785
+[17:35:07] 
+ year       split     n      auc
+ 2017 rolling-OOF 29064 0.845302
+ 2018 rolling-OOF 23021 0.840641
+ 2019 rolling-OOF 21205 0.851214
+ 2020 rolling-OOF 18133 0.857644
+ 2021 rolling-OOF 17179 0.864655
+ 2022 rolling-OOF 16362 0.875909
+ 2023 out-of-time 16916 0.880883
+ 2024 out-of-time 16732 0.882985
+ 2025 out-of-time 16956 0.889657
+ 2026 out-of-time  3830 0.890123
+[17:35:07] 
+ decile    n  pred_mean  observed_rate  lift_vs_base  share_of_successes  precision_hits
+      1 5444   0.990001       0.994673      1.548167            0.154834            5415
+      2 5444   0.970625       0.971345      1.511857            0.151202            5288
+      3 5444   0.936019       0.935158      1.455534            0.145569            5091
+      4 5444   0.876184       0.871418      1.356325            0.135647            4744
+      5 5443   0.784195       0.788536      1.227323            0.122723            4292
+      6 5443   0.668940       0.668933      1.041165            0.104109            3641
+      7 5443   0.531480       0.518464      0.806967            0.080691            2822
+      8 5443   0.379286       0.385633      0.600221            0.060018            2099
+      9 5443   0.220359       0.221202      0.344291            0.034427            1204
+     10 5443   0.067281       0.069263      0.107805            0.010780             377
+[17:35:08] 
+    group_by        group     n     rate      auc
+category_key          art  3778 0.665961 0.822769
+category_key       comics  7639 0.850111 0.881811
+category_key       crafts   799 0.384230 0.825269
+category_key       design  4229 0.702057 0.871395
+category_key      fashion  2325 0.427957 0.860848
+category_key film & video  4826 0.445918 0.794511
+category_key         food  2141 0.305465 0.784662
+category_key        games 12195 0.741287 0.908995
+category_key        music  2899 0.621249 0.850074
+category_key  photography   485 0.626804 0.838016
+category_key   publishing  8698 0.647620 0.847729
+category_key   technology  3534 0.458404 0.933710
+category_key      theater   508 0.624016 0.779923
+    goal_bin         <=1k 14711 0.836857 0.858416
+    goal_bin         1-5k 18026 0.689393 0.845823
+    goal_bin        5-10k  9284 0.583046 0.857643
+    goal_bin       10-20k  5335 0.476851 0.863860
+    goal_bin       20-50k  5020 0.359562 0.882576
+    goal_bin      50-100k  1327 0.263753 0.910987
+    goal_bin     100-500k   595 0.200000 0.937999
+     dur_bin          1-7   898 0.828508 0.957164
+     dur_bin         8-14  3066 0.857143 0.915268
+     dur_bin        15-21  6756 0.851095 0.886358
+     dur_bin        22-30 27391 0.664890 0.859765
+     dur_bin        31-45  8407 0.619722 0.840384
+     dur_bin        46-60  7903 0.306339 0.846067
+    rank_bin          1st 28979 0.473515 0.815220
+    rank_bin          2nd  7060 0.680028 0.863144
+    rank_bin          3rd  3423 0.782647 0.856394
+    rank_bin          4th  2248 0.839413 0.851653
+    rank_bin          5th  1648 0.868932 0.853552
+    rank_bin        6-8th  3126 0.904671 0.867808
+    rank_bin         >8th  7950 0.958994 0.890736
+[17:36:45] 
+ model_a      model_b  delta_auc    ci_lo    ci_hi  significant
+HGB_text          HGB   0.005718 0.004631 0.006769         True
+HGB_text     HGB_text   0.000000 0.000000 0.000000        False
+HGB_text          HGB   0.005718 0.004787 0.006708         True
+HGB_text B2_cell_rate   0.125052 0.121138 0.128659         True
+HGB_text B1_goal_only   0.178013 0.173784 0.182581         True
+HGB_text           LR   0.027698 0.026090 0.029173         True
+HGB_text           RF   0.014144 0.012582 0.015653         True
+HGB_text  B0_majority   0.384785 0.382047 0.387373         True
+[17:37:10] 
+       scope     n  auc_structured  auc_plus_text  delta_auc     ci_lo    ci_hi
+         all 54434        0.879067       0.884785   0.005718  0.004808 0.006689
+         art  3778        0.814421       0.822769   0.008349  0.002797 0.013550
+      comics  7639        0.879765       0.881811   0.002046 -0.000442 0.004824
+      design  4229        0.864044       0.871395   0.007351  0.002931 0.011548
+film & video  4826        0.784716       0.794511   0.009795  0.003587 0.015331
+       games 12195        0.907398       0.908995   0.001597 -0.000085 0.003436
+  publishing  8698        0.839480       0.847729   0.008249  0.004921 0.011109
+  technology  3534        0.931212       0.933710   0.002498 -0.000179 0.004865
+[17:37:22] 
+   model      auc  auc_ci_lo  auc_ci_hi  test_n  test_rate
+HGB_text 0.884785   0.881932   0.887607   54434   0.642484
+[17:37:22] stage evaluate done
+[17:37:22] --- stage eval done in 139.9s ---
+[17:37:22] --- stage dual start ---
+[17:37:25] dual: train successes=167,173 test successes=34,973
+[17:37:48] 
+ quantile  pinball
+      0.1 0.105794
+      0.5 0.331849
+      0.9 0.186465
+[17:37:48] 
+ p10_p90_coverage  p50_below     n
+           0.7412   0.459068 34973
+[17:37:48] 
+goal_bin     n  p_success_mean  pred_median_median  observed_median  pred_p90_median
+    <=1k 12311        0.872144         1435.454784         1608.000     5.238455e+03
+    1-5k 12427        0.784749         5024.657696         5378.000     1.338315e+04
+   5-10k  5413        0.749723        12705.286599        13027.000     3.876769e+04
+  10-20k  2544        0.713701        21498.593428        20975.000     4.914275e+04
+  20-50k  1805        0.670812        47057.359716        50890.000     1.018837e+05
+ 50-100k   350        0.613795       117864.729088       117579.500     2.842264e+05
+100-500k   119        0.605411       352511.786595       377914.540     1.173447e+06
+   >500k     4        0.693289       523714.470624      1599237.755     2.347113e+06
+[17:37:48] dual: trade-off table and figure written
+[17:37:48] stage dual done
+[17:37:48] --- stage dual done in 26.5s ---
+[17:37:48] --- stage ts start ---
+[17:37:52] ts: monthly series 2009-05 .. 2026-04 (n=204)
+[17:37:52] ts: train months=164 test months=40
+[17:37:57] 
+           method  n      mae     rmse     mape  mae_vs_seasonal_naive
+      HW_additive 40 0.019295 0.034183 0.028427               0.825222
+HW_multiplicative 40 0.020191 0.033999 0.029812               0.863540
+   seasonal_naive 40 0.023382 0.042412 0.034437               1.000000
+       last_value 40 0.039534 0.055544 0.062087               1.690830
+[17:37:57] stage tseries done
+[17:37:57] --- stage ts done in 8.7s ---
+[17:37:57] --- stage explain start ---
+[17:38:01] scorecard: 204 cells with n_train>=300
+[17:38:01] category_key goal_bin dur4_bin  n_train  k_train  rate_train       lo       hi  n_test  k_test  rate_test  delta_test_minus_train
+        food  50-100k      46+      356      8.0    0.022472 0.011430 0.043710      61     3.0   0.049180                0.026708
+  technology 100-500k      46+      422     10.0    0.023697 0.012922 0.043065      43     4.0   0.093023                0.069327
+        food 100-500k    15-30      344      9.0    0.026163 0.013824 0.048967      12     1.0   0.083333                0.057171
+film & video 100-500k      46+      532     20.0    0.037594 0.024466 0.057352      47     1.0   0.021277               -0.016317
+  technology 100-500k    15-30      801     67.0    0.083645 0.066403 0.104863      54     6.0   0.111111                0.027466
+        food  50-100k    15-30      609     58.0    0.095238 0.074397 0.121154      45    11.0   0.244444                0.149206
+film & video 100-500k    15-30      776     76.0    0.097938 0.078964 0.120874      51    11.0   0.215686                0.117748
+  technology  50-100k      46+      610     61.0    0.100000 0.078639 0.126367     112     6.0   0.053571               -0.046429
+[17:38:06] keyword panel: 450 rows, categories=15
+[17:38:07] odds ratios: design (353913, 35), fitting logit ...
+[17:38:11] odds ratios done; extreme terms:
+                     term      coef  odds_ratio     ci_lo     ci_hi       p_value
+                prev_miss -2.302131    0.100045  0.094279  0.106165  0.000000e+00
+           goal_bin_>500k -1.358861    0.256953  0.190046  0.347415  1.048299e-18
+        goal_bin_100-500k -0.922497    0.397525  0.357309  0.442268  1.856265e-64
+      category_key_crafts -0.844557    0.429748  0.405679  0.455244 2.113980e-181
+  category_key_journalism -0.708057    0.492601  0.455360  0.532887  9.507433e-70
+                 log_goal -0.683805    0.504693  0.486824  0.523218 1.506575e-302
+       category_key_music  0.505644    1.658053  1.606992  1.710737 2.683908e-220
+            rank_bin_>8th  0.551427    1.735728  1.579212  1.907755  2.740177e-30
+       category_key_dance  0.823139    2.277638  2.103663  2.466001  1.187710e-91
+     category_key_theater  1.022333    2.779671  2.629783  2.938102 3.975247e-286
+                    const  1.865984    6.462290  5.611612  7.441924 4.974142e-148
+creator_prev_success_rate  2.676272   14.530819 13.895480 15.195208  0.000000e+00
+[17:38:36] 
+                  feature  auc_drop_mean  auc_drop_sd
+creator_prev_success_rate       0.123016     0.001192
+                 log_goal       0.031537     0.000708
+          subcategory_key       0.031008     0.001878
+                 dur_days       0.013599     0.000604
+                     hour       0.012284     0.000395
+             creator_rank       0.007538     0.000748
+           location_state       0.007059     0.000497
+                 name_len       0.005572     0.000384
+                      dow       0.003422     0.000438
+       goal_vs_cat_median       0.002943     0.000184
+                blurb_len       0.002701     0.000245
+              blurb_words       0.002537     0.000570
+             category_key       0.002065     0.000327
+                      mon       0.000603     0.000093
+[17:38:37] card goal_too_high: id=1995875331 base=0.025 best=0.073 at goal x0.5 dur=14
+[17:38:38] card duration_too_long: id=937505946 base=0.082 best=0.182 at goal x0.5 dur=30
+[17:38:38] card weak_blurb: id=644954007 base=0.193 best=0.540 at goal x0.5 dur=30
+[17:38:38] stage explain done
+[17:38:38] --- stage explain done in 41.3s ---
+[17:38:38] === run_all finished ===

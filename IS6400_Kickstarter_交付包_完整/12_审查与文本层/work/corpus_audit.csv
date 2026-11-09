@@ -1,0 +1,9 @@
+,value
+rows,604629.0
+empty_doc,3.0
+dup_doc_rows,195.0
+mean_tokens,23.4922688127761
+median_tokens,24.0
+p95_tokens,33.0
+max_tokens,52.0
+nonzero_share_2023plus,0.9999900466810658

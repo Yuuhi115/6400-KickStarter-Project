@@ -1,0 +1,99 @@
+{
+  "tag": "full_pilot",
+  "data": "full",
+  "split": "pilot",
+  "use_prep_days": true,
+  "rows": {
+    "modelable": 604629,
+    "train": 410919,
+    "val": 93241,
+    "test": 100469
+  },
+  "base_rates": {
+    "train": 0.4289531513509962,
+    "test": 0.6441190815077288
+  },
+  "metrics": [
+    {
+      "Accuracy": 0.35588091849227127,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "ROC_AUC": 0.5,
+      "PR_AUC": 0.6441190815077288,
+      "Brier_Score": 0.2755260678455806,
+      "Threshold": 0.5,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Baseline",
+      "Dataset": "Test",
+      "tag": "full_pilot",
+      "val_threshold": NaN,
+      "val_positive_rate": NaN
+    },
+    {
+      "Accuracy": 0.7563327991718839,
+      "Precision": 0.7434380105282266,
+      "Recall": 0.9493154495163334,
+      "F1": 0.8338570333018888,
+      "ROC_AUC": 0.8451786732139794,
+      "PR_AUC": 0.9048509591498822,
+      "Brier_Score": 0.1532000328913264,
+      "Threshold": 0.30499999999999994,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Logistic Regression",
+      "Dataset": "Test",
+      "tag": "full_pilot",
+      "val_threshold": 0.30499999999999994,
+      "val_positive_rate": 0.7692753187975246
+    },
+    {
+      "Accuracy": 0.7754033582498084,
+      "Precision": 0.7685573381927542,
+      "Recall": 0.9319621720184195,
+      "F1": 0.8424088779009268,
+      "ROC_AUC": 0.8611410172920224,
+      "PR_AUC": 0.916084652406779,
+      "Brier_Score": 0.15249355178924,
+      "Threshold": 0.37499999999999994,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Random Forest",
+      "Dataset": "Test",
+      "tag": "full_pilot",
+      "val_threshold": 0.37499999999999994,
+      "val_positive_rate": 0.735920893169314
+    },
+    {
+      "Accuracy": 0.7814549761618012,
+      "Precision": 0.7756204473667246,
+      "Recall": 0.929644280990203,
+      "F1": 0.8456764526036871,
+      "ROC_AUC": 0.8684248590596274,
+      "PR_AUC": 0.9225769276223944,
+      "Brier_Score": 0.14683073713333838,
+      "Threshold": 0.27499999999999997,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Gradient Boosting",
+      "Dataset": "Test",
+      "tag": "full_pilot",
+      "val_threshold": 0.27499999999999997,
+      "val_positive_rate": 0.7319634066558702
+    }
+  ],
+  "best_model": "Gradient Boosting",
+  "best_auc": 0.8684248590596274,
+  "top_decile": {
+    "top_n": 10047,
+    "overall": 0.6441190815077288,
+    "top_rate": 0.9911416343187021,
+    "lift": 1.5387552748766213
+  },
+  "stability_auc": {
+    "fold1": 0.7755191634173875,
+    "fold2": 0.8224823639733301,
+    "fold3": 0.8638029631479635
+  }
+}
