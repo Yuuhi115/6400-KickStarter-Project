@@ -14,16 +14,16 @@ the leakage columns must be excluded by the modelling script, not here.
 """
 import json
 import os
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-SRC = (r"E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整"
-       r"\01_清洗数据\ks_clean.csv")
-OUTDIR = (r"E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整"
-          r"\08_建模就绪数据")
+_ROOT = str(Path(__file__).resolve().parents[1])
+SRC = os.path.join(_ROOT, "01_清洗数据", "ks_clean.csv")
+OUTDIR = os.path.join(_ROOT, "08_建模就绪数据")
 OUT = os.path.join(OUTDIR, "ks_model_ready_v1.parquet")
 REPORT = os.path.join(OUTDIR, "build_report.json")
 CHUNK = 100_000

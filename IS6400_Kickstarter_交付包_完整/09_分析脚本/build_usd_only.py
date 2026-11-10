@@ -6,13 +6,13 @@ code works unchanged: filter with m_is_modelable / m_split as usual.
 """
 import json
 import os
+from pathlib import Path
 
 import pandas as pd
 import pyarrow.compute as pc
 import pyarrow.parquet as pq
 
-BASE = (r"E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整"
-        r"\08_建模就绪数据")
+BASE = str(Path(__file__).resolve().parents[1] / "08_建模就绪数据")
 SRC = os.path.join(BASE, "ks_model_ready_v1.parquet")
 OUT = os.path.join(BASE, "ks_model_ready_usdonly.parquet")
 REPORT = os.path.join(BASE, "build_report_usdonly.json")

@@ -23,6 +23,7 @@ import json
 import math
 import os
 import warnings
+from pathlib import Path
 
 os.environ.setdefault("OMP_NUM_THREADS", "1")
 os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
@@ -45,7 +46,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-ROOT = r"E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整"
+ROOT = str(Path(__file__).resolve().parents[1])
 DATA = {"full": os.path.join(ROOT, "08_建模就绪数据", "ks_model_ready_v1.parquet"),
         "usd": os.path.join(ROOT, "08_建模就绪数据", "ks_model_ready_usdonly.parquet")}
 OUTDIR = os.path.join(ROOT, "11_结果与报告")

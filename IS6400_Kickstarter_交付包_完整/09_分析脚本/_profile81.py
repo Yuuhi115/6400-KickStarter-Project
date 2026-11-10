@@ -2,9 +2,11 @@
 """Fresh profile of the CURRENT 81-column cleaned data (post-revision)."""
 import numpy as np
 import pandas as pd
+import os
+from pathlib import Path
 
-P = (r"E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整"
-     r"\01_清洗数据\ks_clean.csv")
+_ROOT = str(Path(__file__).resolve().parents[1])
+P = os.path.join(_ROOT, "01_清洗数据", "ks_clean.csv")
 COLS = ["state", "succ", "is_terminal_pair", "goal", "log_goal", "dur_days", "yr",
         "category_key", "subcategory_key", "country_final", "currency",
         "name", "blurb", "name_len", "blurb_len", "blurb_words",

@@ -1,0 +1,10 @@
+# 训练/推理环境（模型由 scikit-learn 1.8.0 保存；跨版本加载会报
+#   ValueError: <class 'numpy.random._pcg64.PCG64'> is not a known BitGenerator module）
+# Python 3.13.5（实际运行环境）
+numpy==2.1.3
+pandas==2.2.3
+scipy==1.15.3
+scikit-learn==1.8.0
+pyarrow==22.0.0
+matplotlib==3.10.0
+joblib==1.4.2

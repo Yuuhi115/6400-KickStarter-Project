@@ -10,10 +10,12 @@
 """
 import os
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
-OUT = os.path.join(r"E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整", "11_结果与报告")
+OUT = os.path.join(str(Path(__file__).resolve().parents[1]), "11_结果与报告")
 cells = pd.read_csv(os.path.join(OUT, "decision_axes_cells.csv"), encoding="utf-8-sig")
 cells = cells[cells["n"] >= 300].copy()   # 只对 n>=300 的格给建议
 print("usable cells:", len(cells))

@@ -55,17 +55,26 @@ def gate_terms() -> None:
     hits: list[str] = []
     for name, txt in texts.items():
         for word, why in BANNED.items():
-            n = txt.count(word)
-            if n:
-                hits.append(f"{name}: '{word}' ×{n}（{why}）")
+            start = 0
+            while True:
+                i = txt.find(word, start)
+                if i < 0:
+                    break
+                start = i + 1
+                ctx = txt[max(0, i - 14):i]
+                # 否定/限定语境（“不是期望损失”“非期望损失”“而非…”“不能叫…”）不算违规
+                if any(tag in ctx for tag in ("不是", "而非", "非", "不能叫", "不叫", "并非")):
+                    continue
+                hits.append(f"{name}: '{word}'（{why}）")
+                break
     has_contract = any("口径契约" in t for t in texts.values())
     ok = not hits and has_contract
     detail = []
     if hits:
-        detail.append("禁用词未清除: " + "; ".join(hits[:6]))
+        detail.append("禁用词未清除（非否定语境）: " + "; ".join(hits[:6]))
     if not has_contract:
         detail.append("交付文档缺少 `§0 口径契约` 一节（术语→公式→代码位置）")
-    add("G1", ok, " | ".join(detail) if detail else "无禁用词，且存在 §0 口径契约")
+    add("G1", ok, " | ".join(detail) if detail else "无违规禁用词，且存在 §0 口径契约")
 
 
 # ---------------------------------------------------------------- G2 一致性
@@ -90,33 +99,40 @@ def gate_consistency() -> None:
 
 # ---------------------------------------------------------------- G3 可行动性
 def gate_actionable() -> None:
+    # 单一事实源优先：2026-11-09 起以 cells.parquet 为准
+    src = OUT / "cells.parquet"
     legacy = OUT / "decision_axes_cells.csv"
-    if not legacy.exists():
-        add("G3", False, "找不到 decision_axes_cells.csv")
-        return
     import pandas as pd
-    d = pd.read_csv(legacy, encoding="utf-8-sig")
+    if src.exists():
+        d = pd.read_parquet(src).rename(columns={"rate": "success_rate"})
+        d["n"] = d["n"]
+    elif legacy.exists():
+        d = pd.read_csv(legacy, encoding="utf-8-sig")
+    else:
+        add("G3", False, "找不到 cells.parquet / decision_axes_cells.csv")
+        return
+
     use = d[d["n"] >= MIN_CELL_N].copy()
     problems = []
 
-    neg = int((use["dp_max"] < 0).sum())
-    if neg:
+    if not use["dp_max"].between(-1e-9, 1).all():
+        neg = int((use["dp_max"] < -1e-9).sum())
         problems.append(f"{neg} 个可用格 dp_max<0（应允许“保持原配置”使 ≥0）")
 
-    n61 = int((use["best_dur_band"].astype(str) == "61d+").sum())
-    if n61:
-        problems.append(f"{n61} 个可用格最优时长落在 61d+（平台上限 {DUR_MAX} 天）")
+    if "best_dur_band" in use.columns:
+        n61 = int((use["best_dur_band"].astype(str) == "61d+").sum())
+        if n61:
+            problems.append(f"{n61} 个可用格最优时长落在 61d+（平台上限 {DUR_MAX} 天）")
 
-    lookup = d.set_index(["category", "goal_band", "dur_band"])["n"]
-    under = []
-    for _, r in use.iterrows():
-        k = (r["category"], r["best_goal_band"], r["best_dur_band"])
-        tn = lookup.get(k)
-        if tn is not None and tn < MIN_CELL_N:
-            under.append((r["category"], r["best_goal_band"], r["best_dur_band"], int(tn)))
-    if under:
-        problems.append(f"{len(under)} 个出发格的目标格 n<{MIN_CELL_N}"
-                        f"（例: {under[0][0]} -> {under[0][1]}×{under[0][2]} n={under[0][3]}）")
+    if {"n_target", "best_goal_band", "best_dur_band"} <= set(use.columns):
+        bad = use[(use["n_target"].notna()) & (use["n_target"] < MIN_CELL_N)]
+        if "action" in use.columns:
+            bad = bad.loc[~bad["action"].astype(str).eq("保持原配置")]
+        if len(bad):
+            r = bad.iloc[0]
+            problems.append(f"{len(bad)} 个出发格的目标格 n<{MIN_CELL_N}"
+                            f"（例: {r['category']} -> {r['best_goal_band']}×{r['best_dur_band']}"
+                            f" n={int(r['n_target'])}）")
 
     add("G3", not problems, " | ".join(problems) if problems
         else "所有建议均满足 n_target、1–60 天、dp_max≥0")

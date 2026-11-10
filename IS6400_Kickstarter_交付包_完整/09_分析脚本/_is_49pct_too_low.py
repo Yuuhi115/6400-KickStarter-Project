@@ -3,10 +3,12 @@
 without any ML: base rate vs majority guess vs a 3-variable lookup table."""
 import numpy as np
 import pandas as pd
+import os
+from pathlib import Path
 from sklearn.metrics import roc_auc_score
 
-P = (r"E:\Workspace\IS6400\group\IS6400_Kickstarter_交付包_完整"
-     r"\01_清洗数据\ks_clean.csv")
+_ROOT = str(Path(__file__).resolve().parents[1])
+P = Path(_ROOT) / "01_清洗数据" / "ks_clean.csv"
 d = pd.read_csv(P, usecols=["succ", "goal", "dur_days", "category_key",
                             "country_final", "creator_rank"], low_memory=False)
 d["succ"] = pd.to_numeric(d["succ"], errors="coerce")
