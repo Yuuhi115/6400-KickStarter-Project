@@ -37,6 +37,15 @@ IS6400_Kickstarter_交付包_完整/10_组员pilot研究/repo/kickstarter/pilot_
 # 临时 clone 目录（禁止作为嵌入仓库入库）
 _repo_check/
 
+# ---- 组员 ks_v2 本地镜像（来源：远端 master 4d20b261，仅纯文本）----
+# 源码与结果小表入库；模型二进制与预测大文件不入库（可由 run_all.py 重生成）
+!ks_v2/src/*.py
+!ks_v2/outputs/tables/*.csv
+!ks_v2/outputs/tables/*.json
+ks_v2/outputs/models/
+ks_v2/outputs/data/
+ks_v2/outputs/figures/
+
 # 训练出的模型二进制（几十 MB，不入库）
 *.joblib
 # 11_结果与报告 里的小结果表需要入库

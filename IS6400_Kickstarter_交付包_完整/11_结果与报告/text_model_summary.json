@@ -1,0 +1,318 @@
+{
+  "n_docs": 604629,
+  "n_features": 30000,
+  "nnz_all": 8417547,
+  "nnz_train_window": 7017132,
+  "fit_max_year": 2022,
+  "min_history": 10000,
+  "oof_start_year": 2011,
+  "n_cold_rows": 10831,
+  "cold_value": 0.461806,
+  "text_only_auc_oof_2011_2022": 0.7455,
+  "text_only_auc_test": 0.779922,
+  "n_scored_test": 100469,
+  "folds": [
+    {
+      "score_year": 2011,
+      "fit_through": 2010,
+      "n_fit": 10831,
+      "n_scored": 24197,
+      "auc_in_year": 0.643007
+    },
+    {
+      "score_year": 2012,
+      "fit_through": 2011,
+      "n_fit": 35028,
+      "n_scored": 38673,
+      "auc_in_year": 0.675144
+    },
+    {
+      "score_year": 2013,
+      "fit_through": 2012,
+      "n_fit": 73701,
+      "n_scored": 42053,
+      "auc_in_year": 0.680904
+    },
+    {
+      "score_year": 2014,
+      "fit_through": 2013,
+      "n_fit": 115754,
+      "n_scored": 60482,
+      "auc_in_year": 0.706988
+    },
+    {
+      "score_year": 2015,
+      "fit_through": 2014,
+      "n_fit": 176236,
+      "n_scored": 65127,
+      "auc_in_year": 0.74378
+    },
+    {
+      "score_year": 2016,
+      "fit_through": 2015,
+      "n_fit": 241363,
+      "n_scored": 49240,
+      "auc_in_year": 0.7561
+    },
+    {
+      "score_year": 2017,
+      "fit_through": 2016,
+      "n_fit": 290603,
+      "n_scored": 45797,
+      "auc_in_year": 0.762314
+    },
+    {
+      "score_year": 2018,
+      "fit_through": 2017,
+      "n_fit": 336400,
+      "n_scored": 38285,
+      "auc_in_year": 0.756336
+    },
+    {
+      "score_year": 2019,
+      "fit_through": 2018,
+      "n_fit": 374685,
+      "n_scored": 36234,
+      "auc_in_year": 0.763346
+    },
+    {
+      "score_year": 2020,
+      "fit_through": 2019,
+      "n_fit": 410919,
+      "n_scored": 32774,
+      "auc_in_year": 0.765997
+    },
+    {
+      "score_year": 2021,
+      "fit_through": 2020,
+      "n_fit": 443693,
+      "n_scored": 31211,
+      "auc_in_year": 0.768989
+    },
+    {
+      "score_year": 2022,
+      "fit_through": 2021,
+      "n_fit": 474904,
+      "n_scored": 29256,
+      "auc_in_year": 0.769652
+    }
+  ],
+  "seconds": 77.3,
+  "corpus_audit": {
+    "rows": 604629,
+    "empty_doc": 3,
+    "dup_doc_rows": 195,
+    "mean_tokens": 23.4922688127761,
+    "median_tokens": 24.0,
+    "p95_tokens": 33.0,
+    "max_tokens": 52.0,
+    "nonzero_share_2023plus": 0.9999900466810658
+  },
+  "models": {
+    "M0 无文本特征(14)": {
+      "n_features": 14,
+      "auc": 0.8807304832,
+      "auc_ci_lo": 0.8788642524,
+      "auc_ci_hi": 0.8828048898,
+      "pr_auc": 0.9286734325,
+      "brier": 0.1323075954,
+      "f1": 0.8555423863,
+      "threshold": 0.39,
+      "pred_pos_rate": 0.7667041575,
+      "top10_success": 0.9927341495,
+      "lift": 1.5412276674,
+      "base_rate": 0.6441190815,
+      "n": 100469,
+      "seconds": 52.5
+    },
+    "M0b 保留标题去简介(16)": {
+      "n_features": 16,
+      "auc": 0.882350217,
+      "auc_ci_lo": 0.8804665875,
+      "auc_ci_hi": 0.8842930732,
+      "pr_auc": 0.9296478929,
+      "brier": 0.1315459252,
+      "f1": 0.8579056999,
+      "threshold": 0.43,
+      "pred_pos_rate": 0.7463894336,
+      "top10_success": 0.9919378919,
+      "lift": 1.5399914711,
+      "base_rate": 0.6441190815,
+      "n": 100469,
+      "seconds": 53.1
+    },
+    "M1 仅长度词数(18)": {
+      "n_features": 18,
+      "auc": 0.8821801895,
+      "auc_ci_lo": 0.8803958086,
+      "auc_ci_hi": 0.8841549453,
+      "pr_auc": 0.9295430547,
+      "brier": 0.1316514243,
+      "f1": 0.8572322571,
+      "threshold": 0.415,
+      "pred_pos_rate": 0.755516627,
+      "top10_success": 0.9926346173,
+      "lift": 1.5410731428,
+      "base_rate": 0.6441190815,
+      "n": 100469,
+      "seconds": 55.6
+    },
+    "M2 长度+TF-IDF(19)": {
+      "n_features": 19,
+      "auc": 0.8900716675,
+      "auc_ci_lo": 0.8881715739,
+      "auc_ci_hi": 0.8919380356,
+      "pr_auc": 0.93379276,
+      "brier": 0.1283835121,
+      "f1": 0.8612295614,
+      "threshold": 0.43,
+      "pred_pos_rate": 0.7657088256,
+      "top10_success": 0.9920374241,
+      "lift": 1.5401459957,
+      "base_rate": 0.6441190815,
+      "n": 100469,
+      "seconds": 55.8
+    },
+    "M3 TF-IDF替换长度(15)": {
+      "n_features": 15,
+      "auc": 0.8895368662,
+      "auc_ci_lo": 0.8876126114,
+      "auc_ci_hi": 0.8915012739,
+      "pr_auc": 0.9335233929,
+      "brier": 0.1281387799,
+      "f1": 0.8612792468,
+      "threshold": 0.43,
+      "pred_pos_rate": 0.7618369845,
+      "top10_success": 0.9933313427,
+      "lift": 1.5421548145,
+      "base_rate": 0.6441190815,
+      "n": 100469,
+      "seconds": 50.8
+    }
+  },
+  "increment_all": [
+    {
+      "comparison": "仅长度 vs 无文本",
+      "scope": "all",
+      "n": 100469,
+      "auc_new": 0.8821801895,
+      "auc_base": 0.8807304832,
+      "delta": 0.001454084,
+      "ci_lo": 0.0010493329,
+      "ci_hi": 0.0018650454,
+      "n_boot": 300
+    },
+    {
+      "comparison": "标题长度 vs 无文本",
+      "scope": "all",
+      "n": 100469,
+      "auc_new": 0.882350217,
+      "auc_base": 0.8807304832,
+      "delta": 0.001616487,
+      "ci_lo": 0.0012449828,
+      "ci_hi": 0.0019664752,
+      "n_boot": 300
+    },
+    {
+      "comparison": "TF-IDF 在长度之上",
+      "scope": "all",
+      "n": 100469,
+      "auc_new": 0.8900716675,
+      "auc_base": 0.8821801895,
+      "delta": 0.0078791382,
+      "ci_lo": 0.0070232037,
+      "ci_hi": 0.0086427263,
+      "n_boot": 300
+    },
+    {
+      "comparison": "TF-IDF vs 不用简介",
+      "scope": "all",
+      "n": 100469,
+      "auc_new": 0.8900716675,
+      "auc_base": 0.882350217,
+      "delta": 0.0077167352,
+      "ci_lo": 0.0067955852,
+      "ci_hi": 0.0084714449,
+      "n_boot": 300
+    },
+    {
+      "comparison": "TF-IDF vs 无文本",
+      "scope": "all",
+      "n": 100469,
+      "auc_new": 0.8895368662,
+      "auc_base": 0.8807304832,
+      "delta": 0.0087886845,
+      "ci_lo": 0.007977029,
+      "ci_hi": 0.0096137296,
+      "n_boot": 300
+    },
+    {
+      "comparison": "文本层总增量",
+      "scope": "all",
+      "n": 100469,
+      "auc_new": 0.8900716675,
+      "auc_base": 0.8807304832,
+      "delta": 0.0093332222,
+      "ci_lo": 0.0084541225,
+      "ci_hi": 0.0101986241,
+      "n_boot": 300
+    }
+  ],
+  "length_response": [
+    {
+      "k_words": 6,
+      "n": 3307,
+      "mean_p_success": 0.6377247167,
+      "mean_text_score": 0.538133903,
+      "mean_blurb_len": 29.6634411854,
+      "in_support": true,
+      "dp_vs_original": 0.0008907962
+    },
+    {
+      "k_words": 10,
+      "n": 3307,
+      "mean_p_success": 0.6555481927,
+      "mean_text_score": 0.5408029207,
+      "mean_blurb_len": 50.2283035984,
+      "in_support": true,
+      "dp_vs_original": 0.0187142723
+    },
+    {
+      "k_words": 14,
+      "n": 3307,
+      "mean_p_success": 0.6635404993,
+      "mean_text_score": 0.5441038716,
+      "mean_blurb_len": 70.6649531297,
+      "in_support": true,
+      "dp_vs_original": 0.0267065789
+    },
+    {
+      "k_words": 18,
+      "n": 3307,
+      "mean_p_success": 0.6664119574,
+      "mean_text_score": 0.5480305479,
+      "mean_blurb_len": 91.1648019353,
+      "in_support": true,
+      "dp_vs_original": 0.0295780369
+    },
+    {
+      "k_words": 22,
+      "n": 3307,
+      "mean_p_success": 0.6549077164,
+      "mean_text_score": 0.5516213674,
+      "mean_blurb_len": 111.4296945872,
+      "in_support": true,
+      "dp_vs_original": 0.0180737959
+    },
+    {
+      "k_words": 25,
+      "n": 3307,
+      "mean_p_success": 0.643852249,
+      "mean_text_score": 0.556254089,
+      "mean_blurb_len": 127.205624433,
+      "in_support": true,
+      "dp_vs_original": 0.0070183285
+    }
+  ],
+  "runtime_seconds": 518.7
+}

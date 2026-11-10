@@ -1,0 +1,82 @@
+{
+  "tag": "usd_ours",
+  "data": "usd",
+  "split": "ours",
+  "use_prep_days": true,
+  "rows": {
+    "modelable": 415619,
+    "train": 327642,
+    "val": 33542,
+    "test": 54435
+  },
+  "base_rates": {
+    "train": 0.4473144468657864,
+    "test": 0.6424910443648388
+  },
+  "metrics": [
+    {
+      "Accuracy": 0.3575089556351612,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "ROC_AUC": 0.5,
+      "PR_AUC": 0.6424910443648388,
+      "Brier_Score": 0.26779020648712465,
+      "Threshold": 0.5,
+      "n": 54435,
+      "base_rate": 0.6424910443648388,
+      "Model": "Baseline",
+      "Dataset": "Test",
+      "tag": "usd_ours",
+      "val_threshold": NaN,
+      "val_positive_rate": NaN
+    },
+    {
+      "Accuracy": 0.7482685772021678,
+      "Precision": 0.7352206126285524,
+      "Recall": 0.9505060902384629,
+      "F1": 0.829116212946913,
+      "ROC_AUC": 0.8359469833003621,
+      "PR_AUC": 0.8994665342480118,
+      "Brier_Score": 0.15741355488528486,
+      "Threshold": 0.31499999999999995,
+      "n": 54435,
+      "base_rate": 0.6424910443648388,
+      "Model": "Logistic Regression",
+      "Dataset": "Test",
+      "tag": "usd_ours",
+      "val_threshold": 0.31499999999999995,
+      "val_positive_rate": 0.7921411961123368
+    },
+    {
+      "Accuracy": 0.7917148893175346,
+      "Precision": 0.7830929909452402,
+      "Recall": 0.9347229370389433,
+      "F1": 0.8522158498435871,
+      "ROC_AUC": 0.8759389472632737,
+      "PR_AUC": 0.9257029211438897,
+      "Brier_Score": 0.13531948343427974,
+      "Threshold": 0.39499999999999996,
+      "n": 54435,
+      "base_rate": 0.6424910443648388,
+      "Model": "Gradient Boosting",
+      "Dataset": "Test",
+      "tag": "usd_ours",
+      "val_threshold": 0.39499999999999996,
+      "val_positive_rate": 0.7404746288235645
+    }
+  ],
+  "best_model": "Gradient Boosting",
+  "best_auc": 0.8759389472632737,
+  "top_decile": {
+    "top_n": 5444,
+    "overall": 0.6424910443648388,
+    "top_rate": 0.9930198383541513,
+    "lift": 1.5455777120377487
+  },
+  "stability_auc": {
+    "fold1": 0.6087397140360014,
+    "fold2": 0.8350014490899094,
+    "fold3": 0.8651992683884718
+  }
+}

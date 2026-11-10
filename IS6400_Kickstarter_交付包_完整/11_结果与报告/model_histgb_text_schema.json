@@ -1,0 +1,64 @@
+{
+  "features": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon",
+    "text_score",
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "numeric": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon",
+    "text_score"
+  ],
+  "categorical": [
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "threshold": 0.42999999999999994,
+  "test": {
+    "auc": 0.890071667466193,
+    "pr_auc": 0.9337927600470829,
+    "brier": 0.12838351211411186,
+    "f1": 0.861229561435712,
+    "top10_success": 0.9920374241066985,
+    "lift": 1.5401459956512638
+  },
+  "text_layer": {
+    "text_score_source": "text_scores.csv.gz",
+    "text_model_summary": "text_model_summary.json"
+  },
+  "env": {
+    "sklearn": "1.5.1",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2"
+  }
+}

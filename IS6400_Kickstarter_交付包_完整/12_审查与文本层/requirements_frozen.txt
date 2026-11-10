@@ -1,0 +1,9 @@
+# 冻结环境（2026-11-09 实测通过的环境）
+# python -X utf8 build_text_layer.py 可复现 11_结果与报告\TF-IDF文本层_结果报告.md 的全部数字
+python==3.12.7
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.1
+scikit-learn==1.5.1
+joblib==1.4.2
+matplotlib==3.9.2

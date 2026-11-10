@@ -1,0 +1,99 @@
+{
+  "tag": "ours_rf",
+  "data": "full",
+  "split": "ours",
+  "use_prep_days": true,
+  "rows": {
+    "modelable": 604629,
+    "train": 443693,
+    "val": 60467,
+    "test": 100469
+  },
+  "base_rates": {
+    "train": 0.4397162001654297,
+    "test": 0.6441190815077288
+  },
+  "metrics": [
+    {
+      "Accuracy": 0.35588091849227127,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "ROC_AUC": 0.5,
+      "PR_AUC": 0.6441190815077288,
+      "Brier_Score": 0.2710102282464026,
+      "Threshold": 0.5,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Baseline",
+      "Dataset": "Test",
+      "tag": "ours_rf",
+      "val_threshold": NaN,
+      "val_positive_rate": NaN
+    },
+    {
+      "Accuracy": 0.7524111915118096,
+      "Precision": 0.7374450179399459,
+      "Recall": 0.9559755230707421,
+      "F1": 0.8326099391002995,
+      "ROC_AUC": 0.8463972509667625,
+      "PR_AUC": 0.9056113761434698,
+      "Brier_Score": 0.15074982685920518,
+      "Threshold": 0.32999999999999996,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Logistic Regression",
+      "Dataset": "Test",
+      "tag": "ours_rf",
+      "val_threshold": 0.32999999999999996,
+      "val_positive_rate": 0.7874708518696149
+    },
+    {
+      "Accuracy": 0.7969722003802168,
+      "Precision": 0.7866049254966887,
+      "Recall": 0.9397348332663721,
+      "F1": 0.8563784095869771,
+      "ROC_AUC": 0.8823107870212121,
+      "PR_AUC": 0.9294575064834102,
+      "Brier_Score": 0.13156647288295645,
+      "Threshold": 0.38999999999999996,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Gradient Boosting",
+      "Dataset": "Test",
+      "tag": "ours_rf",
+      "val_threshold": 0.38999999999999996,
+      "val_positive_rate": 0.7405526981659417
+    },
+    {
+      "Accuracy": 0.7868695816620052,
+      "Precision": 0.7732234575535392,
+      "Recall": 0.9467966745990049,
+      "F1": 0.8512521274009239,
+      "ROC_AUC": 0.8749179616974758,
+      "PR_AUC": 0.9229048443502584,
+      "Brier_Score": 0.1402777630317994,
+      "Threshold": 0.38999999999999996,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Random Forest",
+      "Dataset": "Test",
+      "tag": "ours_rf",
+      "val_threshold": 0.38999999999999996,
+      "val_positive_rate": 0.7594555708072172
+    }
+  ],
+  "best_model": "Gradient Boosting",
+  "best_auc": 0.8823107870212121,
+  "top_decile": {
+    "top_n": 10047,
+    "overall": 0.6441190815077288,
+    "top_rate": 0.9924355529013635,
+    "lift": 1.5407640937733271
+  },
+  "stability_auc": {
+    "fold1": 0.8037825762254664,
+    "fold2": 0.8370045749294737,
+    "fold3": 0.8762707918254882
+  }
+}

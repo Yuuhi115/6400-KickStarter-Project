@@ -1,0 +1,41 @@
+{
+  "test_auc_lr": 0.8463972509667625,
+  "test_auc_histgb": 0.8823107870212121,
+  "histgb_source": "joblib",
+  "lr_share_of_histgb_pct": 95.9296047852143,
+  "perm_n": 20000,
+  "perm_repeats": 5,
+  "pdp_n": 5000,
+  "top5_permutation": [
+    {
+      "feature": "creator_previous_count",
+      "importance_mean": 0.1229247581070978,
+      "importance_std": 0.0017585481334510729,
+      "share_pct": 43.32109677338262
+    },
+    {
+      "feature": "m_log_goal_usd",
+      "importance_mean": 0.05587978340736448,
+      "importance_std": 0.0012068057967843623,
+      "share_pct": 19.69313213988191
+    },
+    {
+      "feature": "creator_prev_success_rate",
+      "importance_mean": 0.025744661577195172,
+      "importance_std": 0.0009081110025973539,
+      "share_pct": 9.072923898796427
+    },
+    {
+      "feature": "prep_days",
+      "importance_mean": 0.02555944343260961,
+      "importance_std": 0.001544287304526288,
+      "share_pct": 9.007649390313873
+    },
+    {
+      "feature": "subcategory_key",
+      "importance_mean": 0.018288918963993494,
+      "importance_std": 0.0006798312851381058,
+      "share_pct": 6.445373906120926
+    }
+  ]
+}

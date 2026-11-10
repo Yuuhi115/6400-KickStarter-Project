@@ -1,0 +1,2 @@
+v2_rows,v2_rate,train_rows,train_rate,test_rows,test_rate,majority_baseline_test,train_median_goal,test_median_goal,train_median_duration,test_median_duration
+408347,0.495034860057745,353913,0.47235620053515975,54434,0.6424844766138811,0.6424844766138811,5000.0,4000.0,30.0,30.0

@@ -1,0 +1,6 @@
+{
+  "test_auc_text_only": 0.7301815700491644,
+  "n_features": 15000,
+  "nnz_train": 3808654,
+  "n_scored_train": 320085
+}
