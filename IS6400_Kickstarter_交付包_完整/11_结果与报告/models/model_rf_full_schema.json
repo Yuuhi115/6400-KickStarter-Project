@@ -1,0 +1,54 @@
+{
+  "algo": "Random Forest",
+  "scope": "full",
+  "features": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon",
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "numeric": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon"
+  ],
+  "categorical": [
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "threshold": 0.38999999999999996,
+  "metrics_own_test": {
+    "AUC": 0.8749179616974758,
+    "AP": 0.9229048443502584,
+    "Brier": 0.1402777630317994
+  },
+  "n_train": 443693,
+  "n_test_own": 100469
+}

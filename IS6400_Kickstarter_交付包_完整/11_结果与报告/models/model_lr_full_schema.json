@@ -1,0 +1,54 @@
+{
+  "algo": "Logistic Regression",
+  "scope": "full",
+  "features": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon",
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "numeric": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon"
+  ],
+  "categorical": [
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "threshold": 0.32999999999999996,
+  "metrics_own_test": {
+    "AUC": 0.8463972509667625,
+    "AP": 0.9056113761434698,
+    "Brier": 0.15074982685920518
+  },
+  "n_train": 443693,
+  "n_test_own": 100469
+}

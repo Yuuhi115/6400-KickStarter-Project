@@ -1,0 +1,7 @@
+﻿file,algo,scope,fit_seconds,bytes
+model_lr_full.joblib,Logistic Regression,full,39,6989
+model_rf_full.joblib,Random Forest,full,618,92736708
+model_hgb_full.joblib,Gradient Boosting,full,288,421638
+model_lr_usd.joblib,Logistic Regression,usd,27,6437
+model_rf_usd.joblib,Random Forest,usd,327,72947966
+model_hgb_usd.joblib,Gradient Boosting,usd,178,421171
