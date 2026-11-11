@@ -1,0 +1,45 @@
+{
+  "source_parquet": "08_建模就绪数据\\ks_model_ready_v1.parquet",
+  "source_columns_used": [
+    "id",
+    "succ",
+    "m_is_modelable",
+    "currency",
+    "yr",
+    "m_split"
+  ],
+  "rows_total_in_parquet": 673839,
+  "rows_modelable": 604629,
+  "filter": "m_is_modelable == True 且 succ 非空（succ = successful/failed 二分类）",
+  "rule_ours": {
+    "train": "yr <= 2020",
+    "val": "2021 <= yr <= 2022",
+    "test": "yr >= 2023",
+    "note": "val 仅用于选判定阈值（0.39）；模型族与超参为预先设定，未在 val 上搜索"
+  },
+  "rule_pilot": {
+    "train": "yr <= 2019",
+    "val": "2020 <= yr <= 2022",
+    "test": "yr > 2022",
+    "note": "仅用于复刻组员 pilot，测试行与 ours 相同"
+  },
+  "parquet_m_split": "内置列 m_split 为两段口径：train = yr<=2022 / test = yr>=2023（与上方三段不一致，引用需说明）",
+  "counts_ours_full_scope": {
+    "train": 443693,
+    "val": 60467,
+    "test": 100469
+  },
+  "counts_ours_usd_scope": {
+    "train": 327642,
+    "val": 33542,
+    "test": 54435
+  },
+  "counts_currency": {
+    "usd_rows_modelable": 415619,
+    "non_usd_rows_modelable": 189010
+  },
+  "parquet_m_split_counts_modelable": {
+    "train": 504160,
+    "test": 100469
+  }
+}
