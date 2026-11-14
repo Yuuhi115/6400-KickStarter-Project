@@ -1,0 +1,49 @@
+{
+  "generated": "2026-11-12 15:44:05",
+  "blocks": {
+    "full": {
+      "n_vocab": 3000,
+      "nnz_per_doc": 9.404770866342268,
+      "svd_evr": 0.20211586356163025,
+      "svd_dim": 128,
+      "tfidf_params": {
+        "max_features": 3000,
+        "min_df": 20,
+        "stop_words": "english",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "sublinear_tf": true,
+        "strip_accents": "unicode",
+        "lowercase": true
+      }
+    },
+    "usd": {
+      "n_vocab": 3000,
+      "nnz_per_doc": 9.636994036173629,
+      "svd_evr": 0.20253081619739532,
+      "svd_dim": 128,
+      "tfidf_params": {
+        "max_features": 3000,
+        "min_df": 20,
+        "stop_words": "english",
+        "ngram_range": [
+          1,
+          2
+        ],
+        "sublinear_tf": true,
+        "strip_accents": "unicode",
+        "lowercase": true
+      }
+    }
+  },
+  "timings": {
+    "hgb_text_full": 98.2,
+    "rf_text_full": 1008.4,
+    "lr_text_full": 32.1,
+    "hgb_text_usd": 70.2,
+    "rf_text_usd": 726.7,
+    "lr_text_usd": 22.5
+  }
+}

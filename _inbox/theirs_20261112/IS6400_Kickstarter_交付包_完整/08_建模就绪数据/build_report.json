@@ -1,0 +1,18 @@
+{
+  "rows": 673839,
+  "m_goal_usd_ok": 672352,
+  "m_goal_usd_na": 1487,
+  "m_goal_usd_filled": 7836,
+  "m_currency_usd": 460596,
+  "m_name_len_na": 5,
+  "m_blurb_len_na": 47,
+  "train": 562139,
+  "test": 111700,
+  "modelable": 604629,
+  "goal_usd_min": 0.01,
+  "goal_usd_max": 152350076.0,
+  "mean_goal_usd": 36334.63,
+  "output": "E:\\Workspace\\IS6400\\group\\IS6400_Kickstarter_交付包_完整\\08_建模就绪数据\\ks_model_ready_v1.parquet",
+  "output_bytes": 231240096,
+  "columns": 92
+}

@@ -1,0 +1,98 @@
+{
+  "package": "IS6400_Kickstarter_交付包_完整",
+  "created": "2026-11-12 15:12:00",
+  "name": "model_histgb_text",
+  "family": "hgb",
+  "rep": "svd",
+  "text_source": "both",
+  "svd_dim": 128,
+  "tfidf": {
+    "max_features": 3000,
+    "min_df": 20,
+    "stop_words": "english",
+    "ngram_range": [
+      1,
+      2
+    ],
+    "sublinear_tf": true,
+    "strip_accents": "unicode",
+    "lowercase": true
+  },
+  "base_features": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon",
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "numeric": [
+    "m_log_goal_usd",
+    "m_dur_days_exact",
+    "launch_quarter",
+    "dow",
+    "m_name_len",
+    "m_blurb_len",
+    "m_blurb_words",
+    "name_word_count",
+    "creator_previous_count",
+    "creator_prev_success_rate",
+    "prep_days",
+    "yr",
+    "mon"
+  ],
+  "categorical": [
+    "category_parent_name",
+    "subcategory_key",
+    "country_final",
+    "location_type",
+    "currency"
+  ],
+  "required_text_columns": [
+    "name_clean",
+    "blurb_clean"
+  ],
+  "protocol": {
+    "fit": "yr<=2020",
+    "threshold": "val 2021-2022",
+    "eval": "test yr>=2023"
+  },
+  "threshold": 0.39499999999999996,
+  "metrics_test": {
+    "AUC": 0.8847304344703866,
+    "AP": 0.9305483655157488,
+    "Brier": 0.13002866173741032,
+    "F1": 0.8589998729728585,
+    "top_rate": 0.9916392953120334,
+    "lift": 1.5395278975292006
+  },
+  "n_train": 443693,
+  "n_test_own": 100469,
+  "n_features": 354,
+  "fit_seconds": 98.2,
+  "artifact": "E:\\个人\\港城\\courses\\IS6400\\group project\\KS project\\IS6400_期末进度包_20261102(1)\\13_TFIDF文本层_v2\\05_models\\model_histgb_text.joblib",
+  "wrapper_max_abs_prediction_deviation": 0.0,
+  "sklearn_version": "1.5.1",
+  "artifact_format": "isf6400.textlayer/1",
+  "artifact_is_pure_sklearn_dict": true,
+  "load_with": "from text_model import load_model; m = load_model('<path>.joblib')",
+  "requires": [
+    "numpy",
+    "pandas",
+    "scipy",
+    "scikit-learn(1.5.1)"
+  ],
+  "revised": "2026-11-12 21:05：由 features.TextModel pickle 改为 dict artifact（可独立加载）"
+}

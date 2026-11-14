@@ -1,0 +1,47 @@
+{
+  "n_rows": 604629,
+  "empty_name": 5,
+  "empty_blurb": 13,
+  "both_empty": 3,
+  "blurb_chars": {
+    "median": 119.0,
+    "p90": 134.0,
+    "p99": 137.0,
+    "p999": 150.0,
+    "max": 239
+  },
+  "blurb_words": {
+    "median": 19.0,
+    "p90": 24.0,
+    "p99": 27.0,
+    "max": 43
+  },
+  "name_words": {
+    "median": 6.0,
+    "p90": 9.0,
+    "max": 29
+  },
+  "blurb_ellipsis_share": 0.008711126988616159,
+  "empty_by_split": {
+    "train": {
+      "name": 3,
+      "blurb": 6
+    },
+    "val": {
+      "name": 0,
+      "blurb": 0
+    },
+    "test": {
+      "name": 1,
+      "blurb": 4
+    }
+  },
+  "creator": {
+    "test_rows": 100469,
+    "n_clusters": 67895,
+    "mean_rows_per_cluster": 1.4797702334487075,
+    "max_rows_per_cluster": 91,
+    "singletons": 55984,
+    "share_singleton": 0.8245673466381913
+  }
+}

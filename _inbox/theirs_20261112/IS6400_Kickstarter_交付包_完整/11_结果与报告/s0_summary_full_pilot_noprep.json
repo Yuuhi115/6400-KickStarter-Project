@@ -1,0 +1,82 @@
+{
+  "tag": "full_pilot_noprep",
+  "data": "full",
+  "split": "pilot",
+  "use_prep_days": false,
+  "rows": {
+    "modelable": 604629,
+    "train": 410919,
+    "val": 93241,
+    "test": 100469
+  },
+  "base_rates": {
+    "train": 0.4289531513509962,
+    "test": 0.6441190815077288
+  },
+  "metrics": [
+    {
+      "Accuracy": 0.35588091849227127,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "ROC_AUC": 0.5,
+      "PR_AUC": 0.6441190815077288,
+      "Brier_Score": 0.2755260678455806,
+      "Threshold": 0.5,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Baseline",
+      "Dataset": "Test",
+      "tag": "full_pilot_noprep",
+      "val_threshold": NaN,
+      "val_positive_rate": NaN
+    },
+    {
+      "Accuracy": 0.7527496043555724,
+      "Precision": 0.7391299132791977,
+      "Recall": 0.9522205396050314,
+      "F1": 0.8322517473072897,
+      "ROC_AUC": 0.8442421855976976,
+      "PR_AUC": 0.9044931705781736,
+      "Brier_Score": 0.15359911696019812,
+      "Threshold": 0.3,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Logistic Regression",
+      "Dataset": "Test",
+      "tag": "full_pilot_noprep",
+      "val_threshold": 0.3,
+      "val_positive_rate": 0.775838954966163
+    },
+    {
+      "Accuracy": 0.7827986742179179,
+      "Precision": 0.7785773667255533,
+      "Recall": 0.9261983496615879,
+      "F1": 0.8459964149105845,
+      "ROC_AUC": 0.869363724964135,
+      "PR_AUC": 0.9234701149553753,
+      "Brier_Score": 0.13974274614664928,
+      "Threshold": 0.37499999999999994,
+      "n": 100469,
+      "base_rate": 0.6441190815077288,
+      "Model": "Gradient Boosting",
+      "Dataset": "Test",
+      "tag": "full_pilot_noprep",
+      "val_threshold": 0.37499999999999994,
+      "val_positive_rate": 0.7208953142930685
+    }
+  ],
+  "best_model": "Gradient Boosting",
+  "best_auc": 0.869363724964135,
+  "top_decile": {
+    "top_n": 10047,
+    "overall": 0.6441190815077288,
+    "top_rate": 0.992236488504031,
+    "lift": 1.5404550447122953
+  },
+  "stability_auc": {
+    "fold1": 0.7733427900301701,
+    "fold2": 0.823911008322294,
+    "fold3": 0.8642503150556281
+  }
+}

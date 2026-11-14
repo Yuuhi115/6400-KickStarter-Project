@@ -1,0 +1,90 @@
+{
+  "random_state": 42,
+  "decision": "情况 A：值得继续扩大数据；结果显示出稳定的区分能力和实际的 Top-Decile 推荐价值。",
+  "cleaning_audit": {
+    "pilot_rows_before_cleaning": 60464,
+    "removed_invalid_or_missing_launch_deadline": 0,
+    "removed_invalid_campaign_duration": 0,
+    "removed_invalid_goal": 0,
+    "modeling_rows": 60464
+  },
+  "test_metrics": [
+    {
+      "Model": "Baseline",
+      "Dataset": "Test",
+      "Accuracy": 0.36448874851954205,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0,
+      "ROC_AUC": 0.5,
+      "PR_AUC": 0.635511251480458,
+      "Brier_Score": 0.2731383749126919,
+      "Threshold": 0.5
+    },
+    {
+      "Model": "Logistic Regression",
+      "Dataset": "Test",
+      "Accuracy": 0.7493091196210028,
+      "Precision": 0.7340617120902869,
+      "Recall": 0.9495263239633484,
+      "F1": 0.8280065005417118,
+      "ROC_AUC": 0.830719686556674,
+      "PR_AUC": 0.8927234656834176,
+      "Brier_Score": 0.16124126183391377,
+      "Threshold": 0.30999999999999994
+    },
+    {
+      "Model": "Random Forest",
+      "Dataset": "Test",
+      "Accuracy": 0.772009474930912,
+      "Precision": 0.7591964846202134,
+      "Recall": 0.9391209815188694,
+      "F1": 0.8396278811441267,
+      "ROC_AUC": 0.8437920627108695,
+      "PR_AUC": 0.8986763632948342,
+      "Brier_Score": 0.16288143927308507,
+      "Threshold": 0.38999999999999996
+    },
+    {
+      "Model": "Gradient Boosting",
+      "Dataset": "Test",
+      "Accuracy": 0.7828661666008685,
+      "Precision": 0.7779672131147541,
+      "Recall": 0.9212610653828234,
+      "F1": 0.8435722411831627,
+      "ROC_AUC": 0.8570611231391163,
+      "PR_AUC": 0.908311161847982,
+      "Brier_Score": 0.14525433663067,
+      "Threshold": 0.42499999999999993
+    }
+  ],
+  "top_decile_lift": [
+    {
+      "Test_Projects": 10132,
+      "Top_Projects": 1014,
+      "Overall_Success_Rate": 0.635511251480458,
+      "Top_Decile_Success_Rate": 0.9842209072978304,
+      "Top_Decile_Lift": 1.548707288824603,
+      "Captured_Successes_Share": 0.15499301133716414,
+      "Model": "Logistic Regression"
+    },
+    {
+      "Test_Projects": 10132,
+      "Top_Projects": 1014,
+      "Overall_Success_Rate": 0.635511251480458,
+      "Top_Decile_Success_Rate": 0.9812623274161736,
+      "Top_Decile_Lift": 1.544051856092665,
+      "Captured_Successes_Share": 0.15452710048144122,
+      "Model": "Random Forest"
+    },
+    {
+      "Test_Projects": 10132,
+      "Top_Projects": 1014,
+      "Overall_Success_Rate": 0.635511251480458,
+      "Top_Decile_Success_Rate": 0.9861932938856016,
+      "Top_Decile_Lift": 1.5518109106458946,
+      "Captured_Successes_Share": 0.15530361857431277,
+      "Model": "Gradient Boosting"
+    }
+  ]
+}

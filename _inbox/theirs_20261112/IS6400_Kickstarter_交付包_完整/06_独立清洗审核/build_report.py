@@ -1,0 +1,444 @@
+from pathlib import Path
+import json
+import pandas as pd
+O=Path(__file__).resolve().parent
+S=json.loads((O/'summary.json').read_text(encoding='utf-8'))
+E=json.loads((O/'extra_summary.json').read_text(encoding='utf-8'))
+D=json.loads((O/'detail_summary.json').read_text(encoding='utf-8'))
+P=pd.read_csv(O/'column_profile.csv'); Q=pd.read_csv(O/'quality_checks.csv'); F=pd.read_csv(O/'category_frequencies.csv'); T=pd.read_csv(O/'numeric_statistics.csv')
+def table(frame):
+    def v(x):
+        if pd.isna(x): return '—'
+        if isinstance(x,float): return f'{x:,.4f}'
+        return str(x).replace('|','\\|').replace('\n',' ')
+    return '| '+' | '.join(frame.columns)+' |\n| '+' | '.join(['---']*len(frame.columns))+' |\n'+'\n'.join('| '+' | '.join(v(x) for x in row)+' |' for row in frame.itertuples(index=False,name=None))
+
+report=r'''# Kickstarter 数据清洗独立审核报告
+
+审核日期：2026-10-03（Asia/Shanghai）。审核对象为本交付包中的数据、规则、脚本、字段字典、已有一致性报告及分析方案。审核执行只读取既有文件，所有新增文件写入 `06_独立清洗审核/`。未修改数据文件或原清洗脚本。
+
+## 1. Executive Summary
+
+**结论：有条件允许探索性 EDA；不建议按现有特征和口径直接进入正式分析、建模或发布既有模型指标。**
+
+总体上，“保留缺失和极端值、保留重发记录、取消与失败分开、增加派生列”的方向合理；673,839 行 × 68 列的产物规模和多数派生公式能独立复算一致。但“28 项全部通过”只说明原检查覆盖的数字一致，不能证明业务口径、时间可用性和原始信息保全正确。
+
+确认的关键问题：
+
+1. **🔴 Critical：金额单位混用。** `goal` / `pledged` 是项目币种金额，213,243 行（31.6460%）为非 USD。文档将混合币种的金额分箱、中位数和收益写成美元，足以改变跨国比较及配置建议。`log_goal` 也是本币对数，并未换汇。
+2. **🔴 Critical：历史特征引用未来信息。** 179,533 行（26.6433%）的 `creator_n_projects` 含未来项目；415 个同名组的首条记录仅因为未来重发而被打标。`creator_prev_success_rate` 在 3,281 行使用当时尚不可用的历史终态结果，按保守可用时点重算后 2,709 行结果不同。这与“上线前评分”的业务目标冲突。
+3. **🟠 Major：业务一致性问题仍残留。** 两个汇率列各有 533 行零值，完成率存在 341 行明显公式不一致，22 行状态与金额达标情况冲突，时间逻辑和长度派生也有小规模问题。冲突不等于必须删行或改标签。
+4. **🟠 Major：复现和溯源不完整。** 当前包及脚本固定位置都没有原始 CSV；无法从原始数据重跑并逐值比对。原脚本固定 E 盘路径且 `--out` 未防止覆盖输入；删除审计仅有五列，不能独立恢复完整记录。字段字典是原始口径，部分内容与当前数据不同。
+
+证据等级：**实测**＝全量加载后独立检查；**静态确认**＝代码能明确证明；**合成边界测试**＝只执行原脚本纯函数，不执行写文件函数；**未验证**＝缺少原始 CSV 或字段来源定义。报告不会把未验证项写成通过。
+
+### 业务背景、范围和基本结果
+
+业务目标为 Kickstarter 众筹上线前配置评分：用计划金额、时长、品类、地区、文案、当时可用履历预测成功概率，并描述成功时收益。数据为多批采集的项目级观察数据，不能支持因果优化承诺，也不能假定每个描述字段均为上线前快照。
+
+| 项目 | 独立实测 |
+| --- | --- |
+| 产物规模 | 673,839 × 68；前 43 列为源字段，25 列为派生字段 |
+| 状态 | successful 297,538；failed 307,091；canceled 69,210 |
+| 二元分析样本 | 604,629；成功率约 49.21%，条件为成功/失败二者之一 |
+| 删除审计 | 20,223 × 5；唯一 id 20,223；与保留 id 无交集 |
+| 删除状态 | submitted 9,469；live 7,474；started 1,920；suspended 1,352；canceled 6；failed 2 |
+| 数量账 | 保留 + 删除 = 694,062；删除比例 2.9137%；只验证数量与键，不等于验证每次删除条件 |
+| 上线范围 | 2009-04-21 19:02:48 至 2026-04-22 22:29:43 UTC |
+| 截止范围 | 2009-05-03 至 2026-06-21 UTC；取消项目的未来计划截止不等于非法日期 |
+| 年份数 | 18 个（2009–2026），不是 README 的 17 个 |
+| 完全重复 / 前 43 列完全重复 / id 重复 | 均 0；project_url 重复也为 0 |
+| 同名同发起人业务重复 | 847 行涉及重复组；按 keep='first' 超额 432 行；415 个组 |
+| 国家冲突 | 30,882 / 673,839 = 4.5830%；原文 31,900 是不同口径 |
+| 全列至少一项缺失 | 629,762（93.4588%）；仅原 43 列至少一项缺失 582,123（86.3890%） |
+
+全表 `dropna()` 会只剩 44,077 行，还会移除所有取消记录及大量没有历史成功率的首发项目；当前脚本没有这么做，这是合理的。`succ` 的缺失属于目标定义，`creator_prev_success_rate` 的缺失多为无可观察履历，均不应该当作一般坏数据。
+
+口径对照：旧字典的category_name缺失18.97%、profile_blurb缺失85.11%、usd_pledged缺失1.64%都是自称原始数据的统计，不能用作清洗产物的字段画像；当前对应为19.1800%、84.6655%、0%。产物标题仍有5个缺失，简介47个缺失。清洗后collected_at为119个批次（不是原始124个），细分原标签为197种（不是原始218种）；这些变化可能来自状态过滤，不能没有原始数据就归因为脚本错误。当前全量2015年项目72,714条，文档65,127条可能采用二元样本口径，须标注分母后再比对。
+
+## 2. Cleaning Rule Audit
+
+下表建立“规则 → 脚本 → 数据结果”。代码行号对应当前 500 行的 `02_清洗规则与理由/清洗脚本.py`。
+
+| 清洗项目 | 当前规则 / 代码 | 是否合理 | 问题及数据结果 | 严重程度 | 建议 |
+| --- | --- | --- | --- | --- | --- |
+| R1 状态筛选 | 删 live/submitted/started/suspended；173 行 | 对二元任务有条件合理 | 审计删 20,215；suspended 是特殊终止事件，不应统称未结束；过滤后样本不再代表所有上线项目 | 🟠 Major（总体推断时） | 主表保留状态，分析时定义各自掩码；成功概率明确条件分母，另报取消/中止率 |
+| R2 无效上线 | 解析失败或恰为 epoch 零；169、174 行 | 任务筛选可用，作为全表删除过强 | 审计有 6 canceled；其他字段仍可能可用于非时间统计；epoch+几秒并未识别 | 🟡 Minor | 打时间可用标志；时间任务筛选；不均值填补时间 |
+| R3 非正 goal | goal<=0；175 行 | 非正标记合理 | 当前保留非正/缺失 goal 为 0；但缺失和 +inf 会漏过条件（合成测试确认） | 🟠 Major（规则缺口） | 检查有限且正数，保留原值，金额模型筛选 |
+| R4 非法截止/时长 | 解析失败、过早、dur<=0 或 >365；168–171 行 | 部分合理 | `.dt.days` 向下取整；365.5 天会通过；365 无平台历史依据；最大整数时长 120 天仍保留 | 🟠 Major | 精确天数判断；按年代核验平台规则并打标；不批量删统计极端 |
+| R5 负 pledged | pledged<0；177 行 | 不合法金额应隔离 | 审计删 2 failed；标签和上线特征可能仍有效；“删除不损失任何信息”不成立 | 🟡 Minor / 特定模型偏差风险 | 金额异常打标；只在募款分析排除，不必从二元模型剔除整行 |
+| V1 时间 | 混合解析；114–122、195–201 行 | 大体合理 | 已有 launch/deadline 全部独立复算一致；created_at 没有新增标准时间列；UTC 被移除 | 🟠 Major（语义精度） | 显式 utc=True；保留精确 dur；本地小时需时区映射且说明来源 |
+| V2 布尔 | 可空布尔；125–130、204–205 行 | 类型转换合理 | 原列被赋值，违背不覆盖原则；CSV 重载仍 object | 🟡 Minor | 新建标准布尔列或明确原列类型规范例外；显式读取 schema |
+| V3 品类 | lower/strip/unknown；208–211 行 | 合理 | 一级 16→15；当前细分原始 197、标准 147（含 unknown）；标准 ID→标签无一对多 | 🟢 Passed | 保留原标签及缺失标记；不要把稀有类别当脏数据删掉 |
+| V4 引号 | 折叠连续双引号；214–216 行 | 有条件合理 | 标题改变 27,139、简介 33,480；派生列残留连续引号 0；无法证实全部连引号都是抓取错误 | 🟡 Minor | 原文留存，抽样核对语义；TF-IDF 用清理列 |
+| V5 国家 | 优先 country；219–222 行 | 指定市场口径合理 | 两个国家语义不同；当前 country 无缺失，fallback 未实际触发；冲突 30,882 不等于错误 | 🟢 Passed | 字段命名/字典注明平台市场；地理分析用 location_country；不以冲突删行 |
+| V6 外层空白 | 四个派生文本 strip | 合理 | 8 个列检查未发现外层空白；对 name/blurb 的 strip 不等于全面同义标准化 | 🟢 Passed | 保留防御处理；不任意合并同义类别 |
+| V7 小额/截断 | goal<1 打标；226–227 行 | 原值保留合理 | 4 个小额；cap=5,000,000，541 行派生值变化；混合币种阈值无可比性且全量拟合 | 🟠 Major（若入模） | 金额同口径后，仅训练集估计 cap；保留未截断结果作对照 |
+| V8 缺失 | 多数保留、细分 unknown | 合理 | 未做全表删除/均值填补；原始缺失率并非产物缺失率；不应断言 MNAR | 🟢 Passed（策略）；🟡 Minor（证据） | 按年代/批次/状态分析缺失，训练期填补与缺失指示 |
+| 完全重复/业务重复 | 不删除；241 行同名组打标 | 保留方向合理 | 完全重复 0；847 行重复组，而旧文 929 是其他口径；同名不一定重发 | 🟠 Major（上线前打标） | 原 is_relaunch 可留作回顾描述；另建只看过去的 prior_same_name |
+| 文本长度 | 原始 astype(str)；228–230 行 | 不完整 | 5 个标题缺失计长度3；47 个简介缺失计长度3、词数1；引号转义也拉长原始文本 | 🟠 Major | 从标准文本以 string dtype 计算，缺失保留 NA 或加标记后填0 |
+| 标签 | 成功1、失败0、其余NA；233–235 行 | 合理 | 全部复算一致；22 个状态/金额冲突需另审 | 🟢 Passed（实现） | 保持 state 作来源标签；不要用金额阈值自动覆盖 |
+| creator_rank | 保留样本排序累计；236–237 行 | 只能表示样本内排名 | 不含被删项目、不等于真实终身次数；排序同秒没稳定 tie-break | 🟠 Major | 完整可观察上线历史先计数，再筛分析样本；命名 observed_prior_launches |
+| creator_n_projects | 全量组大小；238 行 | 不适合上线前输入 | 179,533 行含未来项目，分析方案却列为模型变量 | 🔴 Critical | 禁止进预测模型；用截至上线前项目数替代 |
+| 历史成功率 | shift + expanding；239–240 行 | 时间口径不正确 | 顺序过去≠结果已知；3,281 行引用尚未可用结果，2,709 行值会改变 | 🔴 Critical | 按结果可用时点聚合；未知历史保持缺失；事件来源不完整时加限制说明 |
+| 原列完整保留/可回滚 | 原则第4条；192、204–205、247–249 行 | 当前承诺过强 | 原文件缺失，不能逐值证明；两布尔原列被赋值，删除文件缺 38 个源字段 | 🟠 Major（溯源） | 保存原文件哈希/版本与完整删除行；区分类型保留和字节原样保留 |
+
+**规则与代码的缺口：** 文档没有货币单位校验、零汇率校验、状态金额一致性、创建/上线/状态时间先后校验、文本缺失长度策略、时间点可用性规则，代码也未实现这些检查；这是清洗覆盖不足。V6 是防御性处理、V8 主要体现为不删不填，不需要额外“填补代码”。
+
+**无对应明确规则的代码/定义：** `creator_n_projects`、`is_relaunch keep=False` 虽列在派生列说明中，却没有上线前可用性约束；`.dt.days` 的取整、原始 `astype(str)` 的缺失语义、全量 quantile 的拟合范围、全局忽略 warnings（29 行）没有充分规则说明。`LEAKAGE_COLS` 和 `DERIVED_COLS` 仅声明，未执行特征排除或 schema 断言；不能把常量存在当作泄漏保护已经生效。
+
+## 3. Cleaning Script Audit
+
+| 代码位置 | 代码目的 | 是否正确 | 潜在问题 | 修改建议 |
+| --- | --- | --- | --- | --- |
+| 31–36、133–137、480–494 | 输入输出和流程 | 无法在当前包直接复现 | 固定 E 盘；无 --raw；原始 CSV 不在包内；--out 只影响主CSV而非审计/文档 | 参数化输入和输出目录，锁定依赖，检查文件存在 |
+| 29 | 压制 warnings | 不建议 | dtype/解析/弃用警告可能被隐藏 | 去掉全局忽略，仅处理已知警告 |
+| 114–122 | 混合时间解析 | 现有产物可复算 | naive UTC；字符串 fallback 受 pandas 版本和混合格式影响 | 保持分支结构，显式 UTC 与格式策略 |
+| 168–171、197 | 时长 | 取整公式一致，但不等于精确时长 | 281,564 行损失不足1天的信息，平均约0.2039天；分箱边界可能变化 | 新增精确 dur_days_exact，历史整数列改名 floor；不要静默改口径 |
+| 175、177、183 | 非法数过滤 | 对当前非负有限值有效 | missing/+inf 漏过；mask.fillna(False) 不隔离未知状态/值 | 用 numeric coercion 及 finite 检查，分开 error/unknown 标记 |
+| 192 | 副本 | 正确 | 不直接修改传入 df；原列值是否原样尚不能验证 | 保留 copy |
+| 204–205 | 布尔转换 | 值映射合理 | 未知字符串被静默转NA；覆盖源列；0/1因布尔键等价也会被接受 | 限定允许编码，未知值记录到审计；保留源列 |
+| 225–227 | 对数/截断 | 公式复算一致 | 本币混用；未来测试数据参与cap估计 | 保留 log_goal_local；建模前统一口径、训练期拟合cap |
+| 228–230 | 文本长度 | 存在语义错误 | NaN→'nan'；从转义原文而非清理文案算长度 | 缺失感知的字符串计算 |
+| 233–235 | 标签和样本标记 | 正确 | 其他未知状态也会变NA而未报警；只声明10个泄漏列还不够 | 状态白名单断言；模型输入白名单 |
+| 236–240 | 履历 | 部分错误 | 全量次数、未到期结果、过滤后的历史；同秒顺序无稳定键 | 稳定按时间+id；历史事件可用性严格早于当前上线 |
+| 241 | 重发 | 回顾描述正确，预测不正确 | keep=False 使第一次就被未来标记；空标题也可能聚组 | 保留回顾列，新增按过去统计的重发特征，缺标题置unknown/False并打标 |
+| 243–249、475–476 | 写文件 | 默认写新文件但安全不充分 | --out 能指定原路径并覆盖；副产物覆盖；输出父目录未统一建立；删除审计不含完整行 | resolve后拒绝输入=输出；副产物归同一run目录；保存全行和各规则命中 |
+| 261、275–281、395–401、444–445 | 生成说明 | 部分不准确 | 原列数、版本、缺失率、来源大小硬编码；“所有无效值都在R1”被R2/R5自身反例推翻 | 计算实际指标，明确来源元数据和待核实值，删绝对化结论 |
+
+脚本没有随机操作，因此无需为了形式加 random seed；主要复现风险是缺原始文件、固定路径、依赖版本、排序约束和人工先前步骤不明。当前包的 `created_at`、`deadline` 全为数值 epoch，旧字典称混合字符串；清洗脚本没有覆盖这两列，故必须拿到原始文件才能判断是字典过时还是存在未记录的前处理。
+
+代码质量方面：多数操作向量化、复制清晰，无大规模逐行清洗循环；逐发起人 `transform(lambda...expanding())` 会产生数十万组 Python 开销。本次审核实跑这一逻辑较慢，但优化不是优先问题；应先纠正历史可用性。小型五规则循环、文档样例循环可保留。原始行数/schema断言、字段单位注释和命名比压缩代码更有价值。
+
+合成边界测试（只调用原纯函数）：24h正常项目保留；24h但 goal=NaN 和 goal=+inf 都被保留；365.5天也被保留。这三项证实校验漏洞。12h记录因取整为0被删除：平台现行最短1天，不能因此宣称它是真实有效样本被误删；它仅说明代码采用整数时长判断。
+
+## 4. Remaining Data Quality Issues
+
+### 4.1 确认问题与待核实问题
+
+数量按各检查独立计数，彼此可能重叠，不能相加当作总坏行数。除另标注外，比例分母均为 673,839。
+
+| 字段 | 问题 | 数量/比例 | 影响 | 严重程度 |
+| --- | --- | --- | --- | --- |
+| goal/pledged/log_goal | 本币金额用于全表美元口径；数值本身不是错 | 非USD 213,243 / 31.6460% | 跨币种分箱、金额关系和收益不可比 | 🔴 Critical |
+| creator_n_projects | 全生命周期样本总数含未来 | 179,533 / 26.6433% | 上线前模型输入不可获得，评估乐观 | 🔴 Critical |
+| is_relaunch | 同名组首条由未来记录决定 | 415 / 0.0616%；其中328条也是该发起人样本首发 | 未来信息进入特征，首次与重发混淆 | 🔴 Critical |
+| creator_prev_success_rate | 先前上线项目结果当时尚不可用 | 3,281 / 0.4869%；其中3,280含未到截止的项目；2,709值重算不同 | 标签信息泄漏；即使没有跨训练测试也不符合上线前语义 | 🔴 Critical |
+| fx_rate/usd_exchange_rate | 各533行=0；不是正常可用汇率 | 各0.0791%；同一组记录，不加总为1066行 | 换算金额归零；与静态汇率口径冲突 | 🟠 Major |
+| percent_funded | 与 pledged/goal×100 相差>0.1个百分点 | 341 / 0.0506%：failed258、canceled64、successful19 | 完成率图与募资效率统计错误 | 🟠 Major |
+| state / pledged / goal | 成功但募款低于目标5；失败但达到目标17 | 合计22 / 0.0033% | 标签与金额推导不一致，需核对舍入/状态变化/抓取时点 | 🟠 Major（核实） |
+| name_len/blurb_len/blurb_words | 缺标题5行计长度3；缺简介47行计长度3、词数1 | 5 / 0.0007%；47 / 0.0070% | 将缺失错当文字长度，还受重复引号影响 | 🟠 Major（特征定义） |
+| dur_days | 精确时间截断成整数 | 281,564 / 41.7851% | 短时长和区间端点归组有误差 | 🟠 Major（精度）；若明确floor则Minor |
+| 时间逻辑 | created>launch 1；二元终态变化早于deadline 7 | 0.0001%；0.0010% | 创建历史、标签可用时间解释需核对 | 🟡 Minor（总量）；履历计算须隔离 |
+| duration | 历史政策筛查：2011-06-18以后>61天144；此前>90天746 | 0.0214%；0.1107% | 不能仅用365天阈值证明业务有效；需核对日期/特殊延期 | 🟠 Major（核实），不自动删除 |
+| pledged/backers_count | 募款>0但人数0 | 2 / 0.0003% | 人均募款不可直接计算 | 🟡 Minor（核实） |
+| category_name/category_id | 细分缺失保留 | 129,242 / 19.1800% | 细分关系随年代/批次变化，不宜完整案例删除 | 🟢 Passed（处理）；建模需应对 |
+| profile_blurb | 档案简介缺失 | 570,509 / 84.6655% | 不适合默认当主文本；可另做有简介子样本研究 | 🟢 Passed（保留） |
+| profile_project_id | 所有非缺失值等于profile_id而不同于id | 664,516 / 98.6164% | 与“档案内项目ID”字典描述冲突；不能直接用作项目join键 | 🟠 Major（字典/来源核实） |
+| 文档与产物 | 原始/清洗口径混写；年度、批次、类别、缺失和金额单位过时 | 见全文与逐列实测 | 用户可能用错误分母、单位与列含义 | 🟠 Major |
+
+`profile_project_id` 的异常是**字段语义待核实**，不是664,516条记录被证实非法。例：id=2103203254，其 profile_id 和 profile_project_id 都是4197；不可直接删列或猜测改值。
+
+例：id=41023385，goal=500、pledged=3095，完成率却为0，同时两个汇率为0；应保留源列并增加核算完成率。id=4732285 成功但1999.66<2000，可能只是边界舍入；不得按金额强制改为失败。
+
+**通过的业务检查：** goal<=0、goal缺失、负募款、负人数、人数非整数、负完成率均为0；launch/deadline/created/state_changed非缺失值均可解析；相对审核日期未见未来时间；上线晚于采集月份上界、二元终态deadline晚于采集月份上界、状态变化晚于采集月份上界均为0。使用月份上界只是一种宽松一致性检查，不能证明具体采集日或结果可用日准确。无年龄、评分等字段，不作无关范围断言。
+
+### 4.2 缺失机制与类型
+
+细分缺失明显依赖可观察年份：2011年40.59%、2022年5.29%、2025年2.43%。这使“缺失完全随机（MCAR）”成为很弱的工作假设；可能与接口版本、批次、早期品类体系有关。能否视为给定观测变量后的 MAR，需要来源解释及模型假设；MNAR涉及未观测真值，不能仅由现有比例证明。用“非均匀缺失、机制未完全确定”取代绝对断言。
+
+类型解释：ID列可在存储中为整数但只用于键；浮点ID（category_id/profile_id/profile_project_id/location_id）应使用可空Int64或string，不能作为连续数值。launch_dt/deadline_dt重载为字符串，需要显式UTC datetime；created_at/deadline当前是epoch整数也不是连续建模特征。collected_at是YYYYMM批次编码而非数值大小；state/category/country/currency/location_type应作类别。succ是可空二元标签；其NA不是失败。spotlight/staff_pick为object可空布尔，要使用显式boolean schema。未发现数值列混入不可解析字符串；这只覆盖现有产物，不替代输入端校验。
+
+下面给出所有存在缺失的字段（完整68列dtype、unique见附录）：
+
+@@MISSING@@
+
+### 4.3 描述统计与异常值分类
+
+下表中的 goal/pledged 为**混合本币数值，仅用于质量检查**，不能当作统一经济量。完整数值表含所有数值列、0.1%/1%/5%/25%/50%/75%/95%/99%/99.9%、IQR及围栏。对ID和编码列输出统计只是结构诊断，IQR没有业务异常含义。
+
+@@STATS@@
+
+分类判断：
+
+- **A 明确错误/不可用值：** 0汇率；缺失文案被计成'nan'长度；341行完成率与记录金额公式冲突。这些宜另建正确派生值或不可用标记，保留来源值。
+- **B 合理但极端：** 超募完成率>100%、0募款的失败项目、较高募款/人数、历史90天项目、重复发起行为都可以真实存在；不能仅因IQR异常删除。
+- **C 暂时无法判断：** 目标最大10亿本币、4个goal<1（最小0.01）、120天时长、状态金额22行冲突、2行有钱无人等；需回源及币种/年份语境。数值极端并不证明真实，也不证明错误。
+
+IQR会标出goal 81,863（约12.15%）、pledged 92,435、人数82,078、整数时长154,130。当前脚本没有按IQR删除，这是合理的。超募百分比上限不是100%，不应截断到100。
+
+现行手册规定融资1–60天；官方2011-06-17公告将此前上限90天降至60天，已上线旧项目不受影响。来源：[Kickstarter融资手册](https://www.kickstarter.com/help/handbook/funding?lang=es)、[2011年时长调整公告](https://www.kickstarter.com/blog/shortening-the-maximum-project-length)。因此不能跨所有年代直接删>60天记录。精确时长>60天的近期记录10,732行，许多只是60天加不足一天；采用>61天的144行作更保守核实队列，不据此判定全部非法。
+
+### 4.4 分类频数、标准化与重复
+
+@@STATEFREQ@@
+
+@@CATFREQ@@
+
+15个市场币种、25个平台国家、225个地理国家、9个location_type在当前数据中无多余外层空白；主要分类未见NA/Null/None文本混用，派生unknown来自明确缺失。一级category_parent_id与category_key、细分category_id与subcategory_key的非缺失映射均未见一对多，大小写归并有实证支持。低频类别（见频数附件）只作为样本量风险，不能随意合并或删行。
+
+完全重复0不等于不存在业务重复。原名同creator有847行，标准标题casefold+压缩空白后候选增加到1,468行（0.2179%）；它们是待核对的同名组，不是必删重复。不同项目id/时间可能是重发、系列项目或同名；保留原记录，预测时仅用此前出现。
+
+## 5. Over-cleaning Risk
+
+**没有证据表明当前产物大规模按缺失、IQR或稀有类别删行。** 删除2.91%不算高比例，但删量小并不等于偏差小；原始文件缺失使实际分布变化和所有重叠删除原因无法全面重建。
+
+| 原规则 | 潜在问题 | 可能后果 | 推荐做法 |
+| --- | --- | --- | --- |
+| R1删除20,215状态行 | 将分析样本筛选写成普遍数据清洗；suspended并非一般右删失 | 只估计“已知成败且非取消/中止”的条件成功率；近期活跃项目不均匀排除 | 完整项目主表+任务掩码；按launch cohort设置成熟窗口，单报取消/中止/活跃 |
+| R2删6取消、R5删2失败 | 非时间/非收益任务仍有有效信息 | 有用的业务事件和履历缺失，尽管量很小 | 字段级隔离，按任务筛样本；尽可能保全原始全行 |
+| goal_capped的全量99.9% | 单一混合本币阈值、未来分布参与拟合 | 高金额结构被压缩；若使用则污染时间外评估 | 原goal保留；同口径训练期估计阈值；报告未截断敏感性 |
+| dur_days向下取整 | 真实时长信息弱化，281,564行受影响 | 14.9归入14、30.9归入30；短时長关联受分箱规则影响 | 精确天数+显式floor列；分箱定义冻结并做敏感性 |
+| 重复引号一律折叠 | 缺少全部内容属于错误转义的证明 | 文本标点语义少量丢失 | 原文已留存；对文本用途抽样核验，保持可逆对照 |
+| unknown保留缺失 | 若以后全dropna或把unknown当普通业务品类 | 选择偏差或年代代理特征 | 缺失旗标、分年/分批次检查、训练期处理 |
+
+当前首要风险是**语义混用、未来信息及信息精度损失**，而不是“删掉大量统计异常值”。审计文件仅有id/state/goal/launched_at/reason，不能称为可独立完整回滚；它可以在保留原始CSV时做索引恢复。
+
+## 6. Recommended Fixes
+
+### 必须修改（Critical / Major）
+
+1. 冻结上线前预测的特征白名单，立即排除creator_n_projects和回顾性is_relaunch；历史成功率改成结果当时可用口径。更正后的模型指标需要重跑，已有AUC不能作为本审核通过证据。未提供训练代码，无法确认已有模型实际使用了哪些列。
+2. 更正金额单位与图表；短期按币种分层或只分析USD子集，不能把过滤后的结论泛化到全球。确认static_usd_rate时间语义后再增加goal_usd，预测不得自动使用事后换汇信息。
+3. 为零汇率、完成率冲突、状态金额冲突、时长政策异常建立标记和核实队列。完成率单独核算，不能用该核算值自动覆盖state。
+4. 修正文案缺失长度、增加精确时长与UTC schema；补上finite、missing、状态白名单和时间逻辑检查。
+5. 补齐原始CSV和来源版本/哈希，参数化路径，禁止输入输出路径相同；把源字段与派生字段及原始/产物统计分开写字典。
+
+### 建议修改（Minor）
+
+稳定排序launch_dt+id；不全局抑制警告；增加未知布尔编码记录；给稀有类别结果展示样本量/不确定性；保存完整删除行及所有命中原因；记录每次运行依赖、规则版本、输入哈希、输出哈希；仅在正确性完成后优化逐creator计算。
+
+### 可以保留
+
+保留取消为独立状态、保留原文和原goal、品类lower/strip、国家双口径与冲突标记、低缺失字段不删行、极端值不按IQR自动删除、业务重发不去重、读取原始文件后copy、向新文件输出的默认方向。
+
+### 最小必要修改方案（以下为建议，尚未应用）
+
+#### F1 金额单位与异常汇率
+
+原代码（225–226行）：
+
+```python
+clean['log_goal'] = np.log10(clean['goal'])
+clean['goal_capped'] = clean['goal'].clip(upper=clean['goal'].quantile(.999))
+```
+
+原因：未换汇，本币混用；全量cap拟合包含未来样本。最小方案先保留当前列并正确命名用途，再增加可核实的美元描述列：
+
+```python
+clean['log_goal_local'] = np.log10(clean['goal'])
+rate = pd.to_numeric(clean['static_usd_rate'], errors='coerce')
+valid_rate = np.isfinite(rate) & (rate > 0)
+clean['static_rate_invalid'] = ~valid_rate
+clean['goal_usd_snapshot'] = clean['goal'] * rate.where(valid_rate)
+clean['percent_funded_calc'] = 100 * clean['pledged'] / clean['goal']
+clean['percent_funded_conflict'] = clean['percent_funded'].notna() & (
+    (clean['percent_funded'] - clean['percent_funded_calc']).abs() > .1
+)
+# 只有确认rate的时点适合预测后，才能在训练窗口内拟合：
+# cap = train['goal_usd_snapshot'].quantile(.999)
+# train/test分别用相同cap，禁止全量重新拟合。
+```
+
+预期：金额单位可解释，坏汇率不会将目标归零；完成率异常被显式暴露。实测在611,045条非零募款且有static_usd_rate的记录中，`pledged*static_usd_rate` 与usd_pledged未见超过max(1美元,1%)的误差；相同测试对usd_exchange_rate/fx_rate分别有98,803/151,960条不一致。因此不能任意互换汇率字段。此实证不证明static_usd_rate是上线前已知汇率；在定义核实前，该列仅限描述。USD项目本身可保留金额，无需猜补非USD汇率。
+
+#### F2 结果可用时点的历史成功率（替换239–240行）
+
+原代码 `groupby(...).transform(lambda s: s.shift().expanding().mean())` 只排除当前行，未排除尚未结束的前一项目。推荐在原排序框架内调用下列函数，不重写其他清洗步骤：
+
+```python
+def prior_success_asof(frame):
+    result = pd.Series(np.nan, index=frame.index, dtype=float)
+    terminal_time = pm(frame['state_changed_at'])  # F4版本，UTC
+    # 保守近似：终态变更与计划deadline都已发生，才算已知结果。
+    # 有真实逐次状态日志时应改用首次观察终态时点。
+    available = pd.concat([frame['deadline_dt'], terminal_time], axis=1).max(axis=1)
+    time_ok = terminal_time.notna() & (terminal_time >= frame['launch_dt'])
+    for _, group in frame.groupby('creator_id', sort=False):
+        ix = group.index
+        events = pd.DataFrame({'at': available.loc[ix], 'y': frame.loc[ix, 'succ']})
+        events = events[events['y'].notna() & time_ok.loc[ix]].sort_values('at')
+        if events.empty:
+            continue
+        # strict < launch，排除同一时刻刚刚产生的结果。
+        k = np.searchsorted(events['at'].astype('int64').to_numpy(),
+                            group['launch_dt'].astype('int64').to_numpy(), side='left')
+        sums = np.r_[0., events['y'].to_numpy().cumsum()]
+        values = np.divide(sums[k], k, out=np.full(len(k), np.nan), where=k > 0)
+        result.loc[ix] = values
+    return result
+
+clean = clean.sort_values(['launch_dt', 'id'], kind='stable')
+clean['creator_prev_success_rate'] = prior_success_asof(clean)
+```
+
+预期：未知结果不会提前进入履历。实测审核采用max(deadline,state_changed_at)的保守可用时点，并仅考虑先前项目；3,281条被影响、2,709条值不同。这个时点不是精确“首次成功状态”日志，尤其状态金额冲突或字段后期变化需回源核实；建议代码也需在最终schema统一后验证。履历源应覆盖完整可观察有效上线项目，计算完再筛分析样本；本包无法补回所有被删历史字段。
+
+#### F3 防止总项目数、重发标记看未来
+
+原代码（238、241行）：`transform('size')`、`duplicated(..., keep=False)`。推荐保留这两列用于回顾描述，新增预测列：
+
+```python
+clean = clean.sort_values(['launch_dt', 'id'], kind='stable')
+# 严格更早的上线次数；相同时间的一组不互相计入历史。
+launch_groups = clean.groupby(['creator_id', 'launch_dt'], sort=True).size().rename('n')
+prior_counts = launch_groups.groupby(level=0).cumsum() - launch_groups
+keys = pd.MultiIndex.from_frame(clean[['creator_id', 'launch_dt']])
+clean['observed_prior_launches'] = prior_counts.reindex(keys).to_numpy()
+has_name = clean['name_clean'].notna()
+first_seen = clean.groupby(['creator_id', 'name_clean'])['launch_dt'].transform('min')
+clean['has_prior_same_name'] = has_name & (first_seen < clean['launch_dt'])
+# 模型仅使用observed_prior_launches、has_prior_same_name；
+# creator_n_projects和原is_relaunch放在模型输入白名单之外。
+```
+
+预期：415个仅因未来同名出现的首条记录不会成为预测时重发。标题规范化可带来额外候选，但“同名”仍不是已证实“重发”，故新名表明观察事实，不作语义保证。上述次数仍只是保留样本的观察历史；完整履历需在原始有效上线历史上同样计算。
+
+#### F4 精确时间、有效数值和非破坏标记
+
+原代码（116–121、168、197行）去UTC并用`.dt.days`。替换解析函数核心和时长计算：
+
+```python
+def pm(s):
+    t = s.astype('string').str.replace(' UTC', '', regex=False).str.strip()
+    num = pd.to_numeric(t, errors='coerce')
+    out = pd.to_datetime(num, unit='s', errors='coerce', utc=True)
+    text = num.isna()
+    out.loc[text] = pd.to_datetime(t.loc[text], format='mixed', errors='coerce', utc=True)
+    return out
+
+launch, deadline = pm(df['launched_at']), pm(df['deadline'])
+dur_exact = (deadline - launch).dt.total_seconds() / 86400
+goal_num = pd.to_numeric(df['goal'], errors='coerce')
+goal_valid = np.isfinite(goal_num) & (goal_num > 0)
+# 先打标而非扩张整行删除；分析层明确选择所需字段有效的样本。
+df = df.copy()
+df['goal_invalid'] = ~goal_valid
+df['time_invalid'] = launch.isna() | deadline.isna() | (dur_exact <= 0)
+# 如果暂时保留R4的365阈值，其比较必须使用dur_exact。
+# UTC修正后原funnel中的pd.Timestamp常量也需加tz='UTC'，避免naive/aware比较报错。
+clean['dur_days_exact'] = (clean['deadline_dt'] - clean['launch_dt']).dt.total_seconds()/86400
+```
+
+`format='mixed'` 需pandas>=2；推荐锁定经审核环境，或者在旧版本显式分格式解析。预期：365.5天不再被取整掩盖、未知/无限goal不会当正常有效值。保留整数时长兼容旧结论，但字典需明确是floor；政策范围另作年代标记和回源队列。单一UTC小时不等于项目所在地小时，跨国“上线几点”的业务建议必须有可靠时区来源，不能按国家粗略推断多时区城市。
+
+#### F5 文本缺失长度（替换228–230行）
+
+```python
+clean['name_missing'] = clean['name_clean'].isna()
+clean['blurb_missing'] = clean['blurb_clean'].isna()
+clean['name_len'] = clean['name_clean'].astype('string').str.len().astype('Int64')
+clean['blurb_len'] = clean['blurb_clean'].astype('string').str.len().astype('Int64')
+clean['blurb_words'] = clean['blurb_clean'].astype('string').str.split().str.len().astype('Int64')
+# 建模器需数值时，再在训练pipeline里填0并保留missing标记。
+```
+
+预期：缺文案不会产生虚构'nan'，长度反映实际清理后文案。5个标题、47个简介的假长度直接消除；因引号压缩产生的其他长度变化是定义纠正，需重新计算相关长度模型与图表。
+
+#### F6 输入输出安全与审计（31–36、243–249、480–494行）
+
+原代码固定RAW且仅提供--out。最小改动是在main中增加--raw，并按输出路径导出副产物、保护输入：
+
+```python
+# main中：保留load/funnel/clean_and_write/write_document结构。
+ap.add_argument('--raw', required=True, help='原始CSV绝对或相对路径')
+# --out保留；建议默认在脚本所在目录的cleaned中。
+# parse_args之后，在调用load之前：
+from pathlib import Path
+global RAW, OUTDIR, DROPPED, DOC  # 放main顶部；删除原固定E盘路径依赖
+RAW = str(Path(a.raw).resolve())
+out_path = Path(a.out).resolve()
+if out_path == Path(RAW):
+    raise ValueError('输出不能覆盖原始输入')
+if not Path(RAW).is_file():
+    raise FileNotFoundError(RAW)
+out_path.parent.mkdir(parents=True, exist_ok=True)
+OUTDIR = str(out_path.parent)
+DROPPED = str(out_path.parent / (out_path.stem + '_dropped_rows.csv.gz'))
+DOC = str(out_path.parent / (out_path.stem + '_cleaning_rules.md'))
+# 将a.out传递替换为str(out_path)。
+# 原247行可改为：
+dropped = df.loc[~alive].copy()
+dropped['reason'] = reason.loc[~alive]
+```
+
+这是定位明确的修改片段，**不是已应用的完整补丁**；global必须放main顶部且先于使用相关变量，--out默认值也需去掉E盘常量。预期：可指定真实输入、输出父目录存在、不会用--out覆盖输入，删除行能完整恢复。不同运行建议独立目录以避免副产物覆盖；记录完整命中矩阵可避免只留首个删除原因。
+
+#### F7 原列保全与输入schema
+
+原204–205行对source布尔列赋值，应改为新增 `spotlight_bool` / `staff_pick_bool`；读入后显式核对允许token，再映射。当前CSV读入的ID可使用dtype={'id':'Int64','creator_id':'Int64','category_id':'Int64',...}，但键的缺失和整数有效性应先核验。读取日期用显式UTC转换。模型输入采用准入列表，不从“除10列以外全部”自动挑选；state、succ、is_terminal_pair均不得当特征，采集批次/链接/档案字段和汇率也需审查上线可用性。
+
+### 进入Business Data Analysis的用途判断
+
+| 用途 | 判断 | 条件 |
+| --- | --- | --- |
+| 状态/一级品类/平台市场计数 | 可先做探索 | 明确这是保留样本、成功率条件分母；展示缺失及取消比例 |
+| 金额描述/可视化 | 目前全表美元口径不可用 | 分币种或核实换算来源；重尾用分位数/对数轴，注明单位 |
+| 时长/文案关系 | 有条件可做探索 | 修正精度与长度，分年/品类比较，给出样本量与敏感性 |
+| 国家比较 | 有条件可用 | 平台市场与地理国家分开、金额单位统一 |
+| 履历与结果关系 | 现有回顾列仅限明确回顾描述 | 预测、经验效果解释必须用当时可用历史，避免把未来总数说成上线经验 |
+| 上线前建模 | 当前暂不验收 | 纠正Critical项，核实文本/时长/汇率是否事后快照；时间成熟样本、训练期预处理、校准与时间外评估 |
+| 平台年度/月度趋势 | 有条件 | 多批抓取覆盖/选择机制、部分2026年、未成熟队列不可忽略；缺数据不等于真实趋势 |
+
+观察性目标金额有内生性，相关或预测改善不证明改变金额就能引起成功；当前包缺少访问量、营销、首次快照及覆盖日志，不能声称已消除所有bias。随机切分并非在所有任务中本身就是标签泄漏，但不匹配此处时间外上线预测；滚动时间评估仍需控制历史可用时点和creator相关性。
+
+## 7. Final Verdict
+
+1. **规则是否合理？** 基本保留策略合理，但金额口径、上线前历史定义和部分业务检查缺失；状态筛选应定位为任务样本规则。
+2. **脚本是否正确执行？** 大多数显式公式能从产物复算；历史可用性、缺失文本长度、时长精度、输入安全存在确认问题；从原始CSV端到端复现未能验证。
+3. **清洗后是否仍有质量问题？** 有：零汇率、完成率不一致、未来履历、状态金额冲突、少量时间与文本问题；不能以原一致性PASS替代业务质量验收。
+4. **是否过度清洗？** 没有发现大规模异常值/缺失/小众类别删除；存在任务筛选过早、精度损失、整体删行和派生截断的风险。原分布变化需原始数据才能定量确认。
+5. **可以进入EDA吗？** 可以开始注明口径的探索性计数、分类及分币种分析；全表美元金额、履历预测和正式模型结果暂不能验收。
+6. **最优先修复什么？** ①未来信息与模型白名单；②本币/美元单位及换汇时点；③零汇率/完成率冲突和文本长度/精确时长；④原始文件、schema、路径保护与实测字典。对待核实冲突先打标、回源、做包含/排除敏感性，避免增加无依据的删除。
+
+本审核的修改代码为最小建议片段，未经应用到原数据。实际修复应先在隔离输出目录运行，比较样本和分布，并重新验证模型，不覆盖此次审核的证据。
+
+## 附录A：完整字段含义、dtype、缺失和唯一值
+
+含义取自包内字典并按独立观察加上限制；语义未经来源证实的字段明确标出。dtype是pandas3.0.1默认重载结果，字符串显示str；较旧pandas通常显示object。数字ID不等于连续变量。unique不含缺失。
+
+@@DICTIONARY@@
+
+## 附录B：证据文件与复现
+
+| 文件 | 内容 |
+| --- | --- |
+| audit_checks.py | 全量只读结构/缺失/重复/业务/派生/历史可用性检查 |
+| extra_checks.py、detail_checks.py | 年度缺失、币种、换汇对照、语义冲突与合成边界 |
+| column_profile.csv | 全68列dtype、缺失数量比例、非缺失唯一值 |
+| numeric_statistics.csv | 全数值列描述统计、分位数、IQR围栏和异常数量 |
+| category_frequencies.csv | 主要类别所有取值、缺失类别、频数与比例 |
+| quality_checks.csv | 每项质量断言的数量和比例；正命中不一定等于数据错误 |
+| suspicious_examples.csv | 各检查最多12条证据样例；不是全量坏行列表 |
+| history_availability.csv | 3,281条历史可用性受影响记录及保守重算值 |
+| state_money_conflict.csv | 全22条状态/金额冲突；不自动改标签 |
+| percent_conflict.csv | 全341条完成率差异>0.1个百分点记录 |
+| missingness_groups.csv | 按年份、状态、品类、抓取批次的缺失分布 |
+| summary.json / extra_summary.json / detail_summary.json | 环境、核心统计、hash、补充测试 |
+| report_validation.json / validate_report.py | 报告占位符、字段数、关键建议代码测试、输入哈希二次复核 |
+
+审核环境：Python3.12.14、pandas3.0.1、numpy2.3.5。原清洗脚本未固定依赖，本审核环境不构成原脚本的已验证端到端环境。可使用同环境依次执行三个checks脚本，再执行build_report.py，所有结果只写本审核目录。完整查验涉及60万行和近50万creator组，历史核验可能需数分钟。
+
+验证补充：建议F2的历史可用时点、F3的同秒上线不互计历史、F5的文本缺失处理通过小样本执行；建议代码其余集成步骤仍需在取得原始数据后验收。清洗CSV、删除审计、原清洗脚本的SHA256在报告生成后再次一致，确认审核产物生成未改变这些输入。
+
+输入哈希（SHA256）：
+
+@@HASHES@@
+
+审核能力限制：缺少原始43列完整表、原始抓取日志、列来源定义及模型训练代码，因此不确认原始行逐值保全、全部删除条件、原始分布变化、上线前快照真实性、既有模型AUC正确性或平台覆盖完整性。已有清洗文档/一致性报告属于待审材料，未当作独立证明。
+'''
+
+meanings={
+'collected_at':'采集批次YYYYMM，不是精确抓取日；禁作连续特征','backers_count':'支持者人数；事后结果','blurb':'项目短简介原文；可能非上线快照','category_id':'细分品类ID；键/类别，可空','category_name':'细分品类原标签','category_parent_id':'一级品类ID；类别键','category_parent_name':'一级品类原标签','category_url':'品类页面链接','converted_pledged_amount':'平台换算募资额；换算币种/时点待来源核实','country':'项目平台市场代码，区别地理位置','created_at':'项目创建epoch秒；当前产物全数值','creator_id':'发起人标识；分组键，不是数值特征','creator_name':'发起人显示名称','creator_url':'发起人链接；非独立人键','currency':'项目金额币种','deadline':'计划募集截止epoch秒；当前全数值','fx_rate':'换汇字段；方向/时点核实，有零值','goal':'项目币种目标额，不是统一USD','id':'项目唯一标识；键','launched_at':'上线epoch秒','location_country':'地理编码国家/地区','location_id':'地点ID；可空键','location_name':'地点名称','location_state':'州/省标签，全球体系混合','location_type':'地点类型','name':'项目标题原文','percent_funded':'源完成率%，需与pledged/goal核对','pledged':'项目币种募款额；事后','profile_blurb':'档案简介，原字典称发起人档案；字段主体待核实','profile_id':'档案标识；不等同于creator_id','profile_name':'档案名称；常与项目名冗余','profile_project_id':'字段名暗示档案项目键；实测=profile_id≠id，定义待核实','profile_state':'档案状态，非项目state；事后','profile_state_changed_at':'档案状态变更epoch秒','project_url':'项目页面链接','spotlight':'聚光灯标记，可空布尔；事后','staff_pick':'平台精选标记，时点未知；不自动准入模型','state':'项目当前状态；标签来源','state_changed_at':'记录状态变更epoch秒；不保证首次终态日志','static_usd_rate':'静态换汇快照，方向与募资USD一致，时点待核实','usd_exchange_rate':'USD汇率字段，口径/时点待核实，有零值','usd_pledged':'记录的USD募资额；事后','usd_type':'domestic/international市场标记','launch_dt':'解析上线时间，CSV丢失类型；解释为UTC','deadline_dt':'解析计划截止时间，UTC','dur_days':'截止-上线向下取整天数','yr':'UTC上线年份','mon':'UTC上线月1–12','dow':'UTC上线星期0–6，周一=0','hour':'UTC上线小时0–23，不是当地小时','category_key':'一级标签strip/lower','subcategory_key':'细分strip/lower，缺失unknown','name_clean':'引号折叠及strip后的标题','blurb_clean':'引号折叠及strip后的简介','country_final':'平台市场country优先，缺失回退地理国家','country_mismatch':'两国家代码前两字符冲突，不代表错误','log_goal':'log10本币goal，不是log USD','goal_capped':'本币goal全量99.9%上限派生，原goal保留','goal_under_1':'本币goal<1标志','name_len':'原文本转str的字符数；缺失误计3','blurb_len':'原简介转str字符数；缺失误计3','blurb_words':'原简介按空白切词数；缺失误计1','succ':'成功1/失败0/取消NA','is_terminal_pair':'是否success/failed二元任务样本','creator_rank':'保留样本内该creator上线顺序1起','creator_n_projects':'保留全量样本的creator总数，含未来','creator_prev_success_rate':'先前上线样本的终态均值，未控制结果可用性','is_relaunch':'原名+creator重复组全部打标，回顾性候选'}
+dic=P.copy()
+dic['含义与限制']=dic.field.map(meanings)
+dic.columns=['字段','重载dtype','缺失数量','缺失%','非缺失unique','含义与限制']
+missing=P.loc[P.missing_n>0,['field','missing_n','missing_pct']].copy();missing.columns=['字段','缺失数量','缺失%']
+selected=T.loc[T.field.isin(['goal','pledged','usd_pledged','backers_count','dur_days','percent_funded']),['field','min','max','mean','50%','std','25%','75%','99%','IQR','iqr_outlier_n']].copy()
+selected.columns=['字段','最小','最大','均值','中位数','标准差','Q1','Q3','P99','IQR','IQR异常数']
+state=F.loc[F.field=='state',['value','n','pct']].copy();state.columns=['状态','数量','全量%']
+cat=F.loc[F.field=='category_key',['value','n','pct']].copy();cat.columns=['一级品类','数量','全量%']
+hashes='\n'.join('- `'+k+'`：`'+v+'`' for k,v in S['hashes'].items())
+for k,val in {'MISSING':table(missing),'STATS':table(selected),'STATEFREQ':table(state),'CATFREQ':table(cat),'DICTIONARY':table(dic),'HASHES':hashes}.items():report=report.replace('@@'+k+'@@',val)
+(O/'数据清洗独立审核报告.md').write_text(report,encoding='utf-8')
+print('Report written:',len(report),'characters')

@@ -1,0 +1,225 @@
+{
+  "generated": "2026-11-12 15:01:46",
+  "all_ok": true,
+  "checks": {
+    "A1_ks_clean_sha256": {
+      "ok": true,
+      "detail": {
+        "sha256": "aaf7a89e08e91cdefb4b7b56a079e74f358ae3c0b0548471ced8565396b70b3f",
+        "bytes": 710301125
+      }
+    },
+    "A2_ks_clean_bytes": {
+      "ok": true,
+      "detail": 710301125
+    },
+    "B1_base_rows": {
+      "ok": true,
+      "detail": 673839
+    },
+    "B2_base_cols": {
+      "ok": true,
+      "detail": 33
+    },
+    "B3_id_unique": {
+      "ok": true,
+      "detail": 673839
+    },
+    "B4_modelable": {
+      "ok": true,
+      "detail": 604629
+    },
+    "B5_usd_modelable": {
+      "ok": true,
+      "detail": 415619
+    },
+    "B6_goal_na_all": {
+      "ok": true,
+      "detail": 1487
+    },
+    "B7_name_len_na_all": {
+      "ok": true,
+      "detail": 5
+    },
+    "B8_blurb_len_na_all": {
+      "ok": true,
+      "detail": 47
+    },
+    "B9_goal_na_modelable": {
+      "ok": true,
+      "detail": 850
+    },
+    "B10_blurb_na_modelable": {
+      "ok": true,
+      "detail": 13
+    },
+    "C1_frame_rows": {
+      "ok": true,
+      "detail": 604629
+    },
+    "C2_numeric_order": {
+      "ok": true,
+      "detail": [
+        "m_log_goal_usd",
+        "m_dur_days_exact",
+        "launch_quarter",
+        "dow",
+        "m_name_len",
+        "m_blurb_len",
+        "m_blurb_words",
+        "name_word_count",
+        "creator_previous_count",
+        "creator_prev_success_rate",
+        "prep_days",
+        "yr",
+        "mon"
+      ]
+    },
+    "C3_categorical_order": {
+      "ok": true,
+      "detail": [
+        "category_parent_name",
+        "subcategory_key",
+        "country_final",
+        "location_type",
+        "currency"
+      ]
+    },
+    "C1b_id_present": {
+      "ok": true,
+      "detail": 604629
+    },
+    "C4_split_counts": {
+      "ok": true,
+      "detail": {
+        "train_full": 443693,
+        "val_full": 60467,
+        "test_full": 100469
+      }
+    },
+    "C5_base_rates": {
+      "ok": true,
+      "detail": {
+        "train": 0.4397162001654297,
+        "test": 0.6441190815077288
+      }
+    },
+    "C6_split_disjoint": {
+      "ok": true,
+      "detail": {
+        "tr&va": 0,
+        "tr&te": 0,
+        "va&te": 0
+      }
+    },
+    "C7_split_union": {
+      "ok": true,
+      "detail": 604629
+    },
+    "C8_usd_split_counts": {
+      "ok": true,
+      "detail": {
+        "train_usd": 327642,
+        "val_usd": 33542,
+        "test_usd": 54435
+      }
+    },
+    "C9_nonusd_test": {
+      "ok": true,
+      "detail": 46034
+    },
+    "C10_usd_total": {
+      "ok": true,
+      "detail": 415619
+    },
+    "D1_assign_rows": {
+      "ok": true,
+      "detail": 604629
+    },
+    "D2_assign_id_unique": {
+      "ok": true,
+      "detail": 604629
+    },
+    "D3_assign_coverage": {
+      "ok": true,
+      "detail": 0
+    },
+    "D4_agree_split_ours": {
+      "ok": true,
+      "detail": 1.0
+    },
+    "D5_agree_is_usd": {
+      "ok": true,
+      "detail": 1.0
+    },
+    "E1_creator_rows": {
+      "ok": true,
+      "detail": 673839
+    },
+    "E2_creator_id_unique": {
+      "ok": true,
+      "detail": 673839
+    },
+    "E3_creator_coverage": {
+      "ok": true,
+      "detail": 0
+    },
+    "E4_test_clusters": {
+      "ok": true,
+      "detail": {
+        "test_rows": 100469,
+        "n_clusters": 67895,
+        "mean_rows_per_cluster": 1.4797702334487075,
+        "max_rows_per_cluster": 91,
+        "singletons": 55984,
+        "share_singleton": 0.8245673466381913
+      }
+    },
+    "G1_pkg_files": {
+      "ok": true,
+      "detail": 140
+    }
+  },
+  "log": [
+    "[15:01:25] hashing ks_clean.csv ...",
+    "[15:01:26] OK   A1_ks_clean_sha256 :: {'sha256': 'aaf7a89e08e91cdefb4b7b56a079e74f358ae3c0b0548471ced8565396b70b3f', 'bytes': 710301125}",
+    "[15:01:26] OK   A2_ks_clean_bytes :: 710301125",
+    "[15:01:26] OK   B1_base_rows :: 673839",
+    "[15:01:26] OK   B2_base_cols :: 33",
+    "[15:01:26] OK   B3_id_unique :: 673839",
+    "[15:01:26] OK   B4_modelable :: 604629",
+    "[15:01:26] OK   B5_usd_modelable :: 415619",
+    "[15:01:26] OK   B6_goal_na_all :: 1487",
+    "[15:01:26] OK   B7_name_len_na_all :: 5",
+    "[15:01:26] OK   B8_blurb_len_na_all :: 47",
+    "[15:01:26] OK   B9_goal_na_modelable :: 850",
+    "[15:01:26] OK   B10_blurb_na_modelable :: 13",
+    "[15:01:26] building modelable frame via replicate_pilot.build_frame ...",
+    "[15:01:29] OK   C1_frame_rows :: 604629",
+    "[15:01:29] OK   C2_numeric_order :: ['m_log_goal_usd', 'm_dur_days_exact', 'launch_quarter', 'dow', 'm_name_len', 'm_blurb_len', 'm_blurb_words', 'name_word_count', 'creator_previous_count', 'creator_prev_success_rate', 'prep_days', 'yr', 'mon']",
+    "[15:01:29] OK   C3_categorical_order :: ['category_parent_name', 'subcategory_key', 'country_final', 'location_type', 'currency']",
+    "[15:01:30] OK   C1b_id_present :: 604629",
+    "[15:01:30] OK   C4_split_counts :: {'train_full': 443693, 'val_full': 60467, 'test_full': 100469}",
+    "[15:01:30] OK   C5_base_rates :: {'train': 0.4397162001654297, 'test': 0.6441190815077288}",
+    "[15:01:31] OK   C6_split_disjoint :: {'tr&va': 0, 'tr&te': 0, 'va&te': 0}",
+    "[15:01:31] OK   C7_split_union :: 604629",
+    "[15:01:31] OK   C8_usd_split_counts :: {'train_usd': 327642, 'val_usd': 33542, 'test_usd': 54435}",
+    "[15:01:31] OK   C9_nonusd_test :: 46034",
+    "[15:01:31] OK   C10_usd_total :: 415619",
+    "[15:01:31] OK   D1_assign_rows :: 604629",
+    "[15:01:32] OK   D2_assign_id_unique :: 604629",
+    "[15:01:34] OK   D3_assign_coverage :: 0",
+    "[15:01:34] OK   D4_agree_split_ours :: 1.0",
+    "[15:01:34] OK   D5_agree_is_usd :: 1.0",
+    "[15:01:34] reading id/creator_id from ks_clean.csv (pyarrow streaming) ...",
+    "[15:01:35] OK   E1_creator_rows :: 673839",
+    "[15:01:36] OK   E2_creator_id_unique :: 673839",
+    "[15:01:36] OK   E3_creator_coverage :: 0",
+    "[15:01:36] OK   E4_test_clusters :: {'test_rows': 100469, 'n_clusters': 67895, 'mean_rows_per_cluster': 1.4797702334487075, 'max_rows_per_cluster': 91, 'singletons': 55984, 'share_singleton': 0.8245673466381913}",
+    "[15:01:36]      test 首次发起人 creator_rank==1: 53,054 (0.5281)",
+    "[15:01:42] text: empty name=5 blurb=13 blurb chars median=119.0 max=239",
+    "[15:01:45] prepared -> E:\\个人\\港城\\courses\\IS6400\\group project\\KS project\\IS6400_期末进度包_20261102(1)\\13_TFIDF文本层_v2\\02_results\\prepared_modelable.parquet (604,629 x 30)",
+    "[15:01:45] hashing 交付包 (manifest before) ...",
+    "[15:01:46] OK   G1_pkg_files :: 140"
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "generated": "2026-11-12 20:54:01",
+  "main_config": "hgb_text_full",
+  "base_config": "base_hgb_full",
+  "rule": "dAUC>0 且 CI下界>0 且 dBrier<=+0.002 → 可并入；0<dAUC<0.005 → '统计显著、实用有限'；CI 含 0 或 dAUC<=0 → 附录",
+  "observed": {
+    "dAUC": 0.0024045859654967527,
+    "ci95_low": 0.001792056185675503,
+    "ci95_high": 0.0029883524904946585,
+    "p_two_sided": 0.0,
+    "dBrier": -0.0015508046709267198,
+    "dBrier_ci_low": -0.0018554521622002594,
+    "dBrier_ci_high": -0.0012105957269167467
+  },
+  "verdict": "adopt_significant_small",
+  "decision_impact": {
+    "main_config": "hgb_text_full",
+    "base_config": "base_hgb_full",
+    "thresholds": {
+      "new": 0.3949999999999999,
+      "base": 0.3799999999999999
+    },
+    "n_test": 100469,
+    "flagged_new": 76988,
+    "flagged_base": 77881,
+    "flagged_both": 75360,
+    "cross_up": 1628,
+    "cross_down": 2521,
+    "cross_total": 4149,
+    "cross_rate": 0.04129632025799003,
+    "cross_up_common039": 2051,
+    "cross_down_common039": 2098,
+    "cross_total_common039": 4149,
+    "cross_rate_common039": 0.04129632025799003,
+    "flips": {
+      "own_val_thresholds": {
+        "threshold_new": 0.3949999999999999,
+        "threshold_base": 0.3799999999999999,
+        "up": 1628,
+        "down": 2521,
+        "total": 4149,
+        "rate_total": 0.04129632025799003,
+        "rate_up": 0.016204003224875335,
+        "rate_down": 0.02509231703311469,
+        "both": 75360,
+        "none": 20960
+      },
+      "common_0.38": {
+        "threshold_new": 0.38,
+        "threshold_base": 0.38,
+        "up": 1975,
+        "down": 2014,
+        "total": 3989,
+        "rate_total": 0.03970378922851825,
+        "rate_up": 0.019657804895042253,
+        "rate_down": 0.020045984333475996,
+        "both": 75867,
+        "none": 20613
+      },
+      "common_0.39": {
+        "threshold_new": 0.39,
+        "threshold_base": 0.39,
+        "up": 2051,
+        "down": 2098,
+        "total": 4149,
+        "rate_total": 0.04129632025799003,
+        "rate_up": 0.020414257134041346,
+        "rate_down": 0.02088206312394868,
+        "both": 75210,
+        "none": 21110
+      },
+      "common_0.395": {
+        "threshold_new": 0.395,
+        "threshold_base": 0.395,
+        "up": 2080,
+        "down": 2112,
+        "total": 4192,
+        "rate_total": 0.04172431297216057,
+        "rate_up": 0.020702903383133107,
+        "rate_down": 0.02102140958902746,
+        "both": 74908,
+        "none": 21369
+      }
+    },
+    "top10_k": 10047,
+    "top10_overlap": 8341,
+    "top10_jaccard": 0.7096911426869735,
+    "abs_dp": {
+      "p50": 0.022260308265686035,
+      "p90": 0.0963001489639282,
+      "p99": 0.1893713212013244
+    },
+    "abs_dp_max": 0.45764970779418945,
+    "corr_absdp_with_blurb_len": -0.02864277713482143
+  },
+  "published_baseline": {
+    "AUC": 0.8823107870212121,
+    "AP": 0.9294575064834102,
+    "Brier": 0.13156647288295645,
+    "thr": 0.38999999999999996,
+    "n_train": 443693,
+    "n_test": 100469,
+    "features": [
+      "m_log_goal_usd",
+      "m_dur_days_exact",
+      "launch_quarter",
+      "dow",
+      "m_name_len",
+      "m_blurb_len",
+      "m_blurb_words",
+      "name_word_count",
+      "creator_previous_count",
+      "creator_prev_success_rate",
+      "prep_days",
+      "yr",
+      "mon",
+      "category_parent_name",
+      "subcategory_key",
+      "country_final",
+      "location_type",
+      "currency"
+    ]
+  }
+}
